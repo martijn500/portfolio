@@ -67,7 +67,7 @@ function SiteContent() {
       <header
         id="navigation"
         role="banner"
-        className={`sticky top-0 z-40 backdrop-blur h-16 transition-all duration-200 ${showHeaderBorder ? 'border-b border-border' : ''}`}
+        className={`sticky top-0 z-40 backdrop-blur h-16 transition-all duration-200 ${showHeaderBorder ? 'border-b border-primary' : ''}`}
       >
         <Nav dark={dark} setDark={setDark} afterHero={showHeaderBorder} />
       </header>
@@ -75,7 +75,7 @@ function SiteContent() {
       <main id="main-content" role="main">
         <section 
           id="hero"
-          className="border-b-8 border-foreground bg-card px-5 md:px-8 lg:px-12 pb-6 md:pb-8 lg:pb-12"
+          className="border-b-8 border-foreground bg-card md:px-8 lg:px-12 md:pb-8 lg:pb-12"
           role="region"
           aria-labelledby="hero-heading"
         >

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Sun, Moon, Languages } from "lucide-react";
+import { Sun, Moon, Languages, Banana } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import NavLink from "@/components/NavLink";
 import type { LangKey } from "@/lib/i18n";
@@ -41,7 +41,9 @@ export default function Nav({ dark, setDark, afterHero }: NavProps) {
         className="h-full flex items-center gap-2 font-semibold"
         aria-label={`${t.profile.name} - Home`}
       >
-        <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">M</span>
+        <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+          <Banana className="h-4 w-4" />
+        </span>
         <span className="hidden sm:block">{t.profile.name}</span>
       </a>
       
