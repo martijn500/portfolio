@@ -1,5 +1,5 @@
 import React from "react";
-import { useActiveSection } from "@/lib/useActiveSection";
+import { useActiveSection } from "@/lib/hooks/use-active-section";
 
 interface NavLinkProps {
   href: string;

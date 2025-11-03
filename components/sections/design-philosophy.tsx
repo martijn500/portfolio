@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useLanguage } from "@/lib/LanguageContext";
+import { useLanguage } from "@/lib/context/language-context";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface DesignPhilosophyProps {

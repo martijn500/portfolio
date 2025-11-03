@@ -1,16 +1,16 @@
 "use client";
 import React from "react";
 import type { LangKey } from "@/lib/i18n";
-import HeroCarousel from "@/components/HeroCarousel";
-import Work from "@/components/Work";
-import DesignPhilosophy from "@/components/DesignPhilosophy";
-import Community from "@/components/Community";
-import Principles from "@/components/Principles";
-import Nav from "@/components/Nav";
-import Writing from "@/components/Writing";
-import Footer from "@/components/Footer";
-import DecorativeStripes from "@/components/DecorativeStripes";
-import { LanguageProvider, useLanguage } from "@/lib/LanguageContext";
+import Hero from "@/components/sections/hero";
+import Work from "@/components/sections/work";
+import DesignPhilosophy from "@/components/sections/design-philosophy";
+import Community from "@/components/sections/community";
+import Principles from "@/components/sections/principles";
+import Header from "@/components/layout/header";
+import Writing from "@/components/sections/writing";
+import Footer from "@/components/layout/footer";
+import DecorativeStripes from "@/components/common/decorative-stripes";
+import { LanguageProvider, useLanguage } from "@/lib/context/language-context";
 
 function SiteContent() {
   const [dark, setDark] = React.useState(false);
@@ -35,7 +35,7 @@ function SiteContent() {
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        // When the hero is no longer visible at all, show the header border and shrink height
+        // When the hero is no longer visible at all, show the header border
         setShowHeaderBorder(!entry.isIntersecting);
       },
       {
@@ -67,9 +67,9 @@ function SiteContent() {
       <header
         id="navigation"
         role="banner"
-        className={`sticky top-0 z-40 backdrop-blur h-16 transition-all duration-200 ${showHeaderBorder ? 'border-b border-primary' : ''}`}
+        className={`sticky top-0 z-40 backdrop-blur h-16 transition-all duration-200 ${showHeaderBorder ? 'border-b border-foreground' : ''}`}
       >
-        <Nav dark={dark} setDark={setDark} afterHero={showHeaderBorder} />
+        <Header dark={dark} setDark={setDark} afterHero={showHeaderBorder} />
       </header>
 
       <main id="main-content" role="main">
@@ -79,7 +79,7 @@ function SiteContent() {
           role="region"
           aria-labelledby="hero-heading"
         >
-          <HeroCarousel />
+          <Hero />
         </section>
         
         <section 
@@ -147,7 +147,7 @@ function SiteContent() {
   );
 }
 
-export default function Site({ lang }: { lang: LangKey }) {
+export default function PageLayout({ lang }: { lang: LangKey }) {
   return (
     <LanguageProvider lang={lang}>
       <SiteContent />

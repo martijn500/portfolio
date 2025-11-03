@@ -1,4 +1,4 @@
-import Site from "@/components/Site";
+import PageLayout from "@/components/layout/page-layout";
 export default function Page() {
-  return <Site lang="nl" />;
+  return <PageLayout lang="nl" />;
 }

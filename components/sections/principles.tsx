@@ -2,8 +2,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Eye, Layers, Accessibility } from "lucide-react";
-import { useLanguage } from "@/lib/LanguageContext";
-import { useReducedMotion, createAnimation } from "@/lib/useReducedMotion";
+import { useLanguage } from "@/lib/context/language-context";
+import { useReducedMotion, createAnimation } from "@/lib/hooks/use-reduced-motion";
 
 const baseFadeUp = {
   initial: { opacity: 0, y: 16 },

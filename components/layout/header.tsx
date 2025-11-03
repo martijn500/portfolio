@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import { Sun, Moon, Languages, Banana } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import NavLink from "@/components/NavLink";
+import { Button } from "@/components/ui/button";
+import NavLink from "@/components/layout/nav-link";
 import type { LangKey } from "@/lib/i18n";
-import { useLanguage } from "@/lib/LanguageContext";
+import { useLanguage } from "@/lib/context/language-context";
 
 function stripLangPrefix(pathname: string) {
   return pathname.replace(/^\/(en|nl)(\/|$)/, "/");
@@ -15,13 +15,13 @@ function buildLangUrl(lang: LangKey) {
   return `${origin}/${lang}${base}${search}${hash}`;
 }
 
-interface NavProps {
+interface HeaderProps {
   dark: boolean;
   setDark: (value: boolean | ((prev: boolean) => boolean)) => void;
   afterHero: boolean;
 }
 
-export default function Nav({ dark, setDark, afterHero }: NavProps) {
+export default function Header({ dark, setDark, afterHero }: HeaderProps) {
   const { lang, t } = useLanguage();
 
   const handleToggleLang = () => {
