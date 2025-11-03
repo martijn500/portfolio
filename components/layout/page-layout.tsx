@@ -15,6 +15,7 @@ import { LanguageProvider, useLanguage } from "@/lib/context/language-context";
 function SiteContent() {
   const [dark, setDark] = React.useState(false);
   const [showHeaderBorder, setShowHeaderBorder] = React.useState(false);
+  const [activeBorderInfo, setActiveBorderInfo] = React.useState<{ left: number; width: number } | null>(null);
   const { lang, t } = useLanguage();
 
   React.useEffect(() => {
@@ -28,23 +29,23 @@ function SiteContent() {
   }, [lang, t.seo.title]);
 
   React.useEffect(() => {
-    // Enable compact header and nav underline only after the hero (work+life) is fully passed
-    const hero = document.getElementById("hero");
-    if (!hero) return;
+    // Show header border as soon as the "Free time" section starts to scroll out of view
+    const aboutLife = document.getElementById("about-life");
+    if (!aboutLife) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        // When the hero is no longer visible at all, show the header border
+        // Show border when "Free time" is even slightly out of view
         setShowHeaderBorder(!entry.isIntersecting);
       },
       {
         root: null,
-        threshold: 0.01,
+        threshold: 0.99, // Trigger when even 1% is out of view
       }
     );
 
-    observer.observe(hero);
+    observer.observe(aboutLife);
     return () => observer.disconnect();
   }, []);
 
@@ -67,9 +68,35 @@ function SiteContent() {
       <header
         id="navigation"
         role="banner"
-        className={`sticky top-0 z-40 backdrop-blur h-16 transition-all duration-200 ${showHeaderBorder ? 'border-b border-foreground' : ''}`}
+        className="sticky top-0 z-40 backdrop-blur h-16 transition-all duration-200 relative"
       >
-        <Header dark={dark} setDark={setDark} afterHero={showHeaderBorder} />
+        <Header dark={dark} setDark={setDark} afterHero={showHeaderBorder} onBorderUpdate={setActiveBorderInfo} />
+        
+        {/* Bottom border with gap for active nav item */}
+        {showHeaderBorder && (
+          <>
+            {activeBorderInfo ? (
+              <>
+                {/* Left part of border */}
+                <div 
+                  className="absolute bottom-0 left-0 h-px bg-foreground/30 transition-all duration-300"
+                  style={{ width: `${activeBorderInfo.left}px` }}
+                />
+                {/* Right part of border */}
+                <div 
+                  className="absolute bottom-0 h-px bg-foreground/30 transition-all duration-300"
+                  style={{ 
+                    left: `${activeBorderInfo.left + activeBorderInfo.width}px`,
+                    right: 0,
+                  }}
+                />
+              </>
+            ) : (
+              /* Full border when no active section */
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-foreground/30" />
+            )}
+          </>
+        )}
       </header>
 
       <main id="main-content" role="main">

@@ -5,9 +5,10 @@ interface NavLinkProps {
   href: string;
   sectionId: string;
   children: React.ReactNode;
+  "data-section"?: string;
 }
 
-export default function NavLink({ href, sectionId, children }: NavLinkProps) {
+export default function NavLink({ href, sectionId, children, ...props }: NavLinkProps) {
   const activeSection = useActiveSection();
   const isActive = activeSection === sectionId;
 
@@ -16,12 +17,13 @@ export default function NavLink({ href, sectionId, children }: NavLinkProps) {
       href={href}
       className={
         `relative text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring ` +
-        `h-full flex items-center px-0 before:content-[''] before:absolute before:-left-2 before:bottom-0 before:h-2 before:w-[calc(100%+1rem)] before:transition-opacity before:duration-200 before:rounded-t-md ` +
+        `h-full flex items-center px-0 ` +
         (isActive
-          ? "text-foreground before:opacity-100 before:bg-primary"
-          : "text-muted-foreground hover:text-foreground before:opacity-0 before:bg-transparent")
+          ? "text-foreground"
+          : "text-muted-foreground hover:text-foreground")
       }
       role="menuitem"
+      {...props}
     >
       {children}
     </a>
