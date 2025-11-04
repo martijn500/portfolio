@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
-import { Sun, Moon, Languages, Banana } from "lucide-react";
+import { Sun, Moon, Languages, Banana, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import NavLink from "@/components/layout/nav-link";
 import type { LangKey } from "@/lib/i18n";
 import { useLanguage } from "@/lib/context/language-context";
@@ -28,6 +29,7 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
   const activeSection = useActiveSection();
   const navRef = React.useRef<HTMLDivElement>(null);
   const [borderStyle, setBorderStyle] = React.useState({ left: 0, width: 0 });
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   const sections = [
     { id: 'about-work', label: t.hero.aboutWorkTitle },
@@ -39,29 +41,37 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
   ];
 
   React.useEffect(() => {
-    if (!navRef.current || !activeSection) {
-      onBorderUpdate?.(null);
-      return;
-    }
+    const updateBorderPosition = () => {
+      if (!navRef.current || !activeSection) {
+        onBorderUpdate?.(null);
+        return;
+      }
 
-    const activeLink = navRef.current.querySelector(`[data-section="${activeSection}"]`);
-    if (activeLink) {
-      const rect = activeLink.getBoundingClientRect();
-      const navRect = navRef.current.getBoundingClientRect();
-      
-      const borderInfo = {
-        left: rect.left - navRect.left - 8, // -8px voor -left-2
-        width: rect.width + 16, // +16px voor left en right padding
-      };
-      
-      setBorderStyle(borderInfo);
-      
-      // Send absolute viewport position to parent for header border gap
-      onBorderUpdate?.({
-        left: rect.left - 8,
-        width: rect.width + 16,
-      });
-    }
+      const activeLink = navRef.current.querySelector(`[data-section="${activeSection}"]`);
+      if (activeLink) {
+        const rect = activeLink.getBoundingClientRect();
+        const navRect = navRef.current.getBoundingClientRect();
+        
+        const borderInfo = {
+          left: rect.left - navRect.left - 8, // -8px voor -left-2
+          width: rect.width + 16, // +16px voor left en right padding
+        };
+        
+        setBorderStyle(borderInfo);
+        
+        // Send absolute viewport position to parent for header border gap
+        onBorderUpdate?.({
+          left: rect.left - 8,
+          width: rect.width + 16,
+        });
+      }
+    };
+
+    updateBorderPosition();
+
+    // Update on window resize
+    window.addEventListener('resize', updateBorderPosition);
+    return () => window.removeEventListener('resize', updateBorderPosition);
   }, [activeSection, onBorderUpdate]);
 
   const handleToggleLang = () => {
@@ -117,12 +127,53 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
       </div>
       
       <div className="flex items-center gap-2 h-full">
-        <Button variant="ghost" size="sm" aria-label="Toggle language" onClick={handleToggleLang} className="gap-1.5">
+        {/* Mobile Menu */}
+        <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <SheetTrigger asChild className="md:hidden">
+            <Button variant="ghost" size="icon" aria-label="Open menu">
+              <Menu className="h-5 w-5" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-[300px]">
+            <SheetHeader>
+              <SheetTitle>{t.profile.name}</SheetTitle>
+            </SheetHeader>
+            <nav className="flex flex-col gap-4 mt-8" role="navigation" aria-label="Mobile navigation">
+              {sections.map((section) => (
+                <a
+                  key={section.id}
+                  href={`#${section.id}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-lg py-2 px-3 rounded-md transition-colors ${
+                    activeSection === section.id 
+                      ? 'bg-primary text-primary-foreground' 
+                      : 'hover:bg-muted'
+                  }`}
+                >
+                  {section.label}
+                </a>
+              ))}
+            </nav>
+            <div className="flex flex-col gap-2 mt-8 pt-8 border-t">
+              <Button variant="outline" onClick={handleToggleLang} className="justify-start gap-2">
+                <Languages className="h-5 w-5" />
+                {lang === 'nl' ? 'English' : 'Nederlands'}
+              </Button>
+              <Button variant="outline" onClick={() => setDark((v) => !v)} className="justify-start gap-2">
+                {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {dark ? 'Light mode' : 'Dark mode'}
+              </Button>
+            </div>
+          </SheetContent>
+        </Sheet>
+
+        {/* Desktop controls */}
+        <Button variant="ghost" size="sm" aria-label="Toggle language" onClick={handleToggleLang} className="gap-1.5 hidden md:flex">
           <Languages className="h-5 w-5 -mt-0.5" />
           <span className="text-xs font-medium">{lang.toUpperCase()}</span>
           <span className="sr-only">Switch language</span>
         </Button>
-        <Button variant="ghost" size="icon" aria-label="Toggle theme" onClick={() => setDark((v) => !v)}>
+        <Button variant="ghost" size="icon" aria-label="Toggle theme" onClick={() => setDark((v) => !v)} className="hidden md:flex">
           {dark ? <Sun className="h-5 w-5 -mt-0.5" /> : <Moon className="h-5 w-5 -mt-0.5" />}
         </Button>
       </div>

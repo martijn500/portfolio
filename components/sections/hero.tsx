@@ -126,8 +126,8 @@ export default function Hero({}: HeroProps) {
               role="region"
               style={{ opacity: isMobile ? 1 : workOpacity }}
             >
-              <div id="about-work-content" className="w-full px-5 md:px-8 lg:px-12 h-full scroll-mt-20">
-                <div className="h-full flex flex-col">
+              <div id="about-work-content" className="w-full px-5 md:px-8 lg:px-12 h-full scroll-mt-20 lg:overflow-y-auto">
+                <div className="h-full flex flex-col min-h-0">
                   
                   {/* Content grid */}
                   <div className="grid gap-8 flex-1 h-full">
@@ -213,8 +213,8 @@ export default function Hero({}: HeroProps) {
               role="region"
               style={{ opacity: isMobile ? 1 : lifeOpacity }}
             >
-              <div id="about-life-content" className="w-full px-5 md:px-8 lg:px-12 h-full scroll-mt-20">
-                <div className="h-full flex flex-col">
+              <div id="about-life-content" className="w-full px-5 md:px-8 lg:px-12 h-full scroll-mt-20 lg:overflow-y-auto">
+                <div className="h-full flex flex-col min-h-0">
                   
                   {/* Content grid */}
                   <div className="grid gap-8 flex-1 h-full">

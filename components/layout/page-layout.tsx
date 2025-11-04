@@ -36,12 +36,13 @@ function SiteContent() {
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        // Show border when "Free time" is even slightly out of view
+        // Show border when "Free time" is scrolled out significantly
         setShowHeaderBorder(!entry.isIntersecting);
       },
       {
         root: null,
-        threshold: 0.99, // Trigger when even 1% is out of view
+        rootMargin: '100px 0px 0px 0px', // Extend viewport upward so it triggers later
+        threshold: 1.0,
       }
     );
 
