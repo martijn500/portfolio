@@ -242,9 +242,9 @@ making sure solutions work for users and development teams alike.",
       ],
     },
     profileLife: {
-      role: "I'm also a father of two beautiful children, play futsal and always have another hobby.",
+      role: "Proud father of two, futsal player and serial hobbyist.",
       summary:
-        "Outside of work, I enjoy time with my family, a game of futsal with friends, or temporary hobbies like stargazing, sourdough baking and learning piano. \
+        "Outside of work, I enjoy time with my family, a game of futsal with friends (where the third half is just as important as the first two), or temporary hobbies like stargazing, sourdough baking and learning piano. \
 Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I tend to research everything thoroughly. Like vacations or a new kettle.",
       skills: [
         "Family Life",

@@ -126,7 +126,7 @@ button:focus-visible,
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --muted-foreground: oklch(71.547% 0.00008 271.152);
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
@@ -157,5 +157,18 @@ button:focus-visible,
   }
   a, button {
     cursor: pointer;
+  }
+}
+
+/* Smooth theme transitions when toggling .dark */
+/* Use modest durations and avoid animating layout properties. Users who prefer reduced motion will not see the transitions. */
+@media (prefers-reduced-motion: no-preference) {
+  html, body, header, main, footer,
+  [data-slot="button"],
+  a, button,
+  .bg-background, .bg-card, .bg-primary,
+  .text-foreground, .text-primary-foreground,
+  .border-border, .border-input, .border-foreground {
+    transition: background-color 260ms ease, color 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
   }
 }

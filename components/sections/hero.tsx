@@ -117,7 +117,7 @@ export default function Hero({}: HeroProps) {
             {/* Work Section */}
             <motion.section 
               ref={workRef}
-              className="w-full lg:w-1/4 h-full flex-shrink-0"
+              className="w-full lg:w-1/4 h-full shrink-0"
               aria-labelledby="work-heading"
               role="region"
               style={{ opacity: isMobile ? 1 : workOpacity }}
@@ -171,7 +171,7 @@ export default function Hero({}: HeroProps) {
                   transition={{ duration: 0.5 }}
                   className="absolute inset-0 flex items-end"
                 >
-                  <div className="relative w-full aspect-[3/4] lg:h-full lg:aspect-auto">
+                  <div className="relative w-full aspect-3/4 lg:h-full lg:aspect-auto">
                     <Image
                       src="/martijn-portrait-work.png" 
                       alt={`${t.profile.name} professional portrait`}
@@ -186,7 +186,7 @@ export default function Hero({}: HeroProps) {
                   transition={{ duration: 0.5 }}
                   className="flex items-end h-full"
                 >
-                  <div className="relative w-full aspect-[3/4] lg:h-full lg:aspect-auto">
+                  <div className="relative w-full aspect-3/4 lg:h-full lg:aspect-auto">
                     <Image
                       src="/martijn-portrait-life.png" 
                       alt={`${t.profile.name} personal portrait`}
@@ -200,7 +200,7 @@ export default function Hero({}: HeroProps) {
 
             {/* Life Section */}
             <motion.section 
-              className="w-full lg:w-1/4 h-full flex-shrink-0 relative"
+              className="w-full lg:w-1/4 h-full shrink-0 relative"
               aria-labelledby="life-heading"
               role="region"
               style={{ opacity: isMobile ? 1 : lifeOpacity }}
