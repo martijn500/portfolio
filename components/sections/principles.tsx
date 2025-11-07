@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { motion } from "framer-motion";
 import { Eye, Layers, Accessibility } from "lucide-react";
 import { useLanguage } from "@/lib/context/language-context";
