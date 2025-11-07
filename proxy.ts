@@ -15,7 +15,7 @@ function hasFileExtension(pathname: string): boolean {
   return /\.[a-z0-9]+$/i.test(pathname);
 }
 
-export function middleware(req: NextRequest) {
+export default function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   if (PUBLIC.some((p) => pathname.startsWith(p))) return NextResponse.next();
   if (hasFileExtension(pathname)) return NextResponse.next();
