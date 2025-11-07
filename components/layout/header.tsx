@@ -168,13 +168,13 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
         </Sheet>
 
         {/* Desktop controls */}
-        <Button variant="ghost" size="sm" aria-label="Toggle language" onClick={handleToggleLang} className="gap-1.5 hidden md:flex">
+        <Button variant="ghost" size="sm" aria-label="Toggle language" onClick={handleToggleLang} className="gap-1.5 hidden md:flex items-center">
           <Languages className="h-5 w-5 -mt-0.5" />
           <span className="text-xs font-medium">{lang.toUpperCase()}</span>
           <span className="sr-only">Switch language</span>
         </Button>
-        <Button variant="ghost" size="icon" aria-label="Toggle theme" onClick={() => setDark((v) => !v)} className="hidden md:flex">
-          {dark ? <Sun className="h-5 w-5 -mt-0.5" /> : <Moon className="h-5 w-5 -mt-0.5" />}
+        <Button variant="ghost" size="sm" aria-label="Toggle theme" onClick={() => setDark((v) => !v)} className="hidden md:flex items-center justify-center px-3">
+          {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </Button>
       </div>
     </nav>
