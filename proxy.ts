@@ -5,6 +5,7 @@ const PUBLIC = [
   "/sitemap.xml",
   "/robots.txt",
   "/favicon.ico",
+  "/icon",
   "/_next",
   "/assets",
   "/api",

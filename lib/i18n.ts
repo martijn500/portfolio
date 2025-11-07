@@ -27,19 +27,18 @@ zodat oplossingen goed werken voor zowel gebruikers als developmentteams.",
       ],
     },
     profileLife: {
-      role: "Buiten werk ben ik vader, speel futsal en ga graag naar festivals met het gezin.",
+      role: "Gelukkige vader van twee, futsaller en chronische hobby-wisselaar",
       summary:
-        "Buiten werk geniet ik van tijd met mijn gezin, een potje futsal met vrienden, of achter de piano. \
-Van koken voor familie tot snowboarden in de bergen, van filmavonden tot vakanties in Toscane. \
-Met mijn zoontje graafmachines bekijken, met het gezin het bos in, of samen naar festivals - \
-deze momenten geven me de energie en creativiteit die ik nodig heb.",
+        "Buiten werk geniet ik van tijd met mijn gezin, een potje futsal met vrienden (waarbij 3 helften belangrijk zijn), of tijdelijke hobby's zoals sterrenkijken, zuurdesembroden bakken en piano leren spelen. \
+Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast heb ik een neiging om alles tot op de bodem uit te zoeken. Zoals vakanties of een nieuwe waterkoker.",
       skills: [
+        "Gezinsleven",
         "Films kijken",
         "Koken",
         "Brood bakken",
         "Futsal",
         "Piano leren",
-        "Gezinsleven",
+        "Sterrenkijken",
         "Snowboarden",
         "Natuur",
         "Toscane",
@@ -112,7 +111,7 @@ deze momenten geven me de energie en creativiteit die ik nodig heb.",
         id: "alphabet-v1",
         client: "Alphabet (BMW Group)",
         title: "Alphabet Design System",
-        period: "2023 → 2024",
+        period: "2020 → 2023",
         image: "alphabet-1.png",
         summary:
           "Transitie naar nieuwe corporate stijl. Richting gegeven aan consistentie, typografie, kleur en componentbibliotheek met WCAG-baseline.",
@@ -123,11 +122,26 @@ deze momenten geven me de energie en creativiteit die ik nodig heb.",
         ],
       },
       {
+        id: "philips-lighting",
+        client: "Signify / Philips Lighting",
+        title: "Signify InterAct Platform",
+        period: "2015 → 2017",
+        image: "signify.png",
+        summary:
+          "Vormgegeven aan UX-architectuur en herbruikbare componenten voor het InterAct smart lighting platform. Actieve rol in design taskforce met focus op interaction design en usability testing.",
+        outcomes: [
+          "Herbruikbare UI-componenten voor multi-applicatielandschap",
+          "Schaalbare design patterns en interaction design",
+          "Actieve rol in UI/UX Design Taskforce en usability testing",
+          "Brug tussen gebruikersinzichten, UX-richtlijnen en technische realisatie",
+        ],
+      },
+      {
         id: "ing",
         client: "ING",
         title: "ING Mobile Services Portal",
-        period: "2022",
-        image: "ing-1.png",
+        period: "2013 → 2015",
+        image: "ing.png",
         summary:
           "Tablet-portal voor on-site klantenservice. Focus op duidelijkheid, snelheid en compliance in compacte touch-UI.",
         outcomes: [
@@ -228,19 +242,18 @@ making sure solutions work for users and development teams alike.",
       ],
     },
     profileLife: {
-      role: "Outside of work, I'm a father, play futsal and love going to festivals with my family.",
+      role: "I'm also a father of two beautiful children, play futsal and always have another hobby.",
       summary:
-        "Outside of work, I enjoy time with my family, a game of futsal with friends, or learning piano. \
-From cooking for family to snowboarding in the mountains, from movie nights to holidays in Tuscany. \
-Watching excavators with my son, exploring the forest with the family, or going to festivals together - \
-these moments give me the energy and creativity I need.",
+        "Outside of work, I enjoy time with my family, a game of futsal with friends, or temporary hobbies like stargazing, sourdough baking and learning piano. \
+Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I tend to research everything thoroughly. Like vacations or a new kettle.",
       skills: [
+        "Family Life",
         "Watching Films",
         "Cooking",
         "Bread Baking",
         "Futsal",
         "Learning Piano",
-        "Family Life",
+        "Stargazing",
         "Snowboarding",
         "Nature",
         "Tuscany",
@@ -313,7 +326,7 @@ these moments give me the energy and creativity I need.",
         id: "alphabet-v1",
         client: "Alphabet",
         title: "Alphabet Design System",
-        period: "2020 → 2023",
+        period: "2020 → 2022",
         image: "alphabet-1.png",
         summary:
           "Transition to the new corporate design. Established consistency in type, color, and components with a WCAG baseline.",
@@ -324,11 +337,26 @@ these moments give me the energy and creativity I need.",
         ],
       },
       {
+        id: "philips-lighting",
+        client: "Signify / Philips Lighting",
+        title: "Signify InterAct Platform",
+        period: "2015 → 2017",
+        image: "signify.png",
+        summary:
+          "Shaped UX architecture and reusable components for the InterAct smart lighting platform. Active role in design taskforce with focus on interaction design and usability testing.",
+        outcomes: [
+          "Reusable UI components for multi-application landscape",
+          "Scalable design patterns and interaction design",
+          "Active role in UI/UX Design Taskforce and usability testing",
+          "Bridge between user insights, UX guidelines, and technical implementation",
+        ],
+      },
+      {
         id: "ing",
         client: "ING",
         title: "ING Mobile Services Portal",
-        period: "2022",
-        image: "ing-1.png",
+        period: "2013 → 2015",
+        image: "ing.png",
         summary:
           "Tablet portal for on-site client assistance. Focus on clarity, speed, and compliance in a compact touch UI.",
         outcomes: [

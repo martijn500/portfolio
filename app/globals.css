@@ -120,7 +120,8 @@ button:focus-visible,
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(14.646% 0.0279 67.877);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
+  /* Using the same hue as light theme for testing consistency; adjust lightness/chroma later if needed */
+  --primary: oklch(71.089% 0.17636 54.1);
   --primary-foreground: oklch(14.646% 0.0279 67.877);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
