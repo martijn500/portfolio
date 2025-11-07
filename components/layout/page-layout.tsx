@@ -123,7 +123,7 @@ function SiteContent() {
       <main id="main-content" role="main">
         <section 
           id="hero"
-          className="border-b-8 border-foreground bg-card lg:px-12 lg:pb-12"
+          className="border-b-8 border-foreground dark:border-foreground/30 bg-card lg:px-12 lg:pb-12"
           role="region"
           aria-labelledby="hero-heading"
         >
@@ -145,7 +145,7 @@ function SiteContent() {
 
         <section 
           id="featured" 
-          className="pt-12 sm:pt-16 lg:pt-20 border-t-8 border-b-8 border-foreground bg-background"
+          className="pt-12 sm:pt-16 lg:pt-20 border-t-8 border-b-8 border-foreground dark:border-foreground/30 bg-background"
           role="region"
           aria-labelledby="work-heading"
         >          
@@ -168,7 +168,7 @@ function SiteContent() {
 
         <section 
           id="community" 
-          className="pt-10 sm:pt-14 lg:pt-20 border-t-8 border-foreground bg-background"
+          className="pt-10 sm:pt-14 lg:pt-20 border-t-8 border-foreground dark:border-foreground/30 bg-background"
           role="region"
           aria-labelledby="community-heading"
         >
@@ -186,7 +186,7 @@ function SiteContent() {
 
       </main>
       <footer 
-        className="bg-card border-t-8 border-foreground"
+        className="bg-card border-t-8 border-foreground dark:border-foreground/30"
         role="contentinfo"
       >
         <Footer />
