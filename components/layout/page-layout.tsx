@@ -30,24 +30,44 @@ function SiteContent() {
 
   React.useEffect(() => {
     // Show header border as soon as the "Free time" section starts to scroll out of view
+    // Only applies to large screens (lg+), on smaller screens border is always visible
     const aboutLife = document.getElementById("about-life");
     if (!aboutLife) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        // Show border when "Free time" is scrolled out significantly
-        setShowHeaderBorder(!entry.isIntersecting);
-      },
-      {
-        root: null,
-        rootMargin: '100px 0px 0px 0px', // Extend viewport upward so it triggers later
-        threshold: 1.0,
+    const checkScreenSize = () => {
+      const isLargeScreen = window.matchMedia('(min-width: 1024px)').matches;
+      
+      if (!isLargeScreen) {
+        // On small/medium screens, always show border
+        setShowHeaderBorder(true);
+        return;
       }
-    );
 
-    observer.observe(aboutLife);
-    return () => observer.disconnect();
+      // On large screens, use IntersectionObserver
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          setShowHeaderBorder(!entry.isIntersecting);
+        },
+        {
+          root: null,
+          rootMargin: '100px 0px 0px 0px',
+          threshold: 1.0,
+        }
+      );
+
+      observer.observe(aboutLife);
+      return () => observer.disconnect();
+    };
+
+    const cleanup = checkScreenSize();
+    
+    // Re-check on resize
+    window.addEventListener('resize', checkScreenSize);
+    return () => {
+      cleanup?.();
+      window.removeEventListener('resize', checkScreenSize);
+    };
   }, []);
 
   return (
@@ -103,7 +123,7 @@ function SiteContent() {
       <main id="main-content" role="main">
         <section 
           id="hero"
-          className="border-b-8 border-foreground bg-card md:px-8 lg:px-12 md:pb-8 lg:pb-12"
+          className="border-b-8 border-foreground bg-card lg:px-12 lg:pb-12"
           role="region"
           aria-labelledby="hero-heading"
         >

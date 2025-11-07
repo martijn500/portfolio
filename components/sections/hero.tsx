@@ -98,9 +98,6 @@ export default function Hero({}: HeroProps) {
   {/* Anchor for about-work navigation */}
   <div id="about-work" className="absolute -top-20"></div>
       
-  {/* Anchor for about-life navigation - positioned where life section is centered */}
-  <div id="about-life" className="absolute lg:top-full top-1/2"></div>
-      
       {/* Parallax Container */}
       <div 
         ref={containerRef}
@@ -108,8 +105,7 @@ export default function Hero({}: HeroProps) {
       >
         <div 
           ref={stickyRef}
-          className="lg:sticky lg:top-16 lg:h-[calc(100vh-7rem)] w-full bg-background md:rounded-2xl lg:overflow-hidden scroll-mt-20" 
-          style={{boxShadow: 'inset 0 0 40px rgba(0,0,0,0.08)'}}
+          className="lg:sticky lg:top-16 lg:h-[calc(100vh-7rem)] w-full bg-background lg:rounded-2xl lg:overflow-hidden scroll-mt-20 lg:shadow-[inset_0_0_40px_rgba(0,0,0,0.08)]"
         >
           <div className="w-full max-w-6xl mx-auto h-full">
             <motion.div 
@@ -130,17 +126,13 @@ export default function Hero({}: HeroProps) {
                 <div className="h-full flex flex-col min-h-0">
                   
                   {/* Content grid */}
-                  <div className="grid gap-8 flex-1 h-full">
-                    <motion.div {...fadeUp} className="flex flex-col justify-start h-full">
-                      {/* Section Header verplaatst naar de contentkolom */}
-                      <motion.div {...fadeUp} className="pt-16 pb-6 mb-4">
-                        <h2 id="work-heading" className="text-5xl md:text-7xl font-bold">{t.hero.aboutWorkTitle}</h2>
-                      </motion.div>
-                      {/* Titel nu binnen de grid, in de contentkolom */}
+                  <div className="grid gap-8 flex-1 py-8 md:py-12">
+                    <motion.div {...fadeUp} className="flex flex-col justify-center h-full">
+                      {/* Titel */}
                       <motion.div {...fadeUp} className="mb-4">
-                        <h3 className="text-2xl md:text-4xl font-semibold leading-none max-w-fit">
+                        <h2 id="work-heading" className="text-2xl md:text-4xl font-semibold leading-none max-w-fit">
                           {t.profile.role}
-                        </h3>
+                        </h2>
                       </motion.div>
                       <p className="text-lg prose-measure mb-6">{t.profile.summary}</p>
                       <div className="mt-6 mb-6">
@@ -208,26 +200,25 @@ export default function Hero({}: HeroProps) {
 
             {/* Life Section */}
             <motion.section 
-              className="w-full lg:w-1/4 h-full flex-shrink-0"
+              className="w-full lg:w-1/4 h-full flex-shrink-0 relative"
               aria-labelledby="life-heading"
               role="region"
               style={{ opacity: isMobile ? 1 : lifeOpacity }}
             >
+              {/* Anchor for about-life navigation */}
+              <div id="about-life" className="absolute -top-20 lg:top-0"></div>
+              
               <div id="about-life-content" className="w-full px-5 md:px-8 lg:px-12 h-full scroll-mt-20 lg:overflow-y-auto">
                 <div className="h-full flex flex-col min-h-0">
                   
                   {/* Content grid */}
-                  <div className="grid gap-8 flex-1 h-full">
-                    <motion.div {...fadeUp} className="flex flex-col justify-start h-full">
-                      {/* Section Header verplaatst naar de contentkolom */}
-                      <motion.div {...fadeUp} className="pt-16 pb-6 mb-4">
-                        <h2 id="life-heading" className="text-5xl md:text-7xl font-bold">{t.hero.aboutLifeTitle}</h2>
-                      </motion.div>
-                      {/* Titel nu binnen de grid, in de contentkolom */}
+                  <div className="grid gap-8 flex-1 py-8 md:py-12">
+                    <motion.div {...fadeUp} className="flex flex-col justify-center h-full">
+                      {/* Titel */}
                       <motion.div {...fadeUp} className="mb-4">
-                        <h3 className="text-2xl md:text-4xl font-semibold leading-none max-w-fit">
+                        <h2 id="life-heading" className="text-2xl md:text-4xl font-semibold leading-none max-w-fit">
                           {t.profileLife.role}
-                        </h3>
+                        </h2>
                       </motion.div>
                       <p className="text-lg prose-measure mb-6">{t.profileLife.summary}</p>
                       <div className="mt-6 mb-6">

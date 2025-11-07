@@ -94,7 +94,7 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
         <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
           <Banana className="h-4 w-4" />
         </span>
-        <span className="hidden sm:block">{t.profile.name}</span>
+        <span>{t.profile.name}</span>
       </a>
       
       {/* Navigation Links */}
@@ -138,7 +138,7 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
             <SheetHeader>
               <SheetTitle>{t.profile.name}</SheetTitle>
             </SheetHeader>
-            <nav className="flex flex-col gap-4 mt-8" role="navigation" aria-label="Mobile navigation">
+            <nav className="flex flex-col gap-4 mt-8 px-4" role="navigation" aria-label="Mobile navigation">
               {sections.map((section) => (
                 <a
                   key={section.id}
@@ -154,7 +154,7 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
                 </a>
               ))}
             </nav>
-            <div className="flex flex-col gap-2 mt-8 pt-8 border-t">
+            <div className="flex flex-col gap-2 mt-8 pt-8 border-t px-4">
               <Button variant="outline" onClick={handleToggleLang} className="justify-start gap-2">
                 <Languages className="h-5 w-5" />
                 {lang === 'nl' ? 'English' : 'Nederlands'}

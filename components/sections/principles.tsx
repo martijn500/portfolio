@@ -35,14 +35,17 @@ export default function Principles() {
         {t.principles.map((p: { title: string; icon: string; description: string }) => {
           const IconComponent = iconMap[p.icon as keyof typeof iconMap];
           return (
-            <div key={p.title}>
-              <div className="p-6 border-b">
-                <div className="flex items-center gap-3 mb-3">
-                  <IconComponent className="h-6 w-6" aria-hidden="true" />
-                  <h3 className="text-xl font-semibold">{p.title}</h3>
-                </div>
+            <div key={p.title} className="flex gap-4">
+              {/* Icon on the left */}
+              <div className="flex-shrink-0">
+                <IconComponent className="h-6 w-6" aria-hidden="true" />
               </div>
-              <div className="p-6">{p.description}</div>
+              
+              {/* Title and description stacked on the right */}
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold mb-3">{p.title}</h3>
+                <p>{p.description}</p>
+              </div>
             </div>
           );
         })}
