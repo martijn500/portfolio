@@ -90,44 +90,52 @@ function SiteContent() {
   }, [lang, t.seo.title]);
 
   React.useEffect(() => {
-    // Show header border as soon as the "Free time" section starts to scroll out of view
-    // Only applies to large screens (lg+), on smaller screens border is always visible
-    const aboutLife = document.getElementById("about-life");
-    if (!aboutLife) return;
+    if (typeof window === "undefined") {
+      return;
+    }
 
-    const checkScreenSize = () => {
-      const isLargeScreen = window.matchMedia('(min-width: 1024px)').matches;
-      
-      if (!isLargeScreen) {
-        // On small/medium screens, always show border
+    const heroSection = document.getElementById("hero");
+    if (!heroSection) {
+      setShowHeaderBorder(true);
+      return;
+    }
+
+    const desktopQuery = window.matchMedia("(min-width: 1024px)");
+    let ticking = false;
+
+    const updateBorderVisibility = () => {
+      if (!desktopQuery.matches) {
         setShowHeaderBorder(true);
         return;
       }
 
-      // On large screens, use IntersectionObserver
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const entry = entries[0];
-          setShowHeaderBorder(!entry.isIntersecting);
-        },
-        {
-          root: null,
-          rootMargin: '100px 0px 0px 0px',
-          threshold: 1.0,
-        }
-      );
-
-      observer.observe(aboutLife);
-      return () => observer.disconnect();
+      const heroRect = heroSection.getBoundingClientRect();
+      const heroLeavingViewport = heroRect.bottom <= window.innerHeight;
+      setShowHeaderBorder(heroLeavingViewport);
     };
 
-    const cleanup = checkScreenSize();
-    
-    // Re-check on resize
-    window.addEventListener('resize', checkScreenSize);
+    const handleScroll = () => {
+      if (ticking) {
+        return;
+      }
+
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        updateBorderVisibility();
+        ticking = false;
+      });
+    };
+
+    updateBorderVisibility();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", updateBorderVisibility);
+    desktopQuery.addEventListener("change", updateBorderVisibility);
+
     return () => {
-      cleanup?.();
-      window.removeEventListener('resize', checkScreenSize);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateBorderVisibility);
+      desktopQuery.removeEventListener("change", updateBorderVisibility);
     };
   }, []);
 
