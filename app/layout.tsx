@@ -10,16 +10,16 @@ export const metadata: Metadata = {
   title: "Martijn van der Wijst – Tech Lead UX & Design Systems",
   description: "UX specialist / Tech Lead UX – design systems, tokens, accessibility.",
   manifest: "/manifest.webmanifest",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: THEME_COLORS.lightBackground },
-    { media: "(prefers-color-scheme: dark)", color: THEME_COLORS.darkBackground },
-  ],
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: THEME_COLORS.lightBackground },
+    { media: "(prefers-color-scheme: dark)", color: THEME_COLORS.darkBackground },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
