@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html:
-              '(function(){try{var root=document.documentElement;var stored=localStorage.getItem("theme-preference");var prefersDark=window.matchMedia("(prefers-color-scheme: dark)").matches;var isDark=stored?stored==="dark":prefersDark;root.classList.toggle("dark",isDark);root.dataset.theme=stored||"system";root.classList.add("theme-ready");}catch(error){}})();',
+              '(function(){try{var root=document.documentElement;var stored=localStorage.getItem("theme-preference");var prefersDark=window.matchMedia("(prefers-color-scheme: dark)").matches;var mode=stored==="light"||stored==="dark"?stored:"system";var isDark=mode==="dark"||(mode==="system"&&prefersDark);root.classList.toggle("dark",isDark);root.dataset.theme=mode;root.classList.add("theme-ready");}catch(error){}})();',
           }}
         />
       </head>

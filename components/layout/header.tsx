@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Sun, Moon, Languages, Banana, Menu } from "lucide-react";
+import { Sun, Moon, Languages, Banana, Menu, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import NavLink from "@/components/layout/nav-link";
@@ -8,8 +8,7 @@ import type { LangKey } from "@/lib/i18n";
 import { useLanguage } from "@/lib/context/language-context";
 import { useActiveSection } from "@/lib/hooks/use-active-section";
 import { scrollHeroToSection } from "@/lib/scroll-hero";
-
-const THEME_STORAGE_KEY = "theme-preference";
+import { cn } from "@/lib/utils";
 
 function stripLangPrefix(pathname: string) {
   return pathname.replace(/^\/(en|nl)(\/|$)/, "/");
@@ -21,13 +20,13 @@ function buildLangUrl(lang: LangKey) {
 }
 
 interface HeaderProps {
-  dark: boolean;
-  setDark: (value: boolean | ((prev: boolean) => boolean)) => void;
+  themeMode: "light" | "dark" | "system";
+  onThemeModeChange: (mode: "light" | "dark" | "system") => void;
   afterHero: boolean;
   onBorderUpdate?: (borderInfo: { left: number; width: number } | null) => void;
 }
 
-export default function Header({ dark, setDark, afterHero, onBorderUpdate }: HeaderProps) {
+export default function Header({ themeMode, onThemeModeChange, afterHero, onBorderUpdate }: HeaderProps) {
   const { lang, t } = useLanguage();
   const activeSection = useActiveSection();
   const navRef = React.useRef<HTMLDivElement>(null);
@@ -42,6 +41,28 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
     { id: 'featured', label: t.workTitle },
     { id: 'principles', label: t.principlesTitle },
     { id: 'community', label: t.communityTitle },
+  ];
+
+  const themeGroupLabel = headerCopy.themeToggle.label;
+  const themeOptions = [
+    {
+      value: "light" as const,
+      Icon: Sun,
+      label: headerCopy.themeToggle.options.light.short,
+      aria: headerCopy.themeToggle.options.light.aria,
+    },
+    {
+      value: "system" as const,
+      Icon: Monitor,
+      label: headerCopy.themeToggle.options.system.short,
+      aria: headerCopy.themeToggle.options.system.aria,
+    },
+    {
+      value: "dark" as const,
+      Icon: Moon,
+      label: headerCopy.themeToggle.options.dark.short,
+      aria: headerCopy.themeToggle.options.dark.aria,
+    },
   ];
 
   React.useEffect(() => {
@@ -84,34 +105,23 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
     return () => window.removeEventListener('resize', updateBorderPosition);
   }, [activeSection, onBorderUpdate]);
 
-  const nextLang: LangKey = lang === "nl" ? "en" : "nl";
-  const nextLangLabel = headerCopy.languageToggle.label[nextLang];
-  const toggleLangAria = headerCopy.languageToggle.aria[nextLang];
-  const toggleThemeAria = dark ? headerCopy.themeToggle.toLight : headerCopy.themeToggle.toDark;
-
-  const handleToggleLang = () => {
-    const url = buildLangUrl(nextLang);
-    window.location.href = url; // Changed from window.location.assign(url)
+  const handleLanguageSelect = (targetLang: LangKey) => {
+    if (targetLang === lang) {
+      return;
+    }
+    const url = buildLangUrl(targetLang);
+    window.location.href = url;
   };
+
+  const nextLang: LangKey = lang === "nl" ? "en" : "nl";
+  const nextLangLabel = (headerCopy.languageToggle.label as any)[nextLang];
+  const toggleLangAria = (headerCopy.languageToggle.aria as any)[nextLang];
 
   const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     const didScroll = scrollHeroToSection(id);
     if (didScroll) {
       event.preventDefault();
     }
-  };
-
-  const handleThemeToggle = () => {
-    setDark((previous) => {
-      const nextDark = !previous;
-      try {
-        const nextPreference = nextDark ? "dark" : "light";
-        window.localStorage.setItem(THEME_STORAGE_KEY, nextPreference);
-      } catch (error) {
-        // localStorage might be unavailable (e.g., Safari private mode); fail silently.
-      }
-      return nextDark;
-    });
   };
 
   return (
@@ -132,7 +142,7 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
       </a>
       
       {/* Navigation Links */}
-      <div ref={navRef} className="hidden md:flex items-center h-full gap-6 relative" role="menubar">
+      <div ref={navRef} className="hidden md:flex items-center h-full relative" role="menubar">
         {/* Animated border */}
         <div 
           className={`absolute bottom-0 h-2 rounded-t-md transition-all duration-300 ease-in-out ${
@@ -192,51 +202,80 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
                 </a>
               ))}
             </nav>
-            <div className="flex flex-col gap-2 mt-8 pt-8 border-t px-4">
-              <Button
-                variant="outline"
-                onClick={handleToggleLang}
-                className="justify-start gap-2"
-                aria-label={toggleLangAria}
-              >
-                <Languages className="h-5 w-5" />
-                {nextLangLabel}
-              </Button>
-              <Button
-                variant="outline"
-                onClick={handleThemeToggle}
-                className="justify-start gap-2"
-                aria-label={toggleThemeAria}
-              >
-                {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                {toggleThemeAria}
-              </Button>
+            <div className="flex flex-col gap-3 mt-8 pt-8 border-t px-4">
+              <div className="grid gap-2" role="group" aria-label={toggleLangAria}>
+                <Button
+                  variant="outline"
+                  onClick={() => handleLanguageSelect(nextLang)}
+                  className="justify-start gap-2 rounded-full px-3 py-2"
+                  aria-label={toggleLangAria}
+                  title={toggleLangAria}
+                >
+                  <Languages className="h-5 w-5" aria-hidden="true" />
+                  <span aria-hidden="true" className="text-sm font-medium">
+                    {nextLangLabel}
+                  </span>
+                </Button>
+              </div>
+              <div className="grid gap-2" role="group" aria-label={themeGroupLabel}>
+                {themeOptions.map((option) => (
+                  <Button
+                    key={option.value}
+                    variant={themeMode === option.value ? "default" : "outline"}
+                    onClick={() => onThemeModeChange(option.value)}
+                    className="justify-start gap-2"
+                    aria-pressed={themeMode === option.value}
+                    aria-label={option.aria}
+                    title={option.aria}
+                  >
+                    <option.Icon className="h-5 w-5" aria-hidden="true" />
+                    <span aria-hidden="true">{option.label}</span>
+                  </Button>
+                ))}
+              </div>
             </div>
           </SheetContent>
         </Sheet>
 
         {/* Desktop controls */}
-        <Button
-          variant="ghost"
-          size="sm"
-          aria-label={toggleLangAria}
-          onClick={handleToggleLang}
-          className="gap-1.5 hidden md:flex items-center"
-        >
-          <Languages className="h-5 w-5 -mt-0.5" />
-          <span className="text-xs font-medium">{lang.toUpperCase()}</span>
-          <span className="sr-only">{toggleLangAria}</span>
-        </Button>
-        <Button
-          variant="ghost"
-          size="sm"
-          aria-label={toggleThemeAria}
-          onClick={handleThemeToggle}
-          className="hidden md:flex items-center justify-center px-3"
-        >
-          {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          <span className="sr-only">{toggleThemeAria}</span>
-        </Button>
+        <div className="hidden md:flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => handleLanguageSelect(nextLang)}
+            className="flex h-9 items-center gap-1.5 rounded-full border border-foreground/10 bg-card/80 px-3 text-xs font-medium uppercase text-foreground/80 shadow-sm transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            aria-label={toggleLangAria}
+            title={toggleLangAria}
+          >
+            <Languages className="h-4 w-4" aria-hidden="true" />
+            <span aria-hidden="true">{lang.toUpperCase()}</span>
+            <span className="sr-only">{toggleLangAria}</span>
+          </button>
+
+          <div
+            className="flex h-9 items-center gap-px rounded-full border border-foreground/10 bg-card/80 px-0.5 shadow-sm"
+            role="group"
+            aria-label={themeGroupLabel}
+          >
+            {themeOptions.map((option, index) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => onThemeModeChange(option.value)}
+                className={cn(
+                  "relative flex h-8 w-8 items-center justify-center rounded-full text-foreground/70 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+                  themeMode === option.value
+                    ? "text-foreground after:absolute after:inset-px after:rounded-full after:bg-foreground/10 after:content-['']"
+                    : "hover:text-foreground"
+                )}
+                aria-pressed={themeMode === option.value}
+                aria-label={option.aria}
+                title={option.aria}
+              >
+                <option.Icon className="relative h-3.5 w-3.5" aria-hidden="true" />
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </nav>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import { useActiveSection } from "@/lib/hooks/use-active-section";
+import { cn } from "@/lib/utils";
 
 interface NavLinkProps {
   href: string;
@@ -7,22 +8,24 @@ interface NavLinkProps {
   children: React.ReactNode;
   "data-section"?: string;
   onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+  className?: string;
 }
 
-export default function NavLink({ href, sectionId, children, ...props }: NavLinkProps) {
+export default function NavLink({ href, sectionId, children, className, ...props }: NavLinkProps) {
   const activeSection = useActiveSection();
   const isActive = activeSection === sectionId;
 
   return (
     <a 
       href={href}
-      className={
-        `relative text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring ` +
-        `h-full flex items-center px-0 ` +
-        (isActive
+      className={cn(
+  "relative flex h-full items-center rounded-full px-3 text-sm transition-colors",
+
+        isActive
           ? "text-foreground"
-          : "text-muted-foreground hover:text-foreground")
-      }
+          : "text-muted-foreground hover:text-foreground",
+        className
+      )}
       role="menuitem"
       {...props}
     >

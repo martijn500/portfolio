@@ -36,7 +36,7 @@ export default function Principles() {
           return (
             <div key={p.title} className="flex gap-4">
               {/* Icon on the left */}
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <IconComponent className="h-6 w-6" aria-hidden="true" />
               </div>
               

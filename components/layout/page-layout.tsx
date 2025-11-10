@@ -13,9 +13,12 @@ import DecorativeStripes from "@/components/common/decorative-stripes";
 import { LanguageProvider, useLanguage } from "@/lib/context/language-context";
 
 const useIsomorphicLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+type ThemeMode = "light" | "dark" | "system";
+const THEME_STORAGE_KEY = "theme-preference";
 
 function SiteContent() {
-  const [dark, setDark] = React.useState(false);
+  const [themeMode, setThemeMode] = React.useState<ThemeMode>("system");
+  const [isDark, setIsDark] = React.useState(false);
   const [isThemeResolved, setIsThemeResolved] = React.useState(false);
   const [showHeaderBorder, setShowHeaderBorder] = React.useState(false);
   const [activeBorderInfo, setActiveBorderInfo] = React.useState<{ left: number; width: number } | null>(null);
@@ -27,30 +30,33 @@ function SiteContent() {
     }
 
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
-
     const getStoredPreference = () => {
       try {
-        return localStorage.getItem("theme-preference") as "light" | "dark" | "system" | null;
+        return localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode | null;
       } catch (error) {
         return null;
       }
     };
 
-    const applyPreference = (matches: boolean) => {
-      setDark(matches);
-      setIsThemeResolved(true);
-    };
-
     const stored = getStoredPreference();
-    const initialDark = stored ? stored === "dark" : mq.matches;
-    applyPreference(initialDark);
+    const initialMode: ThemeMode = stored === "light" || stored === "dark" || stored === "system" ? stored : "system";
+    const initialDark = initialMode === "dark" ? true : initialMode === "light" ? false : mq.matches;
 
+    setThemeMode((previous) => (previous === initialMode ? previous : initialMode));
+    setIsDark(initialDark);
+    setIsThemeResolved(true);
+  }, []);
+
+  useIsomorphicLayoutEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const handleSchemeChange = (event: MediaQueryListEvent) => {
-      const currentStored = getStoredPreference();
-      if (currentStored === "light" || currentStored === "dark") {
-        return;
+      if (themeMode === "system") {
+        setIsDark(event.matches);
       }
-      applyPreference(event.matches);
     };
 
     if (typeof mq.addEventListener === "function") {
@@ -63,7 +69,7 @@ function SiteContent() {
     return () => {
       mq.onchange = previousOnChange;
     };
-  }, []);
+  }, [themeMode]);
 
   useIsomorphicLayoutEffect(() => {
     if (typeof document === "undefined") {
@@ -71,18 +77,26 @@ function SiteContent() {
     }
 
     const root = document.documentElement;
-    root.classList.toggle("dark", dark);
+    root.classList.toggle("dark", isDark);
     root.classList.add("theme-ready");
-    root.dataset.theme = dark ? "dark" : "light";
-    try {
-      const storedPreference = localStorage.getItem("theme-preference");
-      if (!storedPreference || storedPreference === "system") {
-        return;
-      }
-    } catch (error) {
+    root.dataset.theme = themeMode;
+  }, [isDark, themeMode, isThemeResolved]);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") {
       return;
     }
-  }, [dark, isThemeResolved]);
+
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const nextDark = themeMode === "dark" ? true : themeMode === "light" ? false : mq.matches;
+    setIsDark(nextDark);
+
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, themeMode);
+    } catch (error) {
+      // localStorage might be unavailable (e.g., private mode); ignore.
+    }
+  }, [themeMode]);
 
   React.useEffect(() => {
     document.documentElement.setAttribute("lang", lang);
@@ -158,24 +172,29 @@ function SiteContent() {
       <header
         id="navigation"
         role="banner"
-  className="sticky top-0 z-40 backdrop-blur h-16 transition-all duration-200"
+        className="sticky top-0 z-40 backdrop-blur h-16 transition-all duration-200"
       >
-        <Header dark={dark} setDark={setDark} afterHero={showHeaderBorder} onBorderUpdate={setActiveBorderInfo} />
-        
+        <Header
+          themeMode={themeMode}
+          onThemeModeChange={setThemeMode}
+          afterHero={showHeaderBorder}
+          onBorderUpdate={setActiveBorderInfo}
+        />
+
         {/* Bottom border with gap for active nav item */}
         {showHeaderBorder && (
           <>
             {activeBorderInfo ? (
               <>
                 {/* Left part of border */}
-                <div 
+                <div
                   className="absolute bottom-0 left-0 h-px bg-foreground/30 transition-all duration-300"
                   style={{ width: `${activeBorderInfo.left}px` }}
                 />
                 {/* Right part of border */}
-                <div 
+                <div
                   className="absolute bottom-0 h-px bg-foreground/30 transition-all duration-300"
-                  style={{ 
+                  style={{
                     left: `${activeBorderInfo.left + activeBorderInfo.width}px`,
                     right: 0,
                   }}
@@ -190,7 +209,7 @@ function SiteContent() {
       </header>
 
       <main id="main-content" role="main">
-        <section 
+        <section
           id="hero"
           className="border-b-8 border-foreground dark:border-foreground/30 bg-card lg:px-12 lg:pb-12"
           role="region"
@@ -206,7 +225,7 @@ function SiteContent() {
         >
           <DecorativeStripes />
           <div className="py-10 sm:py-14 lg:py-20">
-          <DesignPhilosophy />
+            <DesignPhilosophy />
           </div>
           <DecorativeStripes />
         </section>

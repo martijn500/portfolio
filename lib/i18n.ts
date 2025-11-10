@@ -50,14 +50,24 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
           en: "English",
           nl: "Nederlands",
         },
-        aria: {
-          en: "Schakel naar Engels",
-          nl: "Schakel naar Nederlands",
-        },
+        aria: "Wissel taal",
       },
       themeToggle: {
-        toDark: "Schakel naar donker thema",
-        toLight: "Schakel naar licht thema",
+        label: "Kies themamodus",
+        options: {
+          light: {
+            short: "Licht",
+            aria: "Schakel naar licht thema",
+          },
+          system: {
+            short: "Auto",
+            aria: "Volg het systeemthema",
+          },
+          dark: {
+            short: "Donker",
+            aria: "Schakel naar donker thema",
+          },
+        },
       },
     },
     hero: {
@@ -281,14 +291,24 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
           en: "English",
           nl: "Dutch",
         },
-        aria: {
-          en: "Switch to English",
-          nl: "Switch to Dutch",
-        },
+        aria: "Switch language",
       },
       themeToggle: {
-        toDark: "Switch to dark theme",
-        toLight: "Switch to light theme",
+        label: "Choose a theme mode",
+        options: {
+          light: {
+            short: "Light",
+            aria: "Switch to light theme",
+          },
+          system: {
+            short: "Auto",
+            aria: "Follow the system theme",
+          },
+          dark: {
+            short: "Dark",
+            aria: "Switch to dark theme",
+          },
+        },
       },
     },
     hero: {
