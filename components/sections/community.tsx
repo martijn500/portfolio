@@ -12,10 +12,7 @@ const baseFadeUp = {
 
 const fadeUpAnimation = createAnimation(baseFadeUp);
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface CommunityProps {
-  // Empty interface for consistent component props pattern
-}
+type CommunityProps = Record<string, never>;
 
 export default function Community({}: CommunityProps) {
   const { t } = useLanguage();

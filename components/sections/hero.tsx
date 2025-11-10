@@ -16,10 +16,7 @@ const baseFadeUp = {
 
 const fadeUpAnimation = createAnimation(baseFadeUp);
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface HeroProps {
-  // Empty interface for consistent component props pattern
-}
+type HeroProps = Record<string, never>;
 
 export default function Hero({}: HeroProps) {
   const { t } = useLanguage();

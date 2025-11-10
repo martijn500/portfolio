@@ -1,10 +1,7 @@
 "use client";
 import { useLanguage } from "@/lib/context/language-context";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface DesignPhilosophyProps {
-  // Empty interface for consistent component props pattern
-}
+type DesignPhilosophyProps = Record<string, never>;
 
 export default function DesignPhilosophy({}: DesignPhilosophyProps) {
   const { t } = useLanguage();

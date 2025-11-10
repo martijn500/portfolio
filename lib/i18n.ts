@@ -44,6 +44,22 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
         "Toscane",
       ],
     },
+    header: {
+      languageToggle: {
+        label: {
+          en: "English",
+          nl: "Nederlands",
+        },
+        aria: {
+          en: "Schakel naar Engels",
+          nl: "Schakel naar Nederlands",
+        },
+      },
+      themeToggle: {
+        toDark: "Schakel naar donker thema",
+        toLight: "Schakel naar licht thema",
+      },
+    },
     hero: {
       ctaPortfolio: "Portfolio",
       ctaWork: "Bekijk mijn werk",
@@ -258,6 +274,22 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
         "Nature",
         "Tuscany",
       ],
+    },
+    header: {
+      languageToggle: {
+        label: {
+          en: "English",
+          nl: "Dutch",
+        },
+        aria: {
+          en: "Switch to English",
+          nl: "Switch to Dutch",
+        },
+      },
+      themeToggle: {
+        toDark: "Switch to dark theme",
+        toLight: "Switch to light theme",
+      },
     },
     hero: {
       ctaPortfolio: "Portfolio",

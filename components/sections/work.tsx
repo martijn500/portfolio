@@ -15,10 +15,7 @@ const baseFadeUp = {
 
 const fadeUpAnimation = createAnimation(baseFadeUp);
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface WorkProps {
-  // Empty interface for consistent component props pattern
-}
+type WorkProps = Record<string, never>;
 
 export default function Work({}: WorkProps) {
   const { t } = useLanguage();
@@ -72,7 +69,7 @@ export default function Work({}: WorkProps) {
             </div>
 
             <div className="lg:col-span-1 grid grid-cols-2 gap-3 self-start">
-              <div className="aspect-[4/3] rounded-xl bg-white/70 border overflow-hidden">
+              <div className="aspect-4/3 rounded-xl bg-white/70 border overflow-hidden">
                 <Image 
                   src="/bmwgroup-1.png" 
                   alt="BMW Group Design System - Component Library interface showing design tokens and components"
@@ -81,7 +78,7 @@ export default function Work({}: WorkProps) {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="aspect-[4/3] rounded-xl bg-white/70 border overflow-hidden">
+              <div className="aspect-4/3 rounded-xl bg-white/70 border overflow-hidden">
                 <Image 
                   src="/bmwgroup-2.png" 
                   alt="BMW Group Design System - Documentation page with detailed component specifications"
@@ -90,7 +87,7 @@ export default function Work({}: WorkProps) {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="col-span-2 aspect-[16/9] rounded-xl bg-white/70 border overflow-hidden">
+              <div className="col-span-2 aspect-video rounded-xl bg-white/70 border overflow-hidden">
                 <Image 
                   src="/bmwgroup-3.png" 
                   alt="BMW Group Design System - Complete overview dashboard showing implementation guidelines"
@@ -121,7 +118,7 @@ export default function Work({}: WorkProps) {
                 </CardTitle>
               </CardHeader>
               {/* Image Full Width */}
-              <div className="aspect-[16/9] bg-muted overflow-hidden">
+              <div className="aspect-video bg-muted overflow-hidden">
                 <Image 
                   src={`/${cs.image}`} 
                   alt={`${cs.title} project screenshot - ${cs.client}`}

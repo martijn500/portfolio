@@ -30,6 +30,7 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
   const navRef = React.useRef<HTMLDivElement>(null);
   const [borderStyle, setBorderStyle] = React.useState({ left: 0, width: 0 });
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const headerCopy = t.header;
 
   const sections = [
     { id: 'about-work', label: t.hero.aboutWorkTitle },
@@ -74,9 +75,13 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
     return () => window.removeEventListener('resize', updateBorderPosition);
   }, [activeSection, onBorderUpdate]);
 
+  const nextLang: LangKey = lang === "nl" ? "en" : "nl";
+  const nextLangLabel = headerCopy.languageToggle.label[nextLang];
+  const toggleLangAria = headerCopy.languageToggle.aria[nextLang];
+  const toggleThemeAria = dark ? headerCopy.themeToggle.toLight : headerCopy.themeToggle.toDark;
+
   const handleToggleLang = () => {
-    const next: LangKey = lang === "nl" ? "en" : "nl";
-    const url = buildLangUrl(next);
+    const url = buildLangUrl(nextLang);
     window.location.href = url; // Changed from window.location.assign(url)
   };
 
@@ -155,26 +160,49 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
               ))}
             </nav>
             <div className="flex flex-col gap-2 mt-8 pt-8 border-t px-4">
-              <Button variant="outline" onClick={handleToggleLang} className="justify-start gap-2">
+              <Button
+                variant="outline"
+                onClick={handleToggleLang}
+                className="justify-start gap-2"
+                aria-label={toggleLangAria}
+              >
                 <Languages className="h-5 w-5" />
-                {lang === 'nl' ? 'English' : 'Nederlands'}
+                {nextLangLabel}
               </Button>
-              <Button variant="outline" onClick={() => setDark((v) => !v)} className="justify-start gap-2">
+              <Button
+                variant="outline"
+                onClick={() => setDark((v) => !v)}
+                className="justify-start gap-2"
+                aria-label={toggleThemeAria}
+              >
                 {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                {dark ? 'Light mode' : 'Dark mode'}
+                {toggleThemeAria}
               </Button>
             </div>
           </SheetContent>
         </Sheet>
 
         {/* Desktop controls */}
-        <Button variant="ghost" size="sm" aria-label="Toggle language" onClick={handleToggleLang} className="gap-1.5 hidden md:flex items-center">
+        <Button
+          variant="ghost"
+          size="sm"
+          aria-label={toggleLangAria}
+          onClick={handleToggleLang}
+          className="gap-1.5 hidden md:flex items-center"
+        >
           <Languages className="h-5 w-5 -mt-0.5" />
           <span className="text-xs font-medium">{lang.toUpperCase()}</span>
-          <span className="sr-only">Switch language</span>
+          <span className="sr-only">{toggleLangAria}</span>
         </Button>
-        <Button variant="ghost" size="sm" aria-label="Toggle theme" onClick={() => setDark((v) => !v)} className="hidden md:flex items-center justify-center px-3">
+        <Button
+          variant="ghost"
+          size="sm"
+          aria-label={toggleThemeAria}
+          onClick={() => setDark((v) => !v)}
+          className="hidden md:flex items-center justify-center px-3"
+        >
           {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          <span className="sr-only">{toggleThemeAria}</span>
         </Button>
       </div>
     </nav>
