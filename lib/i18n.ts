@@ -45,15 +45,14 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
       ],
     },
     header: {
+      menuLabel: "Menu",
+      settingsLabel: "Instellingen",
       languageToggle: {
-        label: {
-          en: "English",
-          nl: "Nederlands",
-        },
+        label: "Taal",
         aria: "Wissel taal",
       },
       themeToggle: {
-        label: "Kies themamodus",
+        label: "Kies thema",
         options: {
           light: {
             short: "Licht",
@@ -286,15 +285,14 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
       ],
     },
     header: {
+      menuLabel: "Menu",
+      settingsLabel: "Settings",
       languageToggle: {
-        label: {
-          en: "English",
-          nl: "Dutch",
-        },
+        label: "Language",
         aria: "Switch language",
       },
       themeToggle: {
-        label: "Choose a theme mode",
+        label: "Choose theme",
         options: {
           light: {
             short: "Light",

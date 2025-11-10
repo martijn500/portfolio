@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Sun, Moon, Languages, Banana, Menu, Monitor } from "lucide-react";
+import { Sun, Moon, Languages, Banana, Menu, Monitor, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import NavLink from "@/components/layout/nav-link";
@@ -31,7 +31,7 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
   const activeSection = useActiveSection();
   const navRef = React.useRef<HTMLDivElement>(null);
   const [borderStyle, setBorderStyle] = React.useState({ left: 0, width: 0 });
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [menuOpen, setMenuOpen] = React.useState(false);
   const headerCopy = t.header;
 
   const sections = [
@@ -67,13 +67,15 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
 
   React.useEffect(() => {
     const updateBorderPosition = () => {
-      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-      if (!isDesktop) {
+      const isMdOrLarger = window.matchMedia("(min-width: 768px)").matches;
+      if (!isMdOrLarger) {
+        setBorderStyle({ left: 0, width: 0 });
         onBorderUpdate?.(null);
         return;
       }
 
       if (!navRef.current || !activeSection) {
+        setBorderStyle({ left: 0, width: 0 });
         onBorderUpdate?.(null);
         return;
       }
@@ -82,15 +84,11 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
       if (activeLink) {
         const rect = activeLink.getBoundingClientRect();
         const navRect = navRef.current.getBoundingClientRect();
-        
         const borderInfo = {
           left: rect.left - navRect.left - 8, // -8px voor -left-2
           width: rect.width + 16, // +16px voor left en right padding
         };
-        
         setBorderStyle(borderInfo);
-        
-        // Send absolute viewport position to parent for header border gap
         onBorderUpdate?.({
           left: rect.left - 8,
           width: rect.width + 16,
@@ -105,17 +103,10 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
     return () => window.removeEventListener('resize', updateBorderPosition);
   }, [activeSection, onBorderUpdate]);
 
-  const handleLanguageSelect = (targetLang: LangKey) => {
-    if (targetLang === lang) {
-      return;
-    }
-    const url = buildLangUrl(targetLang);
-    window.location.href = url;
-  };
-
-  const nextLang: LangKey = lang === "nl" ? "en" : "nl";
-  const nextLangLabel = (headerCopy.languageToggle.label as any)[nextLang];
-  const toggleLangAria = (headerCopy.languageToggle.aria as any)[nextLang];
+  const languages: Array<{ code: LangKey; label: string; nativeLabel: string }> = [
+    { code: 'en', label: 'English', nativeLabel: 'English' },
+    { code: 'nl', label: 'Nederlands', nativeLabel: 'Nederlands' },
+  ];
 
   const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     const didScroll = scrollHeroToSection(id);
@@ -155,9 +146,9 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
           style={{
             left: `${borderStyle.left}px`,
             width: `${borderStyle.width}px`,
+            display: borderStyle.width > 0 ? 'block' : 'none',
           }}
         />
-        
         {sections.map((section) => (
           <NavLink 
             key={section.id}
@@ -172,11 +163,29 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
       </div>
       
       <div className="flex items-center gap-2 h-full">
-        {/* Mobile Menu */}
-        <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+        {/* Combined menu: navigation + settings on mobile, settings only on desktop */}
+        <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" aria-label="Open menu">
-              <Menu className="h-5 w-5" />
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              aria-label="Open menu"
+              aria-haspopup="dialog"
+              aria-expanded={menuOpen}
+            >
+              <Menu className="h-5 w-5" aria-hidden="true" />
+            </Button>
+          </SheetTrigger>
+          <SheetTrigger asChild className="hidden md:flex">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              aria-label={headerCopy.settingsLabel || "Settings"}
+              aria-haspopup="dialog"
+              aria-expanded={menuOpen}
+              title={headerCopy.settingsLabel || "Settings"}
+            >
+              <Settings className="h-5 w-5" aria-hidden="true" />
             </Button>
           </SheetTrigger>
           <SheetContent
@@ -184,98 +193,125 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
             className="w-[300px] bg-background/70 backdrop-blur-md border-l border-border/60"
           >
             <SheetHeader>
-              <SheetTitle>{t.profile.name}</SheetTitle>
+              <SheetTitle className="md:hidden">{headerCopy.menuLabel || "Menu"}</SheetTitle>
+              <SheetTitle className="hidden md:block">{headerCopy.settingsLabel || "Settings"}</SheetTitle>
             </SheetHeader>
-            <nav className="flex flex-col gap-4 mt-8 px-4" role="navigation" aria-label="Mobile navigation">
-              {sections.map((section) => (
-                <a
-                  key={section.id}
-                  href={`#${section.id}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-lg py-2 px-3 rounded-md transition-colors ${
-                    activeSection === section.id 
-                      ? 'bg-primary text-primary-foreground' 
-                      : 'hover:bg-muted'
-                  }`}
-                >
-                  {section.label}
-                </a>
-              ))}
-            </nav>
-            <div className="flex flex-col gap-3 mt-8 pt-8 border-t px-4">
-              <div className="grid gap-2" role="group" aria-label={toggleLangAria}>
-                <Button
-                  variant="outline"
-                  onClick={() => handleLanguageSelect(nextLang)}
-                  className="justify-start gap-2 rounded-full px-3 py-2"
-                  aria-label={toggleLangAria}
-                  title={toggleLangAria}
-                >
-                  <Languages className="h-5 w-5" aria-hidden="true" />
-                  <span aria-hidden="true" className="text-sm font-medium">
-                    {nextLangLabel}
-                  </span>
-                </Button>
-              </div>
-              <div className="grid gap-2" role="group" aria-label={themeGroupLabel}>
-                {themeOptions.map((option) => (
-                  <Button
-                    key={option.value}
-                    variant={themeMode === option.value ? "default" : "outline"}
-                    onClick={() => onThemeModeChange(option.value)}
-                    className="justify-start gap-2"
-                    aria-pressed={themeMode === option.value}
-                    aria-label={option.aria}
-                    title={option.aria}
+            
+            <div className="flex flex-col gap-6 mt-8 px-4">
+              {/* Navigation section - mobile only */}
+              <nav className="flex flex-col gap-2 md:hidden" role="navigation" aria-label="Mobile navigation">
+                {sections.map((section) => (
+                  <a
+                    key={section.id}
+                    href={`#${section.id}`}
+                    onClick={() => setMenuOpen(false)}
+                    className={cn(
+                      "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
+                      activeSection === section.id 
+                        ? 'bg-primary text-primary-foreground font-medium' 
+                        : 'hover:bg-muted text-foreground'
+                    )}
                   >
-                    <option.Icon className="h-5 w-5" aria-hidden="true" />
-                    <span aria-hidden="true">{option.label}</span>
-                  </Button>
+                    <span>{section.label}</span>
+                  </a>
                 ))}
+              </nav>
+
+              {/* Divider between navigation and settings on mobile */}
+              <div className="md:hidden border-t border-border/40" />
+
+              {/* Language section - as navigation links */}
+              <div>
+                <h3 className="text-sm font-medium text-foreground/70 mb-3" id="language-section">
+                  {headerCopy.languageToggle.label}
+                </h3>
+                <nav 
+                  className="flex flex-col gap-2" 
+                  role="navigation" 
+                  aria-labelledby="language-section"
+                >
+                  {languages.map((language) => (
+                    <a
+                      key={language.code}
+                      href={buildLangUrl(language.code)}
+                      lang={language.code}
+                      aria-current={lang === language.code ? "page" : undefined}
+                      className={cn(
+                        "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
+                        lang === language.code
+                          ? "bg-primary text-primary-foreground font-medium"
+                          : "hover:bg-muted text-foreground"
+                      )}
+                      onClick={(e) => {
+                        if (lang === language.code) {
+                          e.preventDefault();
+                          return;
+                        }
+                        // Allow default link navigation with hash preservation
+                      }}
+                    >
+                      <Languages className="h-4 w-4" aria-hidden="true" />
+                      <span>{language.nativeLabel}</span>
+                      {lang === language.code && (
+                        <span className="sr-only"> (current)</span>
+                      )}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+
+              {/* Theme section - as radiogroup */}
+              <div>
+                <h3 className="text-sm font-medium text-foreground/70 mb-3" id="theme-section">
+                  {themeGroupLabel}
+                </h3>
+                <div 
+                  role="radiogroup" 
+                  aria-labelledby="theme-section"
+                  className="flex flex-col gap-2"
+                  onKeyDown={(e) => {
+                    const options = themeOptions.map(o => o.value);
+                    const currentIndex = options.indexOf(themeMode);
+                    
+                    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                      e.preventDefault();
+                      const nextIndex = (currentIndex + 1) % options.length;
+                      onThemeModeChange(options[nextIndex]);
+                    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                      e.preventDefault();
+                      const prevIndex = (currentIndex - 1 + options.length) % options.length;
+                      onThemeModeChange(options[prevIndex]);
+                    }
+                  }}
+                >
+                  {themeOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      role="radio"
+                      aria-checked={themeMode === option.value}
+                      aria-label={option.aria}
+                      onClick={() => onThemeModeChange(option.value)}
+                      className={cn(
+                        "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors text-left",
+                        themeMode === option.value
+                          ? "bg-primary text-primary-foreground font-medium"
+                          : "hover:bg-muted text-foreground"
+                      )}
+                      tabIndex={themeMode === option.value ? 0 : -1}
+                    >
+                      <option.Icon className="h-4 w-4" aria-hidden="true" />
+                      <span>{option.label}</span>
+                      {themeMode === option.value && (
+                        <span className="sr-only"> (selected)</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </SheetContent>
         </Sheet>
-
-        {/* Desktop controls */}
-        <div className="hidden md:flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => handleLanguageSelect(nextLang)}
-            className="flex h-9 items-center gap-1.5 rounded-full border border-foreground/10 bg-card/80 px-3 text-xs font-medium uppercase text-foreground/80 shadow-sm transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            aria-label={toggleLangAria}
-            title={toggleLangAria}
-          >
-            <Languages className="h-4 w-4" aria-hidden="true" />
-            <span aria-hidden="true">{lang.toUpperCase()}</span>
-            <span className="sr-only">{toggleLangAria}</span>
-          </button>
-
-          <div
-            className="flex h-9 items-center gap-px rounded-full border border-foreground/10 bg-card/80 px-0.5 shadow-sm"
-            role="group"
-            aria-label={themeGroupLabel}
-          >
-            {themeOptions.map((option, index) => (
-              <button
-                key={option.value}
-                type="button"
-                onClick={() => onThemeModeChange(option.value)}
-                className={cn(
-                  "relative flex h-8 w-8 items-center justify-center rounded-full text-foreground/70 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-                  themeMode === option.value
-                    ? "text-foreground after:absolute after:inset-px after:rounded-full after:bg-foreground/10 after:content-['']"
-                    : "hover:text-foreground"
-                )}
-                aria-pressed={themeMode === option.value}
-                aria-label={option.aria}
-                title={option.aria}
-              >
-                <option.Icon className="relative h-3.5 w-3.5" aria-hidden="true" />
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
     </nav>
   );
