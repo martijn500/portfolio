@@ -6,6 +6,7 @@ const PUBLIC = [
   "/robots.txt",
   "/favicon.ico",
   "/icon",
+  "/opengraph-image",
   "/_next",
   "/assets",
   "/api",

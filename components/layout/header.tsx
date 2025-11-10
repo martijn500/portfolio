@@ -14,6 +14,9 @@ function stripLangPrefix(pathname: string) {
   return pathname.replace(/^\/(en|nl)(\/|$)/, "/");
 }
 function buildLangUrl(lang: LangKey) {
+  if (typeof window === 'undefined') {
+    return `/${lang}`;
+  }
   const { origin, pathname, search, hash } = window.location;
   const base = stripLangPrefix(pathname);
   return `${origin}/${lang}${base}${search}${hash}`;
@@ -197,7 +200,7 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
               <SheetTitle className="hidden md:block">{headerCopy.settingsLabel || "Settings"}</SheetTitle>
             </SheetHeader>
             
-            <div className="flex flex-col gap-6 mt-8 px-4">
+            <div className="flex flex-col gap-6 overflow-y-auto px-4 pb-4">
               {/* Navigation section - mobile only */}
               <nav className="flex flex-col gap-2 md:hidden" role="navigation" aria-label="Mobile navigation">
                 {sections.map((section) => (
