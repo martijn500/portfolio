@@ -17,18 +17,6 @@ button:focus-visible,
   outline: 3px solid oklch(0.8 0.15 220);
 }
 
-/* Respect prefers-reduced-motion for all animations */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
 /* WCAG 1.4.12 Text Spacing - Support user text spacing overrides */
 @supports (line-height: 1.5) {
   * {
@@ -160,18 +148,34 @@ button:focus-visible,
   }
 }
 
+/* Animation & motion control */
+/* Respect prefers-reduced-motion for all animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Disable transitions until the theme is resolved to prevent first-paint flashes */
+html:not(.theme-ready) *,
+html:not(.theme-ready) *::before,
+html:not(.theme-ready) *::after {
+  transition-duration: 0s !important;
+  animation-duration: 0s !important;
+}
+
 /* Smooth theme transitions when toggling .dark */
 /* Use modest durations and avoid animating layout properties. Users who prefer reduced motion will not see the transitions. */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
-  html, body, header, main, footer,
-  [data-slot="button"],
-  a, button,
-  .bg-background, .bg-card, .bg-primary,
-  .text-foreground, .text-primary-foreground,
-  .border-border, .border-input, .border-foreground {
+  html.theme-ready * {
     transition: background-color 260ms ease, color 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
   }
 }

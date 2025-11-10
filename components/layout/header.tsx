@@ -9,6 +9,8 @@ import { useLanguage } from "@/lib/context/language-context";
 import { useActiveSection } from "@/lib/hooks/use-active-section";
 import { scrollHeroToSection } from "@/lib/scroll-hero";
 
+const THEME_STORAGE_KEY = "theme-preference";
+
 function stripLangPrefix(pathname: string) {
   return pathname.replace(/^\/(en|nl)(\/|$)/, "/");
 }
@@ -44,6 +46,12 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
 
   React.useEffect(() => {
     const updateBorderPosition = () => {
+      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+      if (!isDesktop) {
+        onBorderUpdate?.(null);
+        return;
+      }
+
       if (!navRef.current || !activeSection) {
         onBorderUpdate?.(null);
         return;
@@ -91,6 +99,19 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
     if (didScroll) {
       event.preventDefault();
     }
+  };
+
+  const handleThemeToggle = () => {
+    setDark((previous) => {
+      const nextDark = !previous;
+      try {
+        const nextPreference = nextDark ? "dark" : "light";
+        window.localStorage.setItem(THEME_STORAGE_KEY, nextPreference);
+      } catch (error) {
+        // localStorage might be unavailable (e.g., Safari private mode); fail silently.
+      }
+      return nextDark;
+    });
   };
 
   return (
@@ -183,7 +204,7 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
               </Button>
               <Button
                 variant="outline"
-                onClick={() => setDark((v) => !v)}
+                onClick={handleThemeToggle}
                 className="justify-start gap-2"
                 aria-label={toggleThemeAria}
               >
@@ -210,7 +231,7 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
           variant="ghost"
           size="sm"
           aria-label={toggleThemeAria}
-          onClick={() => setDark((v) => !v)}
+          onClick={handleThemeToggle}
           className="hidden md:flex items-center justify-center px-3"
         >
           {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}

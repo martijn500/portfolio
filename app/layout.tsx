@@ -1,25 +1,39 @@
 import "./globals.css";
 
 import type { Metadata, Viewport } from "next";
+import { THEME_COLORS } from "@/lib/utils";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const metadata: Metadata = {
-metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
-title: "Martijn van der Wijst – Tech Lead UX & Design Systems",
-description: "UX specialist / Tech Lead UX – design systems, tokens, accessibility.",
+  metadataBase: new URL(SITE_URL),
+  title: "Martijn van der Wijst – Tech Lead UX & Design Systems",
+  description: "UX specialist / Tech Lead UX – design systems, tokens, accessibility.",
+  manifest: "/manifest.webmanifest",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: THEME_COLORS.lightBackground },
+    { media: "(prefers-color-scheme: dark)", color: THEME_COLORS.darkBackground },
+  ],
 };
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-}
-
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-return (
-<html suppressHydrationWarning>
-<body className="min-h-screen">{children}</body>
-</html>
-);
+  return (
+    <html suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              '(function(){try{var root=document.documentElement;var stored=localStorage.getItem("theme-preference");var prefersDark=window.matchMedia("(prefers-color-scheme: dark)").matches;var isDark=stored?stored==="dark":prefersDark;root.classList.toggle("dark",isDark);root.dataset.theme=stored||"system";root.classList.add("theme-ready");}catch(error){}})();',
+          }}
+        />
+      </head>
+      <body className="min-h-screen bg-background text-foreground">{children}</body>
+    </html>
+  );
 }

@@ -12,16 +12,77 @@ import Footer from "@/components/layout/footer";
 import DecorativeStripes from "@/components/common/decorative-stripes";
 import { LanguageProvider, useLanguage } from "@/lib/context/language-context";
 
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+
 function SiteContent() {
   const [dark, setDark] = React.useState(false);
+  const [isThemeResolved, setIsThemeResolved] = React.useState(false);
   const [showHeaderBorder, setShowHeaderBorder] = React.useState(false);
   const [activeBorderInfo, setActiveBorderInfo] = React.useState<{ left: number; width: number } | null>(null);
   const { lang, t } = useLanguage();
 
-  React.useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const getStoredPreference = () => {
+      try {
+        return localStorage.getItem("theme-preference") as "light" | "dark" | "system" | null;
+      } catch (error) {
+        return null;
+      }
+    };
+
+    const applyPreference = (matches: boolean) => {
+      setDark(matches);
+      setIsThemeResolved(true);
+    };
+
+    const stored = getStoredPreference();
+    const initialDark = stored ? stored === "dark" : mq.matches;
+    applyPreference(initialDark);
+
+    const handleSchemeChange = (event: MediaQueryListEvent) => {
+      const currentStored = getStoredPreference();
+      if (currentStored === "light" || currentStored === "dark") {
+        return;
+      }
+      applyPreference(event.matches);
+    };
+
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", handleSchemeChange);
+      return () => mq.removeEventListener("change", handleSchemeChange);
+    }
+
+    const previousOnChange = mq.onchange;
+    mq.onchange = handleSchemeChange;
+    return () => {
+      mq.onchange = previousOnChange;
+    };
+  }, []);
+
+  useIsomorphicLayoutEffect(() => {
+    if (typeof document === "undefined") {
+      return;
+    }
+
     const root = document.documentElement;
     root.classList.toggle("dark", dark);
-  }, [dark]);
+    root.classList.add("theme-ready");
+    root.dataset.theme = dark ? "dark" : "light";
+    try {
+      const storedPreference = localStorage.getItem("theme-preference");
+      if (!storedPreference || storedPreference === "system") {
+        return;
+      }
+    } catch (error) {
+      return;
+    }
+  }, [dark, isThemeResolved]);
 
   React.useEffect(() => {
     document.documentElement.setAttribute("lang", lang);
@@ -89,7 +150,7 @@ function SiteContent() {
       <header
         id="navigation"
         role="banner"
-        className="sticky top-0 z-40 backdrop-blur h-16 transition-all duration-200 relative"
+  className="sticky top-0 z-40 backdrop-blur h-16 transition-all duration-200"
       >
         <Header dark={dark} setDark={setDark} afterHero={showHeaderBorder} onBorderUpdate={setActiveBorderInfo} />
         
