@@ -148,7 +148,10 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
               <Menu className="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px]">
+          <SheetContent
+            side="right"
+            className="w-[300px] bg-background/70 backdrop-blur-md border-l border-border/60"
+          >
             <SheetHeader>
               <SheetTitle>{t.profile.name}</SheetTitle>
             </SheetHeader>
