@@ -163,6 +163,9 @@ button:focus-visible,
 /* Smooth theme transitions when toggling .dark */
 /* Use modest durations and avoid animating layout properties. Users who prefer reduced motion will not see the transitions. */
 @media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
   html, body, header, main, footer,
   [data-slot="button"],
   a, button,

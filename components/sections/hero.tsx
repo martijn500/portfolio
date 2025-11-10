@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/context/language-context";
 import { useReducedMotion, createAnimation } from "@/lib/hooks/use-reduced-motion";
+import type { HeroScrollDetail } from "@/lib/scroll-hero";
 
 const baseFadeUp = {
   initial: { opacity: 0, y: 16 },
@@ -22,6 +23,7 @@ export default function Hero({}: HeroProps) {
   const { t } = useLanguage();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const workRef = React.useRef<HTMLDivElement>(null);
+  const lifeRef = React.useRef<HTMLDivElement>(null);
   const stickyRef = React.useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const fadeUp = fadeUpAnimation(prefersReducedMotion);
@@ -68,32 +70,85 @@ export default function Hero({}: HeroProps) {
   // Disable parallax if user prefers reduced motion
   const finalX = prefersReducedMotion ? "0%" : x;
 
-  // Handle keyboard navigation
+  // Keep focused elements inside the visible parallax column
+  const scrollSectionIntoView = React.useCallback(
+    (section: "work" | "life") => {
+      if (isMobile || !containerRef.current || !stickyRef.current) {
+        return;
+      }
+
+      const behavior: ScrollBehavior = prefersReducedMotion ? "auto" : "smooth";
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const stickyRect = stickyRef.current.getBoundingClientRect();
+      const absoluteTop = window.scrollY + containerRect.top;
+      const maxScroll = Math.max(0, containerRect.height - stickyRect.height);
+      const nextScroll = section === "life" ? absoluteTop + maxScroll : absoluteTop;
+
+      window.scrollTo({ top: nextScroll, behavior });
+      scrollYProgress.set(section === "life" ? 1 : 0);
+      setShowLifeImage(section === "life");
+    },
+    [isMobile, prefersReducedMotion, scrollYProgress]
+  );
+
   React.useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Tab') {
-        // Ensure focus stays within visible section during parallax
-        const progress = scrollYProgress.get();
-        if (progress > 0.5) {
-          // Life section is active - ensure focus management
-          // Additional focus management logic if needed
-        }
+    if (isMobile) {
+      return;
+    }
+
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+
+    const handleFocusIn = (event: FocusEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (!target) {
+        return;
+      }
+
+      if (lifeRef.current?.contains(target)) {
+        scrollSectionIntoView("life");
+      } else if (workRef.current?.contains(target)) {
+        scrollSectionIntoView("work");
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [scrollYProgress]);
+    container.addEventListener("focusin", handleFocusIn);
+    return () => container.removeEventListener("focusin", handleFocusIn);
+  }, [isMobile, scrollSectionIntoView]);
+
+  React.useEffect(() => {
+    if (isMobile) {
+      return;
+    }
+
+    const handleHeroScroll = (event: Event) => {
+      const customEvent = event as CustomEvent<HeroScrollDetail>;
+      const targetSection = customEvent.detail?.section;
+
+      if (targetSection === "about-life") {
+        scrollSectionIntoView("life");
+      }
+
+      if (targetSection === "about-work") {
+        scrollSectionIntoView("work");
+      }
+    };
+
+    window.addEventListener("hero:scroll", handleHeroScroll as EventListener);
+    return () => window.removeEventListener("hero:scroll", handleHeroScroll as EventListener);
+  }, [isMobile, scrollSectionIntoView]);
 
   return (
-    <div className="w-full">
+    <div className="w-full" data-hero-root>
       {/* Main page heading for accessibility */}
       <h1 className="sr-only">
         {t.profile.name} - {t.profile.role}
       </h1>
       
   {/* Anchor for about-work navigation */}
-  <div id="about-work" className="absolute -top-20"></div>
+  <div id="about-work" className="sr-only" aria-hidden="true"></div>
       
       {/* Parallax Container */}
       <div 
@@ -197,14 +252,13 @@ export default function Hero({}: HeroProps) {
 
             {/* Life Section */}
             <motion.section 
+              ref={lifeRef}
               className="w-full lg:w-1/4 h-full shrink-0 relative"
               aria-labelledby="life-heading"
               role="region"
               style={{ opacity: isMobile ? 1 : lifeOpacity }}
             >
-              {/* Anchor for about-life navigation */}
-              <div id="about-life" className="absolute -top-20 lg:top-0"></div>
-              
+                          <div id="about-life" className="sr-only" aria-hidden="true"></div>
               <div id="about-life-content" className="w-full px-5 md:px-8 lg:px-12 h-full scroll-mt-20 lg:overflow-y-auto">
                 <div className="h-full flex flex-col min-h-0">
                   

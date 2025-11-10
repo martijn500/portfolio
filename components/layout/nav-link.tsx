@@ -6,6 +6,7 @@ interface NavLinkProps {
   sectionId: string;
   children: React.ReactNode;
   "data-section"?: string;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 export default function NavLink({ href, sectionId, children, ...props }: NavLinkProps) {

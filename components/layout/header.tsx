@@ -7,6 +7,7 @@ import NavLink from "@/components/layout/nav-link";
 import type { LangKey } from "@/lib/i18n";
 import { useLanguage } from "@/lib/context/language-context";
 import { useActiveSection } from "@/lib/hooks/use-active-section";
+import { scrollHeroToSection } from "@/lib/scroll-hero";
 
 function stripLangPrefix(pathname: string) {
   return pathname.replace(/^\/(en|nl)(\/|$)/, "/");
@@ -85,6 +86,13 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
     window.location.href = url; // Changed from window.location.assign(url)
   };
 
+  const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    const didScroll = scrollHeroToSection(id);
+    if (didScroll) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <nav
       className="mx-auto max-w-6xl px-5 md:px-8 lg:px-12 flex h-16 items-center justify-between"
@@ -125,6 +133,7 @@ export default function Header({ dark, setDark, afterHero, onBorderUpdate }: Hea
             href={`#${section.id}`} 
             sectionId={section.id}
             data-section={section.id}
+            onClick={(event) => handleNavClick(event, section.id)}
           >
             {section.label}
           </NavLink>
