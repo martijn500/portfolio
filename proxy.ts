@@ -22,6 +22,12 @@ function hasFileExtension(pathname: string): boolean {
 
 export default function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  // Allow explicit .png requests for OG images by rewriting to the no-extension route
+  if (pathname.endsWith('/opengraph-image.png')) {
+    const newUrl = req.nextUrl.clone();
+    newUrl.pathname = pathname.replace(/\.png$/, '');
+    return NextResponse.rewrite(newUrl);
+  }
   if (PUBLIC.some((p) => pathname.startsWith(p))) return NextResponse.next();
   if (hasFileExtension(pathname)) return NextResponse.next();
   if (pathname.startsWith("/en") || pathname.startsWith("/nl"))
