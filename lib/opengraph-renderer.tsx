@@ -55,59 +55,30 @@ export async function createImageResponse(t: any) {
             {/* Work heading (single line) */}
             <div
               style={{
-                fontSize: '38px',
-                fontWeight: 600,
-                lineHeight: 1.2,
+                fontSize: '48px',
+                fontWeight: 700,
+                lineHeight: 1.15,
                 color: '#6a462b',
-                marginBottom: '28px',
+                marginBottom: '36px',
                 display: 'flex',
               }}
             >
               {t.profile.role}
             </div>
 
-            {/* Skills badges (site style) */}
+            {/* CTA Button (larger) */}
             <div
               style={{
                 display: 'flex',
-                flexWrap: 'wrap',
-                gap: '8px',
-                marginBottom: '28px',
-              }}
-            >
-              {t.profile.skills.map((skill: string) => (
-                <div
-                  key={skill}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '4px 12px',
-                    backgroundColor: 'rgba(106, 70, 43, 0.1)',
-                    borderRadius: '9999px',
-                    fontSize: '14px',
-                    fontWeight: 500,
-                    color: '#6a462b',
-                  }}
-                >
-                  {skill}
-                </div>
-              ))}
-            </div>
-
-            {/* CTA Button */}
-            <div
-              style={{
-                display: 'flex',
-                padding: '12px 24px',
+                padding: '18px 40px',
                 backgroundColor: '#f37d07',
-                borderRadius: '8px',
-                fontSize: '18px',
-                fontWeight: 600,
+                borderRadius: '10px',
+                fontSize: '28px',
+                fontWeight: 700,
                 color: '#ffffff',
                 alignSelf: 'flex-start',
                 boxShadow:
-                  '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                  '0 8px 14px -4px rgba(0, 0, 0, 0.12), 0 4px 8px -4px rgba(0, 0, 0, 0.06)',
               }}
             >
               {t.hero?.ctaWork ?? 'View my work'}
