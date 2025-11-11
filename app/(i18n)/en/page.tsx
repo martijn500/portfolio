@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       images: [
         {
-          url: `${SITE_URL}/en/opengraph-image`,
+          url: `${SITE_URL}/en/opengraph-image.png`,
           width: 1200,
           height: 630,
           alt: t.seo.title,
@@ -36,6 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: 'summary_large_image',
       title: t.seo.title,
       description: t.seo.description,
+      images: [`${SITE_URL}/en/opengraph-image.png`],
     },
   };
 }
