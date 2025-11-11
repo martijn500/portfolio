@@ -1,8 +1,11 @@
 import { ImageResponse } from 'next/og';
 import fs from 'fs';
 import path from 'path';
+import { i18n } from '@/lib/i18n';
 
-export const alt = 'Martijn van der Wijst - Tech Lead UX, Frontend & Design Systems';
+const t = i18n.en;
+
+export const alt = t.seo.title;
 export const size = {
   width: 1200,
   height: 630,
@@ -80,7 +83,7 @@ export default async function Image() {
               marginBottom: '24px',
             }}
           >
-            Tech Lead UX, Frontend & Design Systems
+            {t.seo.description}
           </div>
 
           {/* CTA Button */}
@@ -97,14 +100,14 @@ export default async function Image() {
               boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
             }}
           >
-            View my work
+            {t.hero.ctaWork}
           </div>
         </div>
 
         {/* Right - Portrait image */}
         <img
           src={dataUrl}
-          alt="Martijn van der Wijst"
+          alt={t.profile.name}
           width="450"
           height="630"
           style={{
