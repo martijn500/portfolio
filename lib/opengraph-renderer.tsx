@@ -1,6 +1,4 @@
 import { ImageResponse } from 'next/og'
-import fs from 'fs'
-import path from 'path'
 
 export const size = {
   width: 1200,
@@ -9,10 +7,28 @@ export const size = {
 
 export const contentType = 'image/png'
 
-export async function createImageResponse(t: any) {
-  const imagePath = path.join(process.cwd(), 'public', 'martijn-portrait-work.png')
-  const imageBuffer = fs.readFileSync(imagePath)
-  const base64Image = imageBuffer.toString('base64')
+export async function createImageResponse(t: any, baseUrl?: string) {
+  let base64Image: string
+
+  if (baseUrl) {
+    // Edge runtime: fetch the public asset and convert to base64 using Web APIs
+    const res = await fetch(`${baseUrl}/martijn-portrait-work.png`)
+    const arrayBuffer = await res.arrayBuffer()
+    // convert ArrayBuffer -> base64 (works in edge / browser)
+    let binary = ''
+    const bytes = new Uint8Array(arrayBuffer)
+    const len = bytes.byteLength
+    for (let i = 0; i < len; i++) binary += String.fromCharCode(bytes[i])
+    // btoa is available in edge runtime; fallback to Buffer when available
+    base64Image = typeof btoa === 'function' ? btoa(binary) : Buffer.from(arrayBuffer).toString('base64')
+  } else {
+    // Node runtime: read from filesystem (keeps previous behaviour)
+    const { readFileSync } = await import('fs')
+    const { join } = await import('path')
+    const imagePath = join(process.cwd(), 'public', 'martijn-portrait-work.png')
+    const imageBuffer = readFileSync(imagePath)
+    base64Image = imageBuffer.toString('base64')
+  }
   const dataUrl = `data:image/png;base64,${base64Image}`
 
   return new ImageResponse(
