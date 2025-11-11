@@ -45,25 +45,39 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
       ],
     },
     header: {
-      menuLabel: "Menu",
-      settingsLabel: "Instellingen",
+      mainNavigation: "Hoofdnavigatie",
+      skipToMain: "Spring naar hoofdinhoud",
+      skipToNav: "Spring naar navigatie",
+      close: "Sluiten",
+      currentPage: " (huidige pagina)",
+      selected: " (geselecteerd)",
+      menu: {
+        label: "Menu",
+        aria: "Open navigatie en instellingen",
+      },
+      navigation: {
+        label: "Navigatie",
+      },
+      settings: {
+        label: "Instellingen",
+        aria: "Open taal en thema voorkeuren",
+      },
       languageToggle: {
         label: "Taal",
-        aria: "Wissel taal",
       },
       themeToggle: {
         label: "Thema",
         options: {
           light: {
-            short: "Licht",
+            label: "Licht",
             aria: "Schakel naar licht thema",
           },
           system: {
-            short: "Auto",
+            label: "Auto",
             aria: "Volg het systeemthema",
           },
           dark: {
-            short: "Donker",
+            label: "Donker",
             aria: "Schakel naar donker thema",
           },
         },
@@ -285,25 +299,39 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
       ],
     },
     header: {
-      menuLabel: "Menu",
-      settingsLabel: "Settings",
+      mainNavigation: "Main navigation",
+      skipToMain: "Skip to main content",
+      skipToNav: "Skip to navigation",
+      close: "Close",
+      currentPage: " (current page)",
+      selected: " (selected)",
+      menu: {
+        label: "Menu",
+        aria: "Open navigation and settings",
+      },
+      navigation: {
+        label: "Navigation",
+      },
+      settings: {
+        label: "Settings",
+        aria: "Open language and theme preferences",
+      },
       languageToggle: {
         label: "Language",
-        aria: "Switch language",
       },
       themeToggle: {
         label: "Theme",
         options: {
           light: {
-            short: "Light",
+            label: "Light",
             aria: "Switch to light theme",
           },
           system: {
-            short: "Auto",
+            label: "Auto",
             aria: "Follow the system theme",
           },
           dark: {
-            short: "Dark",
+            label: "Dark",
             aria: "Switch to dark theme",
           },
         },

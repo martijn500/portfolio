@@ -160,13 +160,13 @@ function SiteContent() {
         href="#main-content" 
         className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 z-50 bg-primary text-primary-foreground px-4 py-2 font-medium"
       >
-        Skip to main content
+        {t.header.skipToMain}
       </a>
       <a 
         href="#navigation" 
         className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-32 z-50 bg-primary text-primary-foreground px-4 py-2 font-medium"
       >
-        Skip to navigation
+        {t.header.skipToNav}
       </a>
       
       <header

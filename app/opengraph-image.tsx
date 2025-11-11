@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'Martijn van der Wijst - Tech Lead UX & Design Systems';
+export const alt = 'Martijn van der Wijst - Tech Lead UX, Frontend & Design Systems';
 export const size = {
   width: 1200,
   height: 630,
@@ -79,7 +79,7 @@ export default async function Image() {
               marginBottom: '24px',
             }}
           >
-            Tech Lead, UX Specialist, Frontend Architect
+            Tech Lead UX, Frontend & Design Systems
           </div>
 
           {/* CTA Button */}

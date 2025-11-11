@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Sun, Moon, Languages, Banana, Menu, Monitor, Settings } from "lucide-react";
+import { Sun, Moon, Languages, Banana, Menu, Monitor, Settings, Briefcase, Palmtree, Lightbulb, Star, Target, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import NavLink from "@/components/layout/nav-link";
@@ -38,12 +38,12 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
   const headerCopy = t.header;
 
   const sections = [
-    { id: 'about-work', label: t.hero.aboutWorkTitle },
-    { id: 'about-life', label: t.hero.aboutLifeTitle },
-    { id: 'philosophy', label: t.hero.philosophyTitle },
-    { id: 'featured', label: t.workTitle },
-    { id: 'principles', label: t.principlesTitle },
-    { id: 'community', label: t.communityTitle },
+    { id: 'about-work', label: t.hero.aboutWorkTitle, icon: Briefcase },
+    { id: 'about-life', label: t.hero.aboutLifeTitle, icon: Palmtree },
+    { id: 'philosophy', label: t.hero.philosophyTitle, icon: Lightbulb },
+    { id: 'featured', label: t.workTitle, icon: Star },
+    { id: 'principles', label: t.principlesTitle, icon: Target },
+    { id: 'community', label: t.communityTitle, icon: Users },
   ];
 
   const themeGroupLabel = headerCopy.themeToggle.label;
@@ -51,19 +51,19 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
     {
       value: "light" as const,
       Icon: Sun,
-      label: headerCopy.themeToggle.options.light.short,
+      label: headerCopy.themeToggle.options.light.label,
       aria: headerCopy.themeToggle.options.light.aria,
     },
     {
       value: "system" as const,
       Icon: Monitor,
-      label: headerCopy.themeToggle.options.system.short,
+      label: headerCopy.themeToggle.options.system.label,
       aria: headerCopy.themeToggle.options.system.aria,
     },
     {
       value: "dark" as const,
       Icon: Moon,
-      label: headerCopy.themeToggle.options.dark.short,
+      label: headerCopy.themeToggle.options.dark.label,
       aria: headerCopy.themeToggle.options.dark.aria,
     },
   ];
@@ -122,7 +122,7 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
     <nav
       className="mx-auto max-w-6xl px-5 md:px-8 lg:px-12 flex h-16 items-center justify-between"
       role="navigation"
-      aria-label="Main navigation"
+      aria-label={headerCopy.mainNavigation}
     >
       <a 
         href="#" 
@@ -172,7 +172,7 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
             <Button 
               variant="ghost" 
               size="icon" 
-              aria-label="Open menu"
+              aria-label={headerCopy.menu.aria}
               aria-haspopup="dialog"
               aria-expanded={menuOpen}
             >
@@ -183,10 +183,10 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
             <Button 
               variant="ghost" 
               size="icon" 
-              aria-label={headerCopy.settingsLabel || "Settings"}
+              aria-label={headerCopy.settings.aria}
               aria-haspopup="dialog"
               aria-expanded={menuOpen}
-              title={headerCopy.settingsLabel || "Settings"}
+              title={headerCopy.settings.label}
             >
               <Settings className="h-5 w-5" aria-hidden="true" />
             </Button>
@@ -196,29 +196,38 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
             className="w-[300px] bg-background/70 backdrop-blur-md border-l border-border/60"
           >
             <SheetHeader>
-              <SheetTitle className="md:hidden">{headerCopy.menuLabel || "Menu"}</SheetTitle>
-              <SheetTitle className="hidden md:block">{headerCopy.settingsLabel || "Settings"}</SheetTitle>
+              <SheetTitle className="md:hidden">{headerCopy.menu.label}</SheetTitle>
+              <SheetTitle className="hidden md:block">{headerCopy.settings.label}</SheetTitle>
             </SheetHeader>
             
             <div className="flex flex-col gap-6 overflow-y-auto px-4 pb-4">
               {/* Navigation section - mobile only */}
-              <nav className="flex flex-col gap-2 md:hidden" role="navigation" aria-label="Mobile navigation">
-                {sections.map((section) => (
-                  <a
-                    key={section.id}
-                    href={`#${section.id}`}
-                    onClick={() => setMenuOpen(false)}
-                    className={cn(
-                      "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
-                      activeSection === section.id 
-                        ? 'bg-primary text-primary-foreground font-medium' 
-                        : 'hover:bg-muted text-foreground'
-                    )}
-                  >
-                    <span>{section.label}</span>
-                  </a>
-                ))}
-              </nav>
+              <div className="md:hidden">
+                <h3 className="text-sm font-medium text-foreground/70 mb-3" id="navigation-section">
+                  {headerCopy.navigation.label}
+                </h3>
+                <nav className="flex flex-col gap-2" role="navigation" aria-labelledby="navigation-section">
+                  {sections.map((section) => {
+                    const Icon = section.icon;
+                    return (
+                      <a
+                        key={section.id}
+                        href={`#${section.id}`}
+                        onClick={() => setMenuOpen(false)}
+                        className={cn(
+                          "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
+                          activeSection === section.id 
+                            ? 'bg-primary text-primary-foreground font-medium' 
+                            : 'hover:bg-muted text-foreground'
+                        )}
+                      >
+                        <Icon className="h-4 w-4" aria-hidden="true" />
+                        <span>{section.label}</span>
+                      </a>
+                    );
+                  })}
+                </nav>
+              </div>
 
               {/* Divider between navigation and settings on mobile */}
               <div className="md:hidden border-t border-border/40" />
@@ -256,7 +265,7 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
                       <Languages className="h-4 w-4" aria-hidden="true" />
                       <span>{language.nativeLabel}</span>
                       {lang === language.code && (
-                        <span className="sr-only"> (current)</span>
+                        <span className="sr-only">{headerCopy.currentPage}</span>
                       )}
                     </a>
                   ))}
@@ -306,7 +315,7 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
                       <option.Icon className="h-4 w-4" aria-hidden="true" />
                       <span>{option.label}</span>
                       {themeMode === option.value && (
-                        <span className="sr-only"> (selected)</span>
+                        <span className="sr-only">{headerCopy.selected}</span>
                       )}
                     </button>
                   ))}
