@@ -23,6 +23,14 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: t.profile.name,
       locale: t.seo.locale,
       type: 'website',
+      images: [
+        {
+          url: `${SITE_URL}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: t.seo.title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
