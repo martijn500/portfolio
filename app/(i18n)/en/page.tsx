@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import PageLayout from "@/components/layout/page-layout";
 import { i18n } from "@/lib/i18n";
-import { SITE_URL } from "@/lib/constants";
+import { SITE_URL, OG_IMAGE_VERSION } from "@/lib/constants";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = i18n.en;
+  const imageVersion = OG_IMAGE_VERSION
   
   return {
     title: t.seo.title,
@@ -25,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       images: [
         {
-          url: `${SITE_URL}/en/opengraph-image.png`,
+          url: `${SITE_URL}/en/opengraph-image.png?v=${imageVersion}`,
           width: 1200,
           height: 630,
           alt: t.seo.title,
@@ -36,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: 'summary_large_image',
       title: t.seo.title,
       description: t.seo.description,
-      images: [`${SITE_URL}/en/opengraph-image.png`],
+  images: [`${SITE_URL}/en/opengraph-image.png?v=${imageVersion}`],
     },
   };
 }
