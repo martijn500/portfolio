@@ -1,7 +1,6 @@
 import { ImageResponse } from 'next/og'
 import fs from 'fs'
 import path from 'path'
-import React from 'react'
 
 export const size = {
   width: 1200,
