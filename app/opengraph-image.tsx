@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
+import fs from 'fs';
+import path from 'path';
 
-export const runtime = 'edge';
 export const alt = 'Martijn van der Wijst - Tech Lead UX, Frontend & Design Systems';
 export const size = {
   width: 1200,
@@ -9,10 +10,10 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image() {
-  // Fetch the portrait image
-  const imageUrl = new URL('/martijn-portrait-work.png', 'https://martijnvanderwijst.nl').href;
-  const imageData = await fetch(imageUrl).then((res) => res.arrayBuffer());
-  const base64Image = Buffer.from(imageData).toString('base64');
+  // Read the portrait image from the public directory
+  const imagePath = path.join(process.cwd(), 'public', 'martijn-portrait-work.png');
+  const imageBuffer = fs.readFileSync(imagePath);
+  const base64Image = imageBuffer.toString('base64');
   const dataUrl = `data:image/png;base64,${base64Image}`;
 
   return new ImageResponse(
