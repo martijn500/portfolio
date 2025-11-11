@@ -52,7 +52,7 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
         aria: "Wissel taal",
       },
       themeToggle: {
-        label: "Kies thema",
+        label: "Thema",
         options: {
           light: {
             short: "Licht",
@@ -292,7 +292,7 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
         aria: "Switch language",
       },
       themeToggle: {
-        label: "Choose theme",
+        label: "Theme",
         options: {
           light: {
             short: "Light",

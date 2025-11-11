@@ -9,6 +9,12 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image() {
+  // Fetch the portrait image
+  const imageUrl = new URL('/martijn-portrait-work.png', 'https://martijnvanderwijst.nl').href;
+  const imageData = await fetch(imageUrl).then((res) => res.arrayBuffer());
+  const base64Image = Buffer.from(imageData).toString('base64');
+  const dataUrl = `data:image/png;base64,${base64Image}`;
+
   return new ImageResponse(
     (
       <div
@@ -16,121 +22,95 @@ export default async function Image() {
           height: '100%',
           width: '100%',
           display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
+          alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#d7eee1',
-          padding: '80px 100px 80px 220px',
-          fontFamily: 'system-ui, -apple-system, sans-serif',
-          position: 'relative',
+          backgroundColor: '#f0fff6',
+          padding: '60px',
+          fontFamily: 'ui-sans-serif, system-ui, sans-serif',
         }}
       >
-        {/* Decorative element top-left - behind icon */}
         <div
           style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '400px',
-            height: '400px',
-            background: 'linear-gradient(135deg, #E5A952 0%, #D4974F 100%)', // primary color gradient
-            opacity: 0.15,
-            borderRadius: '0 0 200px 0',
             display: 'flex',
-          }}
-        />
-
-        {/* Decorative element bottom-right */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            right: 0,
-            width: '300px',
-            height: '300px',
-            background: 'linear-gradient(135deg, #C89142 0%, #B88038 100%)', // darker primary tint
-            opacity: 0.12,
-            borderRadius: '200px 0 0 0',
-            display: 'flex',
-          }}
-        />
-
-        {/* Icon/Badge */}
-            {/* Icon - Banana emoji in rounded square */}
-            <div
-              style={{
-                position: 'absolute',
-                top: '60px',
-                left: '60px',
-                width: '120px',
-                height: '120px',
-                backgroundColor: '#D49C50',
-                borderRadius: '24px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '72px',
-              }}
-            >
-              🍌
-            </div>        {/* Main heading */}
-        <div
-          style={{
-            fontSize: '72px',
-            fontWeight: 700,
-            lineHeight: 1.1,
-            color: '#6a462b',
-            marginBottom: '24px',
-            display: 'flex',
-            maxWidth: '900px',
-            marginTop: '40px',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            backgroundColor: '#d7eee1',
+            borderRadius: '24px',
+            padding: '60px',
+            width: '100%',
+            height: '100%',
+            boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.08)',
           }}
         >
-          Martijn van der Wijst
+        {/* Left content */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            maxWidth: '600px',
+          }}
+        >
+          {/* Main heading */}
+          <div
+            style={{
+              fontSize: '72px',
+              fontWeight: 600,
+              lineHeight: 1.1,
+              color: '#6a462b',
+              marginBottom: '16px',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <div style={{ display: 'flex' }}>Hi, I'm Martijn</div>
+            <div style={{ display: 'flex' }}>van der Wijst</div>
+          </div>
+
+          {/* Subtitle */}
+          <div
+            style={{
+              fontSize: '32px',
+              fontWeight: 400,
+              lineHeight: 1.3,
+              color: '#6a462b',
+              opacity: 0.8,
+              display: 'flex',
+              marginBottom: '24px',
+            }}
+          >
+            Tech Lead, UX Specialist, Frontend Architect
+          </div>
+
+          {/* CTA Button */}
+          <div
+            style={{
+              display: 'flex',
+              padding: '12px 24px',
+              backgroundColor: '#f37d07',
+              borderRadius: '8px',
+              fontSize: '20px',
+              fontWeight: 600,
+              color: '#ffffff',
+              alignSelf: 'flex-start',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            }}
+          >
+            View my work
+          </div>
         </div>
 
-        {/* Subtitle */}
-        <div
+        {/* Right - Portrait image */}
+        <img
+          src={dataUrl}
+          alt="Martijn van der Wijst"
+          width="450"
+          height="630"
           style={{
-            fontSize: '40px',
-            fontWeight: 500,
-            lineHeight: 1.3,
-            color: '#6a462b',
-            marginBottom: '16px',
-            display: 'flex',
-            maxWidth: '900px',
-            marginTop: '8px',
+            objectFit: 'contain',
+            objectPosition: 'bottom',
           }}
-        >
-          Tech Lead UX, Frontend & Design Systems
-        </div>
-
-        {/* Tags */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '8px',
-            flexWrap: 'wrap',
-            marginTop: '8px',
-          }}
-        >
-          {['Design Systems', 'Accessibility', 'Design Tokens', 'UX'].map((tag) => (
-            <div
-              key={tag}
-              style={{
-                display: 'flex',
-                padding: '4px 12px',
-                backgroundColor: 'rgba(106, 70, 43, 0.1)',
-                borderRadius: '999px',
-                fontSize: '20px',
-                fontWeight: 500,
-                color: '#6a462b',
-                border: 'none',
-              }}
-            >
-              {tag}
-            </div>
-          ))}
+        />
         </div>
       </div>
     ),
