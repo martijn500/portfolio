@@ -47,7 +47,7 @@ export default async function Image() {
             boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.08)',
           }}
         >
-        {/* Left content */}
+        {/* Left content: work heading, badges, CTA */}
         <div
           style={{
             display: 'flex',
@@ -55,35 +55,47 @@ export default async function Image() {
             maxWidth: '600px',
           }}
         >
-          {/* Main heading */}
+          {/* Work heading (single line) */}
           <div
             style={{
-              fontSize: '72px',
+              fontSize: '38px',
               fontWeight: 600,
-              lineHeight: 1.1,
+              lineHeight: 1.2,
               color: '#6a462b',
-              marginBottom: '16px',
+              marginBottom: '28px',
               display: 'flex',
-              flexDirection: 'column',
             }}
           >
-            <div style={{ display: 'flex' }}>Hi, I'm Martijn</div>
-            <div style={{ display: 'flex' }}>van der Wijst</div>
+            {t.profile.role}
           </div>
 
-          {/* Subtitle */}
+          {/* Skills badges (site style) */}
           <div
             style={{
-              fontSize: '32px',
-              fontWeight: 400,
-              lineHeight: 1.3,
-              color: '#6a462b',
-              opacity: 0.8,
               display: 'flex',
-              marginBottom: '24px',
+              flexWrap: 'wrap',
+              gap: '8px',
+              marginBottom: '28px',
             }}
           >
-            {t.seo.description}
+            {t.profile.skills.map((skill) => (
+              <div
+                key={skill}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '4px 12px',
+                  backgroundColor: 'rgba(106, 70, 43, 0.1)',
+                  borderRadius: '9999px',
+                  fontSize: '14px',
+                  fontWeight: 500,
+                  color: '#6a462b',
+                }}
+              >
+                {skill}
+              </div>
+            ))}
           </div>
 
           {/* CTA Button */}
@@ -93,7 +105,7 @@ export default async function Image() {
               padding: '12px 24px',
               backgroundColor: '#f37d07',
               borderRadius: '8px',
-              fontSize: '20px',
+              fontSize: '18px',
               fontWeight: 600,
               color: '#ffffff',
               alignSelf: 'flex-start',
