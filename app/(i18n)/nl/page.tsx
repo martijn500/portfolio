@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import PageLayout from "@/components/layout/page-layout";
 import { i18n } from "@/lib/i18n";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+import { SITE_URL } from "@/lib/constants";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = i18n.nl;
