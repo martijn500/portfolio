@@ -23,43 +23,45 @@ export default function Writing() {
         </h2>
       </motion.div>
       <div className="mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
-        {t.writing.map((w: { title: string; link: string; meta: string }) => (
-          <a
-            key={w.title}
-            href={w.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${w.title} (opens in new tab)`}
-            className="group block py-6 rounded-full border-b border-border last:border-b-0 hover:bg-muted/60 transition-colors -mx-5 md:-mx-8 lg:-mx-12 px-5 md:px-8 lg:px-12"
-          >
-            <div className="flex flex-col gap-3">
-              {/* Title with badge suffix */}
-              <div className="flex items-center gap-3 flex-wrap">
-                <h3 className="text-lg font-medium leading-snug group-hover:text-foreground transition-colors">
-                  {w.title}
-                </h3>
-                <Badge className="text-xs bg-foreground/5">{w.meta}</Badge>
-              </div>
+        {t.writing.map((w: { title: string; link: string; meta: string }, i: number) => (
+          <div key={w.title}>
+            <a
+              href={w.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${w.title} (opens in new tab)`}
+              className="group block py-6 lg:rounded-full hover:bg-muted/60 transition-colors -mx-5 md:-mx-8 lg:-mx-12 px-5 md:px-8 lg:px-12"
+            >
+              <div className="flex flex-col gap-3">
+                {/* Title with badge suffix */}
+                <div className="flex items-center gap-3 flex-wrap">
+                  <h3 className="text-lg font-medium leading-snug group-hover:text-foreground transition-colors">
+                    {w.title}
+                  </h3>
+                  <Badge className="text-xs bg-foreground/5">{w.meta}</Badge>
+                </div>
 
-              {/* Read more link */}
-              <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors inline-flex items-center gap-1">
-                {t.readMore}
-                <svg
-                  className="w-3 h-3 group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </p>
-            </div>
-          </a>
+                {/* Read more link */}
+                <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors inline-flex items-center gap-1">
+                  {t.readMore}
+                  <svg
+                    className="w-3 h-3 group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </p>
+              </div>
+            </a>
+            {i !== t.writing.length - 1 && <hr className="border-t border-border mx-0" />}
+          </div>
         ))}
       </div>
     </>
