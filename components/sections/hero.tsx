@@ -175,12 +175,12 @@ export default function Hero({}: HeroProps) {
                       <motion.div {...fadeUp} className="flex flex-col justify-center h-full">
                         {/* Titel */}
                         <motion.div {...fadeUp} className="mb-4">
-                          <h2 id="work-heading" className="text-2xl md:text-4xl font-semibold leading-none max-w-fit">
+                          <h2 id="work-heading" className="text-2xl md:text-4xl font-semibold leading-none max-w-fit [font-family:var(--font-merriweather)]">
                             {t.profile.role}
                           </h2>
                         </motion.div>
                         <p className="text-lg prose-measure mb-6">{t.profile.summary}</p>
-                        <div className="mt-6 mb-6">
+                        <div className="mb-6">
                           <div className="flex flex-wrap gap-2">
                             {t.profile.skills.map((s: string) => (
                               <Badge key={s}>{s}</Badge>
@@ -260,12 +260,12 @@ export default function Hero({}: HeroProps) {
                       <motion.div {...fadeUp} className="flex flex-col justify-center h-full">
                         {/* Titel */}
                         <motion.div {...fadeUp} className="mb-4">
-                          <h2 id="life-heading" className="text-2xl md:text-4xl font-semibold leading-none max-w-fit">
+                          <h2 id="life-heading" className="text-2xl md:text-4xl font-semibold leading-none max-w-fit [font-family:var(--font-merriweather)]">
                             {t.profileLife.role}
                           </h2>
                         </motion.div>
                         <p className="text-lg prose-measure mb-6">{t.profileLife.summary}</p>
-                        <div className="mt-6 mb-6">
+                        <div className="mb-6">
                           <div className="flex flex-wrap gap-2">
                             {t.profileLife.skills.map((s: string) => (
                               <Badge key={s}>{s}</Badge>

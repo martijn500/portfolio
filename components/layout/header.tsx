@@ -1,6 +1,20 @@
 "use client";
 import React from "react";
-import { Sun, Moon, Languages, Banana, Menu, Monitor, Settings, Briefcase, Palmtree, Lightbulb, Star, Target, Users } from "lucide-react";
+import {
+  Sun,
+  Moon,
+  Languages,
+  Banana,
+  Menu,
+  Monitor,
+  Settings,
+  Briefcase,
+  Palmtree,
+  Lightbulb,
+  Star,
+  Target,
+  Users,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import NavLink from "@/components/layout/nav-link";
@@ -14,7 +28,7 @@ function stripLangPrefix(pathname: string) {
   return pathname.replace(/^\/(en|nl)(\/|$)/, "/");
 }
 function buildLangUrl(lang: LangKey) {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return `/${lang}`;
   }
   const { origin, pathname, search, hash } = window.location;
@@ -29,7 +43,12 @@ interface HeaderProps {
   onBorderUpdate?: (borderInfo: { left: number; width: number } | null) => void;
 }
 
-export default function Header({ themeMode, onThemeModeChange, afterHero, onBorderUpdate }: HeaderProps) {
+export default function Header({
+  themeMode,
+  onThemeModeChange,
+  afterHero,
+  onBorderUpdate,
+}: HeaderProps) {
   const { lang, t } = useLanguage();
   const activeSection = useActiveSection();
   const navRef = React.useRef<HTMLDivElement>(null);
@@ -38,12 +57,12 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
   const headerCopy = t.header;
 
   const sections = [
-    { id: 'about-work', label: t.hero.aboutWorkTitle, icon: Briefcase },
-    { id: 'about-life', label: t.hero.aboutLifeTitle, icon: Palmtree },
-    { id: 'philosophy', label: t.hero.philosophyTitle, icon: Lightbulb },
-    { id: 'featured', label: t.workTitle, icon: Star },
-    { id: 'principles', label: t.principlesTitle, icon: Target },
-    { id: 'community', label: t.communityTitle, icon: Users },
+    { id: "about-work", label: t.hero.aboutWorkTitle, icon: Briefcase },
+    { id: "about-life", label: t.hero.aboutLifeTitle, icon: Palmtree },
+    { id: "philosophy", label: t.hero.philosophyTitle, icon: Lightbulb },
+    { id: "featured", label: t.workTitle, icon: Star },
+    { id: "principles", label: t.principlesTitle, icon: Target },
+    { id: "community", label: t.communityTitle, icon: Users },
   ];
 
   const themeGroupLabel = headerCopy.themeToggle.label;
@@ -102,13 +121,13 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
     updateBorderPosition();
 
     // Update on window resize
-    window.addEventListener('resize', updateBorderPosition);
-    return () => window.removeEventListener('resize', updateBorderPosition);
+    window.addEventListener("resize", updateBorderPosition);
+    return () => window.removeEventListener("resize", updateBorderPosition);
   }, [activeSection, onBorderUpdate]);
 
   const languages: Array<{ code: LangKey; label: string; nativeLabel: string }> = [
-    { code: 'en', label: 'English', nativeLabel: 'English' },
-    { code: 'nl', label: 'Nederlands', nativeLabel: 'Nederlands' },
+    { code: "en", label: "English", nativeLabel: "English" },
+    { code: "nl", label: "Nederlands", nativeLabel: "Nederlands" },
   ];
 
   const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -124,8 +143,8 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
       role="navigation"
       aria-label={headerCopy.mainNavigation}
     >
-      <a 
-        href="#" 
+      <a
+        href="#"
         className="h-full flex items-center gap-2 font-semibold"
         aria-label={`${t.profile.name} - Home`}
       >
@@ -134,28 +153,26 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
         </span>
         <span>{t.profile.name}</span>
       </a>
-      
+
       {/* Navigation Links */}
       <div ref={navRef} className="hidden md:flex items-center h-full relative" role="menubar">
         {/* Animated border */}
-        <div 
+        <div
           className={`absolute bottom-0 h-2 rounded-t-md transition-all duration-300 ease-in-out ${
-            afterHero ? 'border-l border-r border-t border-foreground/30' : ''
+            afterHero ? "border-l border-r border-t border-foreground/30" : ""
           } ${
-            activeSection === 'about-work' || activeSection === 'about-life'
-              ? 'bg-background' 
-              : ''
+            activeSection === "about-work" || activeSection === "about-life" ? "bg-background" : ""
           }`}
           style={{
             left: `${borderStyle.left}px`,
             width: `${borderStyle.width}px`,
-            display: borderStyle.width > 0 ? 'block' : 'none',
+            display: borderStyle.width > 0 ? "block" : "none",
           }}
         />
         {sections.map((section) => (
-          <NavLink 
+          <NavLink
             key={section.id}
-            href={`#${section.id}`} 
+            href={`#${section.id}`}
             sectionId={section.id}
             data-section={section.id}
             onClick={(event) => handleNavClick(event, section.id)}
@@ -164,14 +181,14 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
           </NavLink>
         ))}
       </div>
-      
+
       <div className="flex items-center gap-2 h-full">
         {/* Combined menu: navigation + settings on mobile, settings only on desktop */}
         <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               aria-label={headerCopy.menu.aria}
               aria-haspopup="dialog"
               aria-expanded={menuOpen}
@@ -180,9 +197,9 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
             </Button>
           </SheetTrigger>
           <SheetTrigger asChild className="hidden md:flex">
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               aria-label={headerCopy.settings.aria}
               aria-haspopup="dialog"
               aria-expanded={menuOpen}
@@ -199,14 +216,18 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
               <SheetTitle className="md:hidden">{headerCopy.menu.label}</SheetTitle>
               <SheetTitle className="hidden md:block">{headerCopy.settings.label}</SheetTitle>
             </SheetHeader>
-            
+
             <div className="flex flex-col gap-6 overflow-y-auto px-4 pb-4">
               {/* Navigation section - mobile only */}
               <div className="md:hidden">
                 <h3 className="text-sm font-medium text-foreground/70 mb-3" id="navigation-section">
                   {headerCopy.navigation.label}
                 </h3>
-                <nav className="flex flex-col gap-2" role="navigation" aria-labelledby="navigation-section">
+                <nav
+                  className="flex flex-col gap-2"
+                  role="navigation"
+                  aria-labelledby="navigation-section"
+                >
                   {sections.map((section) => {
                     const Icon = section.icon;
                     return (
@@ -216,9 +237,9 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
                         onClick={() => setMenuOpen(false)}
                         className={cn(
                           "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
-                          activeSection === section.id 
-                            ? 'bg-primary text-primary-foreground font-medium' 
-                            : 'hover:bg-muted text-foreground'
+                          activeSection === section.id
+                            ? "bg-primary text-primary-foreground font-medium"
+                            : "hover:bg-muted text-foreground"
                         )}
                       >
                         <Icon className="h-4 w-4" aria-hidden="true" />
@@ -237,9 +258,9 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
                 <h3 className="text-sm font-medium text-foreground/70 mb-3" id="language-section">
                   {headerCopy.languageToggle.label}
                 </h3>
-                <nav 
-                  className="flex flex-col gap-2" 
-                  role="navigation" 
+                <nav
+                  className="flex flex-col gap-2"
+                  role="navigation"
                   aria-labelledby="language-section"
                 >
                   {languages.map((language) => (
@@ -277,19 +298,19 @@ export default function Header({ themeMode, onThemeModeChange, afterHero, onBord
                 <h3 className="text-sm font-medium text-foreground/70 mb-3" id="theme-section">
                   {themeGroupLabel}
                 </h3>
-                <div 
-                  role="radiogroup" 
+                <div
+                  role="radiogroup"
                   aria-labelledby="theme-section"
                   className="flex flex-col gap-2"
                   onKeyDown={(e) => {
-                    const options = themeOptions.map(o => o.value);
+                    const options = themeOptions.map((o) => o.value);
                     const currentIndex = options.indexOf(themeMode);
-                    
-                    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+
+                    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
                       e.preventDefault();
                       const nextIndex = (currentIndex + 1) % options.length;
                       onThemeModeChange(options[nextIndex]);
-                    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                    } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
                       e.preventDefault();
                       const prevIndex = (currentIndex - 1 + options.length) % options.length;
                       onThemeModeChange(options[prevIndex]);

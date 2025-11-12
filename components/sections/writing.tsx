@@ -13,9 +13,9 @@ export default function Writing() {
     <>
   <motion.div {...useFadeUp()} className="mb-6 flex items-center gap-3 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
         <FileText className="h-6 w-6" aria-hidden="true" />
-        <h2 id="writing-heading" className="text-2xl md:text-3xl font-semibold">{t.writingTitle}</h2>
+  <h2 id="writing-heading" className="text-2xl md:text-3xl font-semibold [font-family:var(--font-merriweather)]">{t.writingTitle}</h2>
       </motion.div>
-      <div className="space-y-1 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
+      <div className="mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
         {t.writing.map((w: { title: string; link: string; meta: string }) => (
           <a 
             key={w.title} 
@@ -23,7 +23,7 @@ export default function Writing() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${w.title} (opens in new tab)`}
-            className="group block py-6 border-b border-border/50 last:border-b-0 hover:bg-muted/60 transition-colors -mx-5 md:-mx-8 lg:-mx-12 px-5 md:px-8 lg:px-12"
+            className="group block py-6 rounded-full border-b border-border last:border-b-0 hover:bg-muted/60 transition-colors -mx-5 md:-mx-8 lg:-mx-12 px-5 md:px-8 lg:px-12"
           >
             <div className="flex flex-col gap-3">
               {/* Title with badge suffix */}
@@ -37,12 +37,12 @@ export default function Writing() {
               </div>
               
               {/* Read more link */}
-              <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors inline-flex items-center gap-1">
+              <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors inline-flex items-center gap-1">
                 {t.readMore}
                 <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </span>
+              </p>
             </div>
           </a>
         ))}

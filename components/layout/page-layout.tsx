@@ -12,7 +12,8 @@ import Footer from "@/components/layout/footer";
 import DecorativeStripes from "@/components/common/decorative-stripes";
 import { LanguageProvider, useLanguage } from "@/lib/context/language-context";
 
-const useIsomorphicLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 type ThemeMode = "light" | "dark" | "system";
 const THEME_STORAGE_KEY = "theme-preference";
 
@@ -21,7 +22,10 @@ function SiteContent() {
   const [isDark, setIsDark] = React.useState(false);
   const [isThemeResolved, setIsThemeResolved] = React.useState(false);
   const [showHeaderBorder, setShowHeaderBorder] = React.useState(false);
-  const [activeBorderInfo, setActiveBorderInfo] = React.useState<{ left: number; width: number } | null>(null);
+  const [activeBorderInfo, setActiveBorderInfo] = React.useState<{
+    left: number;
+    width: number;
+  } | null>(null);
   const { lang, t } = useLanguage();
 
   useIsomorphicLayoutEffect(() => {
@@ -39,8 +43,10 @@ function SiteContent() {
     };
 
     const stored = getStoredPreference();
-    const initialMode: ThemeMode = stored === "light" || stored === "dark" || stored === "system" ? stored : "system";
-    const initialDark = initialMode === "dark" ? true : initialMode === "light" ? false : mq.matches;
+    const initialMode: ThemeMode =
+      stored === "light" || stored === "dark" || stored === "system" ? stored : "system";
+    const initialDark =
+      initialMode === "dark" ? true : initialMode === "light" ? false : mq.matches;
 
     setThemeMode((previous) => (previous === initialMode ? previous : initialMode));
     setIsDark(initialDark);
@@ -156,19 +162,19 @@ function SiteContent() {
   return (
     <div className="min-h-screen text-foreground antialiased bg-card">
       {/* Skip Links for Accessibility */}
-      <a 
-        href="#main-content" 
+      <a
+        href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 z-50 bg-primary text-primary-foreground px-4 py-2 font-medium"
       >
         {t.header.skipToMain}
       </a>
-      <a 
-        href="#navigation" 
+      <a
+        href="#navigation"
         className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-32 z-50 bg-primary text-primary-foreground px-4 py-2 font-medium"
       >
         {t.header.skipToNav}
       </a>
-      
+
       <header
         id="navigation"
         role="banner"
@@ -217,45 +223,34 @@ function SiteContent() {
         >
           <Hero />
         </section>
-        
-        <section 
-          id="philosophy"
-          role="region"
-          aria-labelledby="philosophy-heading"
-        >
+
+        <section id="philosophy" role="region" aria-labelledby="philosophy-heading">
           <DecorativeStripes />
           <div className="py-10 sm:py-14 lg:py-20">
             <DesignPhilosophy />
           </div>
           <DecorativeStripes />
         </section>
-        
 
-        <section 
-          id="featured" 
+        <section
+          id="featured"
           className="pt-12 sm:pt-16 lg:pt-20 border-t-8 border-b-8 border-foreground dark:border-foreground/30 bg-background"
           role="region"
           aria-labelledby="work-heading"
-        >          
+        >
           <Work />
         </section>
 
-
-        <section 
-          id="principles"
-          role="region"
-          aria-labelledby="principles-heading"
-        >
+        <section id="principles" role="region" aria-labelledby="principles-heading">
           <DecorativeStripes />
           <div className="py-10 sm:py-14 lg:py-20">
             <Principles />
           </div>
           <DecorativeStripes />
         </section>
-        
 
-        <section 
-          id="community" 
+        <section
+          id="community"
           className="pt-10 sm:pt-14 lg:pt-20 border-t-8 border-foreground dark:border-foreground/30 bg-background"
           role="region"
           aria-labelledby="community-heading"
@@ -263,17 +258,16 @@ function SiteContent() {
           <Community />
         </section>
 
-        <section 
-          id="writing" 
+        <section
+          id="writing"
           className="py-10 sm:py-14 lg:py-20 bg-background"
           role="region"
           aria-labelledby="writing-heading"
         >
           <Writing />
         </section>
-
       </main>
-      <footer 
+      <footer
         className="bg-card border-t-8 border-foreground dark:border-foreground/30"
         role="contentinfo"
       >
