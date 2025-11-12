@@ -1,4 +1,23 @@
+
 import "./globals.css";
+import { Merriweather } from "next/font/google";
+import { Geist } from "next/font/google";
+
+// Use the `variable` option so we expose CSS variables for the fonts
+// and avoid forcing a font-family on the entire `<html>` element.
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-merriweather",
+});
+
+const geist = Geist({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  display: "swap",
+  variable: "--font-geist-sans",
+});
 
 import type { Metadata, Viewport } from "next";
 import { THEME_COLORS } from "@/lib/utils";
@@ -23,7 +42,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html suppressHydrationWarning>
+    // Keep theme and script logic on <html>, but attach the *variable* classes
+    // for the fonts (they expose CSS variables). The globals.css already
+    // uses those variables to apply different fonts to body/headings.
+    <html suppressHydrationWarning className={`${geist.variable} ${merriweather.variable}`}>
       <head>
         <script
           dangerouslySetInnerHTML={{

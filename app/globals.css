@@ -101,6 +101,11 @@ button:focus-visible,
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* Provide a fallback mono font variable in case a dedicated mono font isn't loaded */
+:root {
+  --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Segoe UI Mono", "Courier New", monospace;
+}
+
 .dark {
   --background: oklch(0.207 0.038 60);
   --foreground: oklch(0.985 0 0);
@@ -142,9 +147,29 @@ button:focus-visible,
   }
   body {
     @apply bg-background text-foreground;
+    /* Use Geist for the main body text. Fallback to system sans if variable isn't available. */
+    font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
   a, button {
     cursor: pointer;
+  }
+
+  /* Apply Merriweather to headings using the variable set by next/font (if available)
+     Fallback to common serif stack to avoid layout shift when font isn't loaded. */
+  h1, h2, h3 {
+    font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
+  }
+
+  /* Use Geist / system sans for small and muted text to keep UI compact and readable */
+  .text-sm,
+  .text-muted-foreground {
+    font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+}
+
+@layer components {
+  p.text-muted-foreground {
+    @apply font-bold;
   }
 }
 
