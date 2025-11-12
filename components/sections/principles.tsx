@@ -2,21 +2,12 @@
 import { motion } from "framer-motion";
 import { Eye, Layers, Accessibility } from "lucide-react";
 import { useLanguage } from "@/lib/context/language-context";
-import { useReducedMotion, createAnimation } from "@/lib/hooks/use-reduced-motion";
+import { useFadeUp } from "@/lib/animations";
 
-const baseFadeUp = {
-  initial: { opacity: 0, y: 16 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-50px" },
-  transition: { duration: 0.5 },
-};
-
-const fadeUpAnimation = createAnimation(baseFadeUp);
+// reuse shared fadeUp from lib/animations
 
 export default function Principles() {
   const { t } = useLanguage();
-  const prefersReducedMotion = useReducedMotion();
-  const fadeUp = fadeUpAnimation(prefersReducedMotion);
 
   // Icon mapping for principles
   const iconMap = {
@@ -27,7 +18,7 @@ export default function Principles() {
 
   return (
     <>
-      <motion.div {...fadeUp} className="mb-6 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
+  <motion.div {...useFadeUp()} className="mb-6 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
         <h2 id="principles-heading" className="text-5xl md:text-7xl font-bold">{t.principlesTitle}</h2>
       </motion.div>
       <div className="grid md:grid-cols-3 gap-6 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
