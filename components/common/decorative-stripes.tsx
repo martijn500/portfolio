@@ -4,9 +4,11 @@ interface DecorativeStripesProps {
   className?: string;
 }
 
-export default function DecorativeStripes({ className = "text-foreground" }: DecorativeStripesProps) {
+export default function DecorativeStripes({
+  className = "text-foreground",
+}: DecorativeStripesProps) {
   return (
-    <div 
+    <div
       className={`w-full h-20 opacity-20 ${className}`}
       style={{
         background: `repeating-linear-gradient(
@@ -15,7 +17,7 @@ export default function DecorativeStripes({ className = "text-foreground" }: Dec
           currentColor 2px,
           transparent 2px,
           transparent 12px
-        )`
+        )`,
       }}
     />
   );

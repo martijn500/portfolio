@@ -5,16 +5,16 @@ import { SITE_URL, OG_IMAGE_VERSION } from "@/lib/constants";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = i18n.en;
-  const imageVersion = OG_IMAGE_VERSION
-  
+  const imageVersion = OG_IMAGE_VERSION;
+
   return {
     title: t.seo.title,
     description: t.seo.description,
     alternates: {
       canonical: `${SITE_URL}/en`,
       languages: {
-        'nl': `${SITE_URL}/nl`,
-        'en': `${SITE_URL}/en`,
+        nl: `${SITE_URL}/nl`,
+        en: `${SITE_URL}/en`,
       },
     },
     openGraph: {
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: `${SITE_URL}/en`,
       siteName: t.profile.name,
       locale: t.seo.locale,
-      type: 'website',
+      type: "website",
       images: [
         {
           url: `${SITE_URL}/en/opengraph-image.png?v=${imageVersion}`,
@@ -34,10 +34,10 @@ export async function generateMetadata(): Promise<Metadata> {
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: t.seo.title,
       description: t.seo.description,
-  images: [`${SITE_URL}/en/opengraph-image.png?v=${imageVersion}`],
+      images: [`${SITE_URL}/en/opengraph-image.png?v=${imageVersion}`],
     },
   };
 }

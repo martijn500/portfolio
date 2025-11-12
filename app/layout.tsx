@@ -1,4 +1,3 @@
-
 import "./globals.css";
 import { Merriweather } from "next/font/google";
 import { Geist } from "next/font/google";

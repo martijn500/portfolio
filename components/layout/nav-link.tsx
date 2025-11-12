@@ -16,16 +16,14 @@ export default function NavLink({ href, sectionId, children, className, ...props
   const isActive = activeSection === sectionId;
 
   return (
-    <a 
+    <a
       href={href}
       className={cn(
-  "relative flex h-full items-center px-3 text-sm transition-colors",
+        "relative flex h-full items-center px-3 text-sm transition-colors",
 
         // Swap active/inactive colors for top-of-screen navigation:
         // active links should be muted, inactive links primary (inverse of previous behavior).
-        isActive
-          ? "text-muted-foreground"
-          : "text-foreground hover:text-muted-foreground",
+        isActive ? "text-muted-foreground" : "text-foreground hover:text-muted-foreground",
         className
       )}
       role="menuitem"

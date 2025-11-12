@@ -24,8 +24,7 @@ export default function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   if (PUBLIC.some((p) => pathname.startsWith(p))) return NextResponse.next();
   if (hasFileExtension(pathname)) return NextResponse.next();
-  if (pathname.startsWith("/en") || pathname.startsWith("/nl"))
-    return NextResponse.next();
+  if (pathname.startsWith("/en") || pathname.startsWith("/nl")) return NextResponse.next();
 
   // One-time language redirect based on Accept-Language
   const langHeader = req.headers.get("accept-language") || "";

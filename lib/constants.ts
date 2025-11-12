@@ -2,4 +2,4 @@
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.martijnvanderwijst.nl";
 
 // Simple static OG image version. Bump this string when you want scrapers to fetch a new image.
-export const OG_IMAGE_VERSION = "1"
+export const OG_IMAGE_VERSION = "1";

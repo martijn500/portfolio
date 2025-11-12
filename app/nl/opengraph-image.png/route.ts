@@ -1,13 +1,13 @@
-import { i18n } from '@/lib/i18n'
-import { contentType, createImageResponse, size } from '@/lib/opengraph-renderer'
+import { i18n } from "@/lib/i18n";
+import { contentType, createImageResponse, size } from "@/lib/opengraph-renderer";
 
-export const runtime = 'edge'
+export const runtime = "edge";
 
-const t = i18n.nl
+const t = i18n.nl;
 
-export { contentType, size }
+export { contentType, size };
 
 export async function GET(request: Request) {
-  const origin = new URL(request.url).origin
-  return createImageResponse(t, origin)
+  const origin = new URL(request.url).origin;
+  return createImageResponse(t, origin);
 }

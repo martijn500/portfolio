@@ -75,7 +75,7 @@ button:focus-visible,
   --popover: oklch(1 0 0);
   --popover-foreground: var(--foreground);
   --primary: oklch(71.089% 0.17636 54.1);
-  --primary-foreground: oklch(0.98 0.01 90);  /* bijna wit voor contrast */
+  --primary-foreground: oklch(0.98 0.01 90); /* bijna wit voor contrast */
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(14.646% 0.0279 67.877);
   --muted: oklch(0.97 0 0);
@@ -103,7 +103,9 @@ button:focus-visible,
 
 /* Provide a fallback mono font variable in case a dedicated mono font isn't loaded */
 :root {
-  --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Segoe UI Mono", "Courier New", monospace;
+  --font-geist-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Segoe UI Mono", "Courier New",
+    monospace;
 }
 
 .dark {
@@ -148,22 +150,41 @@ button:focus-visible,
   body {
     @apply bg-background text-foreground;
     /* Use Geist for the main body text. Fallback to system sans if variable isn't available. */
-    font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family:
+      var(--font-geist-sans),
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
   }
-  a, button {
+  a,
+  button {
     cursor: pointer;
   }
 
   /* Apply Merriweather to headings using the variable set by next/font (if available)
      Fallback to common serif stack to avoid layout shift when font isn't loaded. */
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
   }
 
   /* Use Geist / system sans for small and muted text to keep UI compact and readable */
   .text-sm,
   .text-muted-foreground {
-    font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family:
+      var(--font-geist-sans),
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
   }
 }
 
@@ -201,6 +222,10 @@ html:not(.theme-ready) *::after {
     scroll-behavior: smooth;
   }
   html.theme-ready * {
-    transition: background-color 260ms ease, color 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+    transition:
+      background-color 260ms ease,
+      color 260ms ease,
+      border-color 260ms ease,
+      box-shadow 260ms ease;
   }
 }

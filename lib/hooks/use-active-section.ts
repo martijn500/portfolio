@@ -7,18 +7,18 @@ export function useActiveSection() {
     // Special handling for carousel sections
     const handleScroll = () => {
       // Find the carousel container by looking for the parallax container
-      const heroContainer = document.querySelector('.lg\\:h-\\[200vh\\]');
-      
+      const heroContainer = document.querySelector(".lg\\:h-\\[200vh\\]");
+
       if (heroContainer) {
         const rect = heroContainer.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
-        
+
         // Calculate scroll progress matching Framer Motion's offset: ["start start", "end end"]
         // This means: start when container top hits viewport top, end when container bottom hits viewport bottom
         const scrollStart = 0; // When top of container reaches top of viewport
         const scrollEnd = rect.height - viewportHeight; // When bottom of container reaches bottom of viewport
         const scrollProgress = Math.max(0, Math.min(1, -rect.top / scrollEnd));
-        
+
         // Determine if we're in the carousel area (container is in viewport)
         if (rect.top <= viewportHeight * 0.3 && rect.bottom >= viewportHeight * 0.3) {
           // We're scrolling through the carousel
@@ -32,7 +32,7 @@ export function useActiveSection() {
           }
         }
       }
-      
+
       // Fallback for other sections
       const sections = [
         { id: "philosophy", element: document.getElementById("philosophy") },
@@ -54,8 +54,8 @@ export function useActiveSection() {
     };
 
     handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return activeSection;

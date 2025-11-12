@@ -1,32 +1,32 @@
 type HeroSectionId = "about-work" | "about-life";
 
 export type HeroScrollDetail = {
-	section: HeroSectionId;
+  section: HeroSectionId;
 };
 
 export function scrollHeroToSection(sectionId: string): boolean {
-	if (typeof window === "undefined") {
-		return false;
-	}
+  if (typeof window === "undefined") {
+    return false;
+  }
 
-	if (!isHeroSection(sectionId)) {
-		return false;
-	}
+  if (!isHeroSection(sectionId)) {
+    return false;
+  }
 
-	const heroRoot = document.querySelector<HTMLElement>("[data-hero-root]");
-	if (!heroRoot) {
-		return false;
-	}
+  const heroRoot = document.querySelector<HTMLElement>("[data-hero-root]");
+  if (!heroRoot) {
+    return false;
+  }
 
-	window.dispatchEvent(
-		new CustomEvent<HeroScrollDetail>("hero:scroll", {
-			detail: { section: sectionId },
-		})
-	);
+  window.dispatchEvent(
+    new CustomEvent<HeroScrollDetail>("hero:scroll", {
+      detail: { section: sectionId },
+    })
+  );
 
-	return true;
+  return true;
 }
 
 function isHeroSection(value: string): value is HeroSectionId {
-	return value === "about-work" || value === "about-life";
+  return value === "about-work" || value === "about-life";
 }

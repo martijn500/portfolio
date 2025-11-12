@@ -200,8 +200,7 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
       },
       {
         title: "Systeem boven pagina's",
-        description:
-          "Denk in tokens, componenten en governance om schaalbaar te blijven.",
+        description: "Denk in tokens, componenten en governance om schaalbaar te blijven.",
         icon: "Layers",
       },
       {
@@ -232,8 +231,7 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
         link: "https://www.divotion.com/blog/ux-bij-divotion",
       },
       {
-        title:
-          "Omgaan met groeiende gebruikersverwachtingen in enterprise omgevingen",
+        title: "Omgaan met groeiende gebruikersverwachtingen in enterprise omgevingen",
         meta: "Blog",
         link: "https://www.divotion.com/blog/how-to-cope-with-growing-user-expectations-in-an-enterprise-environment",
       },
@@ -448,14 +446,12 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
     principles: [
       {
         title: "Clarity over cleverness",
-        description:
-          "Clear language and patterns that minimize cognitive load.",
+        description: "Clear language and patterns that minimize cognitive load.",
         icon: "Eye",
       },
       {
         title: "System over pages",
-        description:
-          "Think in tokens, components, and governance to stay scalable.",
+        description: "Think in tokens, components, and governance to stay scalable.",
         icon: "Layers",
       },
       {
@@ -486,8 +482,7 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
         link: "https://www.divotion.com/blog/ux-bij-divotion",
       },
       {
-        title:
-          "How to cope with growing user expectations in an enterprise environment",
+        title: "How to cope with growing user expectations in an enterprise environment",
         meta: "Blog",
         link: "https://www.divotion.com/blog/how-to-cope-with-growing-user-expectations-in-an-enterprise-environment",
       },

@@ -15,13 +15,19 @@ export default function Work({}: WorkProps) {
   return (
     <>
       <motion.div {...fadeUp} className="mx-auto max-w-6xl px-5 md:px-8 lg:px-12 mb-12">
-        <h2 id="work-heading" className="text-5xl md:text-7xl font-bold [font-family:var(--font-merriweather)]">
+        <h2
+          id="work-heading"
+          className="text-5xl md:text-7xl font-bold [font-family:var(--font-merriweather)]"
+        >
           {t.workTitle}
         </h2>
       </motion.div>
       {/* FEATURED CASE */}
       <div>
-        <motion.div {...fadeUp} className="mb-6 flex items-center gap-3 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
+        <motion.div
+          {...fadeUp}
+          className="mb-6 flex items-center gap-3 mx-auto max-w-6xl px-5 md:px-8 lg:px-12"
+        >
           <Spotlight className="h-6 w-6" />
           <h3 className="text-2xl md:text-3xl font-semibold">{t.featured.title}</h3>
           <span className="text-sm text-muted-foreground">{t.featured.period}</span>
@@ -88,7 +94,9 @@ export default function Work({}: WorkProps) {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <figcaption className="col-span-2 text-xs text-muted-foreground">BMW Group Design System screenshots showcasing component library and implementation.</figcaption>
+              <figcaption className="col-span-2 text-xs text-muted-foreground">
+                BMW Group Design System screenshots showcasing component library and implementation.
+              </figcaption>
             </figure>
           </div>
         </div>
@@ -96,34 +104,55 @@ export default function Work({}: WorkProps) {
 
       {/* OTHER WORK */}
       <section className="py-10 sm:py-14 lg:py-20">
-        <motion.div {...fadeUp} className="mb-6 flex items-center gap-3 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
+        <motion.div
+          {...fadeUp}
+          className="mb-6 flex items-center gap-3 mx-auto max-w-6xl px-5 md:px-8 lg:px-12"
+        >
           <BriefcaseBusiness className="h-6 w-6" />
           <h3 className="text-2xl md:text-3xl font-semibold">{t.otherWorkTitle}</h3>
         </motion.div>
         <div className="grid md:grid-cols-2 gap-6 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
-          {t.otherCases.map((cs: { id: string; title: string; period: string; client: string; summary: string; image: string; outcomes: readonly string[] }) => (
-            <Card key={cs.id} className="overflow-hidden">
-              <CardHeader className="border-b">
-                <CardTitle className="flex items-center justify-between gap-3">
-                  <span className="truncate">{cs.title}</span>
-                  <span className="text-muted-foreground text-sm whitespace-nowrap font-normal">{cs.period}</span>
-                </CardTitle>
-              </CardHeader>
-              {/* Image Full Width */}
-              <div className="aspect-video bg-muted overflow-hidden">
-                <Image src={`/${cs.image}`} alt={`${cs.title} project screenshot - ${cs.client}`} width={600} height={338} className="w-full h-full object-cover" />
-              </div>
-              <CardContent className="p-6">
-                <p className="text-sm text-muted-foreground mb-1">{cs.client}</p>
-                <p className="mb-4">{cs.summary}</p>
-                <ul className="list-disc pl-5 text-sm space-y-1">
-                  {cs.outcomes.map((o: string, i: number) => (
-                    <li key={i}>{o}</li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          ))}
+          {t.otherCases.map(
+            (cs: {
+              id: string;
+              title: string;
+              period: string;
+              client: string;
+              summary: string;
+              image: string;
+              outcomes: readonly string[];
+            }) => (
+              <Card key={cs.id} className="overflow-hidden">
+                <CardHeader className="border-b">
+                  <CardTitle className="flex items-center justify-between gap-3">
+                    <span className="truncate">{cs.title}</span>
+                    <span className="text-muted-foreground text-sm whitespace-nowrap font-normal">
+                      {cs.period}
+                    </span>
+                  </CardTitle>
+                </CardHeader>
+                {/* Image Full Width */}
+                <div className="aspect-video bg-muted overflow-hidden">
+                  <Image
+                    src={`/${cs.image}`}
+                    alt={`${cs.title} project screenshot - ${cs.client}`}
+                    width={600}
+                    height={338}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <p className="text-sm text-muted-foreground mb-1">{cs.client}</p>
+                  <p className="mb-4">{cs.summary}</p>
+                  <ul className="list-disc pl-5 text-sm space-y-1">
+                    {cs.outcomes.map((o: string, i: number) => (
+                      <li key={i}>{o}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            )
+          )}
         </div>
       </section>
     </>

@@ -18,8 +18,13 @@ export default function Principles() {
 
   return (
     <>
-  <motion.div {...useFadeUp()} className="mb-6 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
-  <h2 id="principles-heading" className="text-5xl md:text-7xl font-bold [font-family:var(--font-merriweather)]">{t.principlesTitle}</h2>
+      <motion.div {...useFadeUp()} className="mb-6 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
+        <h2
+          id="principles-heading"
+          className="text-5xl md:text-7xl font-bold [font-family:var(--font-merriweather)]"
+        >
+          {t.principlesTitle}
+        </h2>
       </motion.div>
       <div className="grid md:grid-cols-3 gap-6 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
         {t.principles.map((p: { title: string; icon: string; description: string }) => {
