@@ -6,17 +6,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/lib/context/language-context";
 import { useFadeUp } from "@/lib/animations";
 
-
 type WorkProps = Record<string, never>;
 
 export default function Work({}: WorkProps) {
   const { t } = useLanguage();
-  const fadeUp = useFadeUp(); // This line is kept for context
+  const fadeUp = useFadeUp();
 
   return (
     <>
-  <motion.div {...useFadeUp()} className="mx-auto max-w-6xl px-5 md:px-8 lg:px-12 mb-12">
-        <h2 id="work-heading" className="text-5xl md:text-7xl font-bold">{t.workTitle}</h2>
+      <motion.div {...fadeUp} className="mx-auto max-w-6xl px-5 md:px-8 lg:px-12 mb-12">
+        <h2 id="work-heading" className="text-5xl md:text-7xl font-bold [font-family:var(--font-merriweather)]">
+          {t.workTitle}
+        </h2>
       </motion.div>
       {/* FEATURED CASE */}
       <div>
@@ -30,19 +31,19 @@ export default function Work({}: WorkProps) {
           <div className="py-6 grid lg:grid-cols-2 gap-8 mx-auto max-w-6xl">
             <div className="lg:col-span-1 space-y-6">
               <div>
-                <p className="text-sm text-muted-foreground">{t.featured.clientLabel}</p>
+                <p className="text-sm text-muted-foreground mb-1">{t.featured.clientLabel}</p>
                 <p className="font-medium">{t.featured.client}</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">{t.featured.challengeLabel}</p>
+                <p className="text-sm text-muted-foreground mb-1">{t.featured.challengeLabel}</p>
                 <p className="prose-measure">{t.featured.challenge}</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">{t.featured.roleLabel}</p>
+                <p className="text-sm text-muted-foreground mb-1">{t.featured.roleLabel}</p>
                 <p className="prose-measure">{t.featured.role}</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">{t.featured.contribLabel}</p>
+                <p className="text-sm text-muted-foreground mb-1">{t.featured.contribLabel}</p>
                 <ul className="list-disc pl-5 space-y-1">
                   {t.featured.bullets.map((b: string, i: number) => (
                     <li key={i}>{b}</li>
@@ -50,7 +51,7 @@ export default function Work({}: WorkProps) {
                 </ul>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">{t.featured.resultLabel}</p>
+                <p className="text-sm text-muted-foreground mb-1">{t.featured.resultLabel}</p>
                 <ul className="list-disc pl-5 space-y-1">
                   {t.featured.results.map((r: string, i: number) => (
                     <li key={i}>{r}</li>
@@ -59,10 +60,10 @@ export default function Work({}: WorkProps) {
               </div>
             </div>
 
-            <div className="lg:col-span-1 grid grid-cols-2 gap-3 self-start">
+            <figure className="lg:col-span-1 grid grid-cols-2 gap-3 self-start">
               <div className="aspect-4/3 rounded-xl bg-white/70 border overflow-hidden">
-                <Image 
-                  src="/bmwgroup-1.png" 
+                <Image
+                  src="/bmwgroup-1.png"
                   alt="BMW Group Design System - Component Library interface showing design tokens and components"
                   width={400}
                   height={300}
@@ -70,8 +71,8 @@ export default function Work({}: WorkProps) {
                 />
               </div>
               <div className="aspect-4/3 rounded-xl bg-white/70 border overflow-hidden">
-                <Image 
-                  src="/bmwgroup-2.png" 
+                <Image
+                  src="/bmwgroup-2.png"
                   alt="BMW Group Design System - Documentation page with detailed component specifications"
                   width={400}
                   height={300}
@@ -79,16 +80,16 @@ export default function Work({}: WorkProps) {
                 />
               </div>
               <div className="col-span-2 aspect-video rounded-xl bg-white/70 border overflow-hidden">
-                <Image 
-                  src="/bmwgroup-3.png" 
+                <Image
+                  src="/bmwgroup-3.png"
                   alt="BMW Group Design System - Complete overview dashboard showing implementation guidelines"
                   width={800}
                   height={450}
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="col-span-2 text-xs text-muted-foreground">BMW Group Design System screenshots showcasing component library and implementation.</p>
-            </div>
+              <figcaption className="col-span-2 text-xs text-muted-foreground">BMW Group Design System screenshots showcasing component library and implementation.</figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -110,16 +111,10 @@ export default function Work({}: WorkProps) {
               </CardHeader>
               {/* Image Full Width */}
               <div className="aspect-video bg-muted overflow-hidden">
-                <Image 
-                  src={`/${cs.image}`} 
-                  alt={`${cs.title} project screenshot - ${cs.client}`}
-                  width={600}
-                  height={338}
-                  className="w-full h-full object-cover"
-                />
+                <Image src={`/${cs.image}`} alt={`${cs.title} project screenshot - ${cs.client}`} width={600} height={338} className="w-full h-full object-cover" />
               </div>
               <CardContent className="p-6">
-                <p className="text-sm text-muted-foreground mb-2">{cs.client}</p>
+                <p className="text-sm text-muted-foreground mb-1">{cs.client}</p>
                 <p className="mb-4">{cs.summary}</p>
                 <ul className="list-disc pl-5 text-sm space-y-1">
                   {cs.outcomes.map((o: string, i: number) => (
