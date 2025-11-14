@@ -7,7 +7,6 @@ import DesignPhilosophy from "@/components/sections/design-philosophy";
 import Community from "@/components/sections/community";
 import Principles from "@/components/sections/principles";
 import Header from "@/components/layout/header";
-import Writing from "@/components/sections/writing";
 import Footer from "@/components/layout/footer";
 import DecorativeStripes from "@/components/common/decorative-stripes";
 import { LanguageProvider, useLanguage } from "@/lib/context/language-context";
@@ -234,7 +233,7 @@ function SiteContent() {
 
         <section
           id="featured"
-          className="pt-12 sm:pt-16 lg:pt-20 border-t-8 border-b-8 border-foreground dark:border-foreground/30 bg-background"
+          className="pt-10 md:pt-14 lg:pt-20 border-t-8 border-b-8 border-foreground dark:border-foreground/30 bg-background"
           role="region"
           aria-labelledby="work-heading"
         >
@@ -251,21 +250,14 @@ function SiteContent() {
 
         <section
           id="community"
-          className="pt-10 sm:pt-14 lg:pt-20 border-t-8 border-foreground dark:border-foreground/30 bg-background"
+          className="py-10 md:py-14 lg:py-20 border-t-8 border-foreground dark:border-foreground/30 bg-background"
           role="region"
           aria-labelledby="community-heading"
         >
           <Community />
         </section>
 
-        <section
-          id="writing"
-          className="py-10 sm:py-14 lg:py-20 bg-background"
-          role="region"
-          aria-labelledby="writing-heading"
-        >
-          <Writing />
-        </section>
+        {/* Writing moved into Community section; no separate section needed */}
       </main>
       <footer
         className="bg-card border-t-8 border-foreground dark:border-foreground/30"

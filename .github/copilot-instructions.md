@@ -47,6 +47,13 @@ Guidelines for Copilot suggestions that match this Next.js portfolio project.
 - Prefer localized strings via `lib/i18n.ts`; avoid hard-coded copy in components.
 - Remove unused scaffolding or variables; keep comments focused on clarifying non-obvious logic.
 
+## Import & refactor checklist
+
+- When moving or refactoring components, update import paths across the repo to the new location and remove any unused imports.
+- After making code changes that affect module structure, run ESLint with --fix and Prettier to automatically tidy imports and formatting.
+- Verify the change by running a build (`npm run build`) and fix any remaining compile or runtime errors.
+- Prefer project aliases (`@/...`) when updating imports to keep paths consistent.
+
 ## Commits & Docs
 
 - Use conventional-commit style messages consistent with the repo (e.g., `fix(component): clarify aria labels`).

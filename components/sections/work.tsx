@@ -5,6 +5,7 @@ import { Spotlight, BriefcaseBusiness } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/lib/context/language-context";
 import { useFadeUp } from "@/lib/animations";
+import SectionHeading from "@/components/ui/section-heading";
 
 type WorkProps = Record<string, never>;
 
@@ -14,14 +15,7 @@ export default function Work({}: WorkProps) {
 
   return (
     <>
-      <motion.div {...fadeUp} className="mx-auto max-w-6xl px-5 md:px-8 lg:px-12 mb-12">
-        <h2
-          id="work-heading"
-          className="text-5xl md:text-7xl font-bold [font-family:var(--font-merriweather)]"
-        >
-          {t.workTitle}
-        </h2>
-      </motion.div>
+      <SectionHeading id="work-heading">{t.workTitle}</SectionHeading>
       {/* FEATURED CASE */}
       <div>
         <motion.div

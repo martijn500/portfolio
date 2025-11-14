@@ -1,8 +1,7 @@
 "use client";
-import { motion } from "framer-motion";
 import { Eye, Layers, Accessibility } from "lucide-react";
 import { useLanguage } from "@/lib/context/language-context";
-import { useFadeUp } from "@/lib/animations";
+import SectionHeading from "@/components/ui/section-heading";
 
 // reuse shared fadeUp from lib/animations
 
@@ -18,19 +17,12 @@ export default function Principles() {
 
   return (
     <>
-      <motion.div {...useFadeUp()} className="mb-6 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
-        <h2
-          id="principles-heading"
-          className="text-5xl md:text-7xl font-bold [font-family:var(--font-merriweather)]"
-        >
-          {t.principlesTitle}
-        </h2>
-      </motion.div>
+      <SectionHeading id="principles-heading">{t.principlesTitle}</SectionHeading>
       <div className="grid md:grid-cols-3 gap-6 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
         {t.principles.map((p: { title: string; icon: string; description: string }) => {
           const IconComponent = iconMap[p.icon as keyof typeof iconMap];
           return (
-            <div key={p.title} className="flex gap-4">
+            <div key={p.title} className="flex gap-4 pt-6">
               {/* Icon on the left */}
               <div className="shrink-0">
                 <IconComponent className="h-6 w-6" aria-hidden="true" />
