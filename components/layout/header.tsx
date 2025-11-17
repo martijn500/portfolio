@@ -16,6 +16,7 @@ import {
   Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import IconButton from "@/components/ui/icon-button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import NavLink from "@/components/layout/nav-link";
 import type { LangKey } from "@/lib/i18n";
@@ -186,27 +187,23 @@ export default function Header({
         {/* Combined menu: navigation + settings on mobile, settings only on desktop */}
         <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
+            <IconButton
               aria-label={headerCopy.menu.aria}
               aria-haspopup="dialog"
               aria-expanded={menuOpen}
             >
-              <Menu className="h-5 w-5" aria-hidden="true" />
-            </Button>
+              <Menu className="w-5 h-5 text-foreground" aria-hidden="true" />
+            </IconButton>
           </SheetTrigger>
           <SheetTrigger asChild className="hidden md:flex">
-            <Button
-              variant="ghost"
-              size="icon"
+            <IconButton
               aria-label={headerCopy.settings.aria}
               aria-haspopup="dialog"
               aria-expanded={menuOpen}
               title={headerCopy.settings.label}
             >
-              <Settings className="h-5 w-5" aria-hidden="true" />
-            </Button>
+              <Settings className="w-5 h-5 text-foreground" aria-hidden="true" />
+            </IconButton>
           </SheetTrigger>
           <SheetContent
             side="right"
@@ -331,7 +328,7 @@ export default function Header({
                           ? "bg-primary text-primary-foreground font-medium"
                           : "hover:bg-muted text-foreground"
                       )}
-                      tabIndex={themeMode === option.value ? 0 : -1}
+                      tabIndex={0}
                     >
                       <option.Icon className="h-4 w-4" aria-hidden="true" />
                       <span>{option.label}</span>

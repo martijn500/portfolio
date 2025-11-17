@@ -5,6 +5,7 @@ import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import IconButton from "@/components/ui/icon-button";
 import { useLanguage } from "@/lib/context/language-context";
 
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
@@ -69,22 +70,28 @@ function SheetContent({
         {...props}
       >
         {children}
-        <SheetPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none">
-          <XIcon className="size-4" />
-          <span className="sr-only">{t.header.close}</span>
-        </SheetPrimitive.Close>
       </SheetPrimitive.Content>
     </SheetPortal>
   );
 }
 
 function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
+  const { t } = useLanguage();
+
   return (
     <div
       data-slot="sheet-header"
-      className={cn("flex flex-col gap-1.5 p-4", className)}
+      className={cn("flex items-center justify-between gap-2 p-4", className)}
       {...props}
-    />
+    >
+      <div className="flex-1">{props.children}</div>
+      <SheetPrimitive.Close asChild>
+        <IconButton aria-label={t.header.close}>
+          <XIcon className="w-5 h-5 text-foreground" />
+          <span className="sr-only">{t.header.close}</span>
+        </IconButton>
+      </SheetPrimitive.Close>
+    </div>
   );
 }
 
