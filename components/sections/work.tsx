@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Spotlight, BriefcaseBusiness } from "lucide-react";
+import { Spotlight, BriefcaseBusiness, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/lib/context/language-context";
 import { useFadeUp } from "@/lib/animations";
@@ -24,26 +24,32 @@ export default function Work({}: WorkProps) {
         >
           <Spotlight className="h-6 w-6" />
           <h3 className="text-2xl md:text-3xl font-semibold">{t.featured.title}</h3>
-          <span className="text-sm text-muted-foreground">{t.featured.period}</span>
+          <span className="flex text-sm text-accent-foreground">
+            <span>{t.featured.startDate}</span>
+            <span className="inline-flex items-center px-1 align-middle" aria-hidden="true">
+              <ArrowRight className="w-3 h-3" />
+            </span>
+            <span>{t.featured.endDate}</span>
+          </span>
         </motion.div>
 
         <div className="mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
           <div className="py-6 grid lg:grid-cols-2 gap-8 mx-auto max-w-6xl">
             <div className="lg:col-span-1 space-y-6">
               <div>
-                <p className="text-sm text-muted-foreground mb-1">{t.featured.clientLabel}</p>
+                <p className="text-sm text-accent-foreground mb-1">{t.featured.clientLabel}</p>
                 <p className="font-medium">{t.featured.client}</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground mb-1">{t.featured.challengeLabel}</p>
+                <p className="text-sm text-accent-foreground mb-1">{t.featured.challengeLabel}</p>
                 <p className="prose-measure">{t.featured.challenge}</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground mb-1">{t.featured.roleLabel}</p>
+                <p className="text-sm text-accent-foreground mb-1">{t.featured.roleLabel}</p>
                 <p className="prose-measure">{t.featured.role}</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground mb-1">{t.featured.contribLabel}</p>
+                <p className="text-sm text-accent-foreground mb-1">{t.featured.contribLabel}</p>
                 <ul className="list-disc pl-5 space-y-1">
                   {t.featured.bullets.map((b: string, i: number) => (
                     <li key={i}>{b}</li>
@@ -51,7 +57,7 @@ export default function Work({}: WorkProps) {
                 </ul>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground mb-1">{t.featured.resultLabel}</p>
+                <p className="text-sm text-accent-foreground mb-1">{t.featured.resultLabel}</p>
                 <ul className="list-disc pl-5 space-y-1">
                   {t.featured.results.map((r: string, i: number) => (
                     <li key={i}>{r}</li>
@@ -88,7 +94,7 @@ export default function Work({}: WorkProps) {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <figcaption className="col-span-2 text-xs text-muted-foreground">
+              <figcaption className="col-span-2 text-xs text-accent-foreground">
                 BMW Group Design System screenshots showcasing component library and implementation.
               </figcaption>
             </figure>
@@ -110,7 +116,8 @@ export default function Work({}: WorkProps) {
             (cs: {
               id: string;
               title: string;
-              period: string;
+              startDate: string;
+              endDate: string;
               client: string;
               summary: string;
               image: string;
@@ -120,8 +127,15 @@ export default function Work({}: WorkProps) {
                 <CardHeader className="border-b">
                   <CardTitle className="flex items-center justify-between gap-3">
                     <span className="truncate">{cs.title}</span>
-                    <span className="text-muted-foreground text-sm whitespace-nowrap font-normal">
-                      {cs.period}
+                    <span className="text-accent-foreground text-sm whitespace-nowrap font-normal">
+                      <span>{cs.startDate}</span>
+                      <span
+                        className="inline-flex items-center px-1 align-middle"
+                        aria-hidden="true"
+                      >
+                        <ArrowRight className="w-3 h-3" />
+                      </span>
+                      <span>{cs.endDate}</span>
                     </span>
                   </CardTitle>
                 </CardHeader>
@@ -136,7 +150,7 @@ export default function Work({}: WorkProps) {
                   />
                 </div>
                 <CardContent className="p-6">
-                  <p className="text-sm text-muted-foreground mb-1">{cs.client}</p>
+                  <p className="text-sm text-accent-foreground mb-1">{cs.client}</p>
                   <p className="mb-4">{cs.summary}</p>
                   <ul className="list-disc pl-5 text-sm space-y-1">
                     {cs.outcomes.map((o: string, i: number) => (

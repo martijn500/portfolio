@@ -122,7 +122,8 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
     workTitle: "Werk",
     featured: {
       title: "Uitgelicht: Scaling with Design Tokens",
-      period: "2022 → 2025",
+      startDate: "2022",
+      endDate: "2025",
       clientLabel: "Klant",
       challengeLabel: "Challenge",
       roleLabel: "Rol",
@@ -150,7 +151,8 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
         id: "alphabet-v1",
         client: "Alphabet (BMW Group)",
         title: "Alphabet Design System",
-        period: "2020 → 2023",
+        startDate: "2020",
+        endDate: "2023",
         image: "alphabet-1.png",
         summary:
           "Transitie naar nieuwe corporate stijl. Richting gegeven aan consistentie, typografie, kleur en componentbibliotheek met WCAG-baseline.",
@@ -164,7 +166,8 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
         id: "philips-lighting",
         client: "Signify / Philips Lighting",
         title: "Signify InterAct Platform",
-        period: "2015 → 2017",
+        startDate: "2015",
+        endDate: "2017",
         image: "signify.png",
         summary:
           "Vormgegeven aan UX-architectuur en herbruikbare componenten voor het InterAct smart lighting platform. Actieve rol in design taskforce met focus op interaction design en usability testing.",
@@ -179,7 +182,8 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
         id: "ing",
         client: "ING",
         title: "ING Mobile Services Portal",
-        period: "2013 → 2015",
+        startDate: "2013",
+        endDate: "2015",
         image: "ing.png",
         summary:
           "Tablet-portal voor on-site klantenservice. Focus op duidelijkheid, snelheid en compliance in compacte touch-UI.",
@@ -374,7 +378,8 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
     workTitle: "Work",
     featured: {
       title: "Featured: Scaling with Design Tokens",
-      period: "2022 → 2025",
+      startDate: "2022",
+      endDate: "2025",
       clientLabel: "Client",
       challengeLabel: "Challenge",
       roleLabel: "Role",
@@ -402,7 +407,8 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
         id: "alphabet-v1",
         client: "Alphabet",
         title: "Alphabet Design System",
-        period: "2020 → 2022",
+        startDate: "2020",
+        endDate: "2022",
         image: "alphabet-1.png",
         summary:
           "Transition to the new corporate design. Established consistency in type, color, and components with a WCAG baseline.",
@@ -416,7 +422,8 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
         id: "philips-lighting",
         client: "Signify / Philips Lighting",
         title: "Signify InterAct Platform",
-        period: "2015 → 2017",
+        startDate: "2015",
+        endDate: "2017",
         image: "signify.png",
         summary:
           "Shaped UX architecture and reusable components for the InterAct smart lighting platform. Active role in design taskforce with focus on interaction design and usability testing.",
@@ -431,7 +438,8 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
         id: "ing",
         client: "ING",
         title: "ING Mobile Services Portal",
-        period: "2013 → 2015",
+        startDate: "2013",
+        endDate: "2015",
         image: "ing.png",
         summary:
           "Tablet portal for on-site client assistance. Focus on clarity, speed, and compliance in a compact touch UI.",

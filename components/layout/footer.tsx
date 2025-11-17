@@ -5,7 +5,7 @@ export default function Footer() {
   const { t } = useLanguage();
 
   return (
-    <div className="py-10 text-sm text-muted-foreground mx-auto max-w-6xl px-5 md:px-8 lg:px-12 flex flex-wrap items-center justify-between gap-3">
+    <div className="py-10 text-sm text-accent-foreground mx-auto max-w-6xl px-5 md:px-8 lg:px-12 flex flex-wrap items-center justify-between gap-3">
       <p>{t.footerAllRights(t.profile.name)}</p>
       <div className="flex items-center gap-4">
         <a

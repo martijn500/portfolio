@@ -23,7 +23,7 @@ export default function NavLink({ href, sectionId, children, className, ...props
 
         // Swap active/inactive colors for top-of-screen navigation:
         // active links should be muted, inactive links primary (inverse of previous behavior).
-        isActive ? "text-muted-foreground" : "text-foreground hover:text-muted-foreground",
+        isActive ? "text-accent-foreground" : "text-foreground hover:text-accent-foreground",
         className
       )}
       role="menuitem"

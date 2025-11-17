@@ -42,7 +42,7 @@ export default function Community({}: CommunityProps) {
           {t.writingTitle}
         </h3>
       </motion.div>
-      <div className="mx-auto pb-6 max-w-6xl px-5 md:px-8 lg:px-12">
+      <div className="mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
         {t.writing.map((w: { title: string; link: string; meta: string }, i: number) => (
           <div key={w.title}>
             <a
@@ -62,7 +62,7 @@ export default function Community({}: CommunityProps) {
                 </div>
 
                 {/* Read more link */}
-                <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors inline-flex items-center gap-1">
+                <p className="text-sm text-accent-foreground group-hover:text-foreground transition-colors inline-flex items-center gap-1">
                   {t.readMore}
                   <svg
                     className="w-3 h-3 group-hover:translate-x-1 transition-transform"

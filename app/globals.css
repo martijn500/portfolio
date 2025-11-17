@@ -81,7 +81,7 @@ button:focus-visible,
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(14.646% 0.0279 67.877);
   --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(14.646% 0.0279 67.877);
+  --accent-foreground: lab(17.32% 9.35 15.24);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
@@ -172,24 +172,10 @@ button:focus-visible,
   h3 {
     font-family: var(--font-merriweather), Georgia, "Times New Roman", serif;
   }
-
-  /* Use Geist / system sans for small and muted text to keep UI compact and readable */
-  .text-sm,
-  .text-muted-foreground {
-    font-family:
-      var(--font-geist-sans),
-      system-ui,
-      -apple-system,
-      "Segoe UI",
-      Roboto,
-      "Helvetica Neue",
-      Arial,
-      sans-serif;
-  }
 }
 
 @layer components {
-  p.text-muted-foreground {
+  p.text-accent-foreground {
     @apply font-bold;
   }
 }
