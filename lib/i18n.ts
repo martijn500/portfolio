@@ -30,7 +30,7 @@ zodat oplossingen goed werken voor zowel gebruikers als developmentteams.",
       role: "Gelukkige vader van twee, futsaller en chronische hobby-wisselaar",
       summary:
         "Buiten werk geniet ik van tijd met mijn gezin, een potje futsal met vrienden (waarbij 3 helften belangrijk zijn), of tijdelijke hobby's zoals sterrenkijken, zuurdesembroden bakken en piano leren spelen. \
-Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast heb ik een neiging om alles tot op de bodem uit te zoeken. Zoals vakanties of een nieuwe waterkoker.",
+  Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast heb ik een neiging om alles tot op de bodem uit te zoeken. Zoals vakanties of een nieuwe waterkoker.",
       skills: [
         "Gezinsleven",
         "Films kijken",
@@ -120,40 +120,61 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
       viewingLife: "Je bekijkt mijn persoonlijk leven -",
     },
     workTitle: "Werk",
-    featured: {
-      title: "Uitgelicht: Scaling with Design Tokens",
-      startDate: "2022",
-      endDate: "2025",
-      clientLabel: "Klant",
-      challengeLabel: "Challenge",
-      roleLabel: "Rol",
-      contribLabel: "Mijn bijdrage",
-      resultLabel: "Resultaat",
-      client: "BMW Group",
-      challenge:
-        "Evolueer het design system met tokens om efficiency te verhogen, consistentie te borgen en meerdere brands te ondersteunen.",
-      role: "Tech Lead UX: UX-roadmap eigenaarschap, toegankelijkheidsstandaarden, schaalbaar design system, coaching en vertegenwoordiging in productvisie.",
-      bullets: [
-        "Token-architectuur (kleur, typografie, spacing, states, theming)",
-        "Figma ↔ Storybook synchronisatie + CI/CD publishing",
-        "Governance en change control over 15+ apps",
-        "Reusable componenten met duidelijke variants & states",
-      ],
-      results: [
-        "Snellere delivery door hergebruik van componenten en tokens",
-        "Langdurige alignment tussen UX, business en development",
-        "Minder inconsistenties over 15+ apps",
-      ],
-    },
     otherWorkTitle: "Meer werk",
-    otherCases: [
+    clientLabel: "Klant",
+    challengeLabel: "Challenge",
+    roleLabel: "Rol",
+    contribLabel: "Mijn bijdrage",
+    resultLabel: "Resultaat",
+    cases: [
+      {
+        id: "bmwgroup",
+        title: "Uitgelicht: Scaling with Design Tokens",
+        startDate: "2022",
+        endDate: "2025",
+        images: [
+          {
+            src: "/bmwgroup-1.png",
+            alt: "BMW Group Design System - interface van de componentbibliotheek met design tokens en componenten",
+          },
+          {
+            src: "/bmwgroup-2.png",
+            alt: "BMW Group Design System - documentatiepagina met component specificaties",
+          },
+          {
+            src: "/bmwgroup-3.png",
+            alt: "BMW Group Design System - overzichtsdashboard met implementatierichtlijnen",
+          },
+        ],
+
+        client: "BMW Group",
+        summary:
+          "Evolueer het design system met tokens om efficiency te verhogen, consistentie te borgen en meerdere brands te ondersteunen.",
+        role: "Tech Lead UX: UX-roadmap eigenaarschap, toegankelijkheidsstandaarden, schaalbaar design system, coaching en vertegenwoordiging in productvisie.",
+        bullets: [
+          "Token-architectuur (kleur, typografie, spacing, states, theming)",
+          "Figma ↔ Storybook synchronisatie + CI/CD publishing",
+          "Governance en change control over 15+ apps",
+          "Reusable componenten met duidelijke variants & states",
+        ],
+        outcomes: [
+          "Snellere delivery door hergebruik van componenten en tokens",
+          "Langdurige alignment tussen UX, business en development",
+          "Minder inconsistenties over 15+ apps",
+        ],
+      },
       {
         id: "alphabet-v1",
         client: "Alphabet (BMW Group)",
         title: "Alphabet Design System",
         startDate: "2020",
         endDate: "2023",
-        image: "alphabet-1.png",
+        images: [
+          {
+            src: "/alphabet-1.png",
+            alt: "Alphabet Design System - component overzicht en typografische richtlijnen",
+          },
+        ],
         summary:
           "Transitie naar nieuwe corporate stijl. Richting gegeven aan consistentie, typografie, kleur en componentbibliotheek met WCAG-baseline.",
         outcomes: [
@@ -168,7 +189,12 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
         title: "Signify InterAct Platform",
         startDate: "2015",
         endDate: "2017",
-        image: "signify.png",
+        images: [
+          {
+            src: "/signify.png",
+            alt: "Signify InterAct Platform - dashboard en slimme verlichting integraties",
+          },
+        ],
         summary:
           "Vormgegeven aan UX-architectuur en herbruikbare componenten voor het InterAct smart lighting platform. Actieve rol in design taskforce met focus op interaction design en usability testing.",
         outcomes: [
@@ -184,7 +210,12 @@ Blijvende hobby's zijn koken, snowboarden, festivals en filmavonden en daarnaast
         title: "ING Mobile Services Portal",
         startDate: "2013",
         endDate: "2015",
-        image: "ing.png",
+        images: [
+          {
+            src: "/ing.png",
+            alt: "ING Mobile Services Portal - tablet portal interface voorbeelden",
+          },
+        ],
         summary:
           "Tablet-portal voor on-site klantenservice. Focus op duidelijkheid, snelheid en compliance in compacte touch-UI.",
         outcomes: [
@@ -376,40 +407,61 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
       viewingLife: "You're viewing my personal life -",
     },
     workTitle: "Work",
-    featured: {
-      title: "Featured: Scaling with Design Tokens",
-      startDate: "2022",
-      endDate: "2025",
-      clientLabel: "Client",
-      challengeLabel: "Challenge",
-      roleLabel: "Role",
-      contribLabel: "Contributions",
-      resultLabel: "Results",
-      client: "BMW Group",
-      challenge:
-        "Evolve the design system with tokens to boost efficiency, maintain consistency, and support multiple brands.",
-      role: "Tech Lead UX: owned the UX roadmap, introduced accessibility standards, scaled the design system, coached teams, and represented design in product vision.",
-      bullets: [
-        "Token architecture (color, type, spacing, states, theming)",
-        "Figma ↔ Storybook sync + CI/CD publishing",
-        "Governance & change control across 15+ apps",
-        "Reusable components with clear variants & states",
-      ],
-      results: [
-        "Faster delivery via reusable components and tokens",
-        "Long-term alignment between UX, business, and engineering",
-        "Reduced inconsistencies across 15+ apps",
-      ],
-    },
     otherWorkTitle: "More work",
-    otherCases: [
+    clientLabel: "Client",
+    challengeLabel: "Challenge",
+    roleLabel: "Role",
+    contribLabel: "Contributions",
+    resultLabel: "Results",
+    cases: [
+      {
+        id: "bmwgroup",
+        title: "Featured: Scaling with Design Tokens",
+        startDate: "2022",
+        endDate: "2025",
+        images: [
+          {
+            src: "/bmwgroup-1.png",
+            alt: "BMW Group Design System - component library interface showing design tokens and components",
+          },
+          {
+            src: "/bmwgroup-2.png",
+            alt: "BMW Group Design System - documentation page with detailed component specifications",
+          },
+          {
+            src: "/bmwgroup-3.png",
+            alt: "BMW Group Design System - overview dashboard showing implementation guidelines",
+          },
+        ],
+
+        client: "BMW Group",
+        summary:
+          "Evolve the design system with tokens to boost efficiency, maintain consistency, and support multiple brands.",
+        role: "Tech Lead UX: owned the UX roadmap, introduced accessibility standards, scaled the design system, coached teams, and represented design in product vision.",
+        bullets: [
+          "Token architecture (color, type, spacing, states, theming)",
+          "Figma ↔ Storybook sync + CI/CD publishing",
+          "Governance & change control across 15+ apps",
+          "Reusable components with clear variants & states",
+        ],
+        outcomes: [
+          "Faster delivery via reusable components and tokens",
+          "Long-term alignment between UX, business, and engineering",
+          "Reduced inconsistencies across 15+ apps",
+        ],
+      },
       {
         id: "alphabet-v1",
         client: "Alphabet",
         title: "Alphabet Design System",
         startDate: "2020",
         endDate: "2022",
-        image: "alphabet-1.png",
+        images: [
+          {
+            src: "/alphabet-1.png",
+            alt: "Alphabet Design System - component overview and typographic guidelines",
+          },
+        ],
         summary:
           "Transition to the new corporate design. Established consistency in type, color, and components with a WCAG baseline.",
         outcomes: [
@@ -424,7 +476,12 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
         title: "Signify InterAct Platform",
         startDate: "2015",
         endDate: "2017",
-        image: "signify.png",
+        images: [
+          {
+            src: "/signify.png",
+            alt: "Signify InterAct Platform - dashboard and smart lighting integrations",
+          },
+        ],
         summary:
           "Shaped UX architecture and reusable components for the InterAct smart lighting platform. Active role in design taskforce with focus on interaction design and usability testing.",
         outcomes: [
@@ -440,7 +497,9 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
         title: "ING Mobile Services Portal",
         startDate: "2013",
         endDate: "2015",
-        image: "ing.png",
+        images: [
+          { src: "/ing.png", alt: "ING Mobile Services Portal - tablet portal interface examples" },
+        ],
         summary:
           "Tablet portal for on-site client assistance. Focus on clarity, speed, and compliance in a compact touch UI.",
         outcomes: [

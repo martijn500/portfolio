@@ -32,7 +32,7 @@ export default function Community({}: CommunityProps) {
 
       <motion.div
         {...useFadeUp()}
-        className="pt-10 mb-6 flex items-center gap-3 mx-auto max-w-6xl px-5 md:px-8 lg:px-12"
+        className="pt-10 md:pt-14 lg:pt-20 mb-6 flex items-center gap-3 mx-auto max-w-6xl px-5 md:px-8 lg:px-12"
       >
         <FileText className="h-6 w-6" aria-hidden="true" />
         <h3

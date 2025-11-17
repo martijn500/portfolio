@@ -1,17 +1,31 @@
 "use client";
 import Image from "next/image";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Spotlight, BriefcaseBusiness, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/lib/context/language-context";
 import { useFadeUp } from "@/lib/animations";
 import SectionHeading from "@/components/ui/section-heading";
+import Lightbox from "@/components/ui/lightbox";
 
 type WorkProps = Record<string, never>;
 
 export default function Work({}: WorkProps) {
   const { t } = useLanguage();
   const fadeUp = useFadeUp();
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [lightboxImages, setLightboxImages] = useState<{ src: string; alt?: string }[]>([]);
+
+  const openLightbox = (images: { src: string; alt?: string }[], index = 0) => {
+    setLightboxImages(images);
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const featured = (t as any).cases?.[0];
+  const otherCases = (t as any).cases?.slice(1) ?? [];
 
   return (
     <>
@@ -23,13 +37,13 @@ export default function Work({}: WorkProps) {
           className="mb-6 flex items-center gap-3 mx-auto max-w-6xl px-5 md:px-8 lg:px-12"
         >
           <Spotlight className="h-6 w-6" />
-          <h3 className="text-2xl md:text-3xl font-semibold">{t.featured.title}</h3>
+          <h3 className="text-2xl md:text-3xl font-semibold">{featured?.title}</h3>
           <span className="flex text-sm text-accent-foreground">
-            <span>{t.featured.startDate}</span>
+            <span>{featured?.startDate}</span>
             <span className="inline-flex items-center px-1 align-middle" aria-hidden="true">
               <ArrowRight className="w-3 h-3" />
             </span>
-            <span>{t.featured.endDate}</span>
+            <span>{featured?.endDate}</span>
           </span>
         </motion.div>
 
@@ -37,29 +51,29 @@ export default function Work({}: WorkProps) {
           <div className="py-6 grid lg:grid-cols-2 gap-8 mx-auto max-w-6xl">
             <div className="lg:col-span-1 space-y-6">
               <div>
-                <p className="text-sm text-accent-foreground mb-1">{t.featured.clientLabel}</p>
-                <p className="font-medium">{t.featured.client}</p>
+                <p className="text-sm text-accent-foreground mb-1">{t.clientLabel}</p>
+                <p className="font-medium">{featured?.client}</p>
               </div>
               <div>
-                <p className="text-sm text-accent-foreground mb-1">{t.featured.challengeLabel}</p>
-                <p className="prose-measure">{t.featured.challenge}</p>
+                <p className="text-sm text-accent-foreground mb-1">{t.challengeLabel}</p>
+                <p className="prose-measure">{featured?.summary}</p>
               </div>
               <div>
-                <p className="text-sm text-accent-foreground mb-1">{t.featured.roleLabel}</p>
-                <p className="prose-measure">{t.featured.role}</p>
+                <p className="text-sm text-accent-foreground mb-1">{t.roleLabel}</p>
+                <p className="prose-measure">{featured?.role}</p>
               </div>
               <div>
-                <p className="text-sm text-accent-foreground mb-1">{t.featured.contribLabel}</p>
+                <p className="text-sm text-accent-foreground mb-1">{t.contribLabel}</p>
                 <ul className="list-disc pl-5 space-y-1">
-                  {t.featured.bullets.map((b: string, i: number) => (
+                  {featured?.bullets?.map((b: string, i: number) => (
                     <li key={i}>{b}</li>
                   ))}
                 </ul>
               </div>
               <div>
-                <p className="text-sm text-accent-foreground mb-1">{t.featured.resultLabel}</p>
+                <p className="text-sm text-accent-foreground mb-1">{t.resultLabel}</p>
                 <ul className="list-disc pl-5 space-y-1">
-                  {t.featured.results.map((r: string, i: number) => (
+                  {featured?.outcomes?.map((r: string, i: number) => (
                     <li key={i}>{r}</li>
                   ))}
                 </ul>
@@ -67,32 +81,59 @@ export default function Work({}: WorkProps) {
             </div>
 
             <figure className="lg:col-span-1 grid grid-cols-2 gap-3 self-start">
-              <div className="aspect-4/3 rounded-xl bg-white/70 border overflow-hidden">
-                <Image
-                  src="/bmwgroup-1.png"
-                  alt="BMW Group Design System - Component Library interface showing design tokens and components"
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
+              <div>
+                <button
+                  onClick={() =>
+                    openLightbox((featured?.images ?? []) as { src: string; alt?: string }[], 0)
+                  }
+                  className="p-0 m-0 bg-transparent border-0 text-left w-full"
+                >
+                  <div className="aspect-4/3 rounded-xl bg-white/70 border overflow-hidden">
+                    <Image
+                      src={featured?.images?.[0]?.src ?? ""}
+                      alt={featured?.images?.[0]?.alt ?? ""}
+                      width={400}
+                      height={300}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </button>
               </div>
-              <div className="aspect-4/3 rounded-xl bg-white/70 border overflow-hidden">
-                <Image
-                  src="/bmwgroup-2.png"
-                  alt="BMW Group Design System - Documentation page with detailed component specifications"
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
+              <div>
+                <button
+                  onClick={() =>
+                    openLightbox((featured?.images ?? []) as { src: string; alt?: string }[], 1)
+                  }
+                  className="p-0 m-0 bg-transparent border-0 text-left w-full"
+                >
+                  <div className="aspect-4/3 rounded-xl bg-white/70 border overflow-hidden">
+                    <Image
+                      src={featured?.images?.[1]?.src ?? ""}
+                      alt={featured?.images?.[1]?.alt ?? ""}
+                      width={400}
+                      height={300}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </button>
               </div>
-              <div className="col-span-2 aspect-video rounded-xl bg-white/70 border overflow-hidden">
-                <Image
-                  src="/bmwgroup-3.png"
-                  alt="BMW Group Design System - Complete overview dashboard showing implementation guidelines"
-                  width={800}
-                  height={450}
-                  className="w-full h-full object-cover"
-                />
+              <div className="col-span-2">
+                <button
+                  onClick={() =>
+                    openLightbox((featured?.images ?? []) as { src: string; alt?: string }[], 2)
+                  }
+                  className="p-0 m-0 bg-transparent border-0 text-left w-full"
+                >
+                  <div className="col-span-2 aspect-video rounded-xl bg-white/70 border overflow-hidden">
+                    <Image
+                      src={featured?.images?.[2]?.src ?? ""}
+                      alt={featured?.images?.[2]?.alt ?? ""}
+                      width={800}
+                      height={450}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </button>
               </div>
               <figcaption className="col-span-2 text-xs text-accent-foreground">
                 BMW Group Design System screenshots showcasing component library and implementation.
@@ -112,7 +153,7 @@ export default function Work({}: WorkProps) {
           <h3 className="text-2xl md:text-3xl font-semibold">{t.otherWorkTitle}</h3>
         </motion.div>
         <div className="grid md:grid-cols-2 gap-6 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
-          {t.otherCases.map(
+          {otherCases.map(
             (cs: {
               id: string;
               title: string;
@@ -120,7 +161,7 @@ export default function Work({}: WorkProps) {
               endDate: string;
               client: string;
               summary: string;
-              image: string;
+              images: { src: string; alt?: string }[];
               outcomes: readonly string[];
             }) => (
               <Card key={cs.id} className="overflow-hidden">
@@ -141,13 +182,18 @@ export default function Work({}: WorkProps) {
                 </CardHeader>
                 {/* Image Full Width */}
                 <div className="aspect-video bg-muted overflow-hidden">
-                  <Image
-                    src={`/${cs.image}`}
-                    alt={`${cs.title} project screenshot - ${cs.client}`}
-                    width={600}
-                    height={338}
-                    className="w-full h-full object-cover"
-                  />
+                  <button
+                    onClick={() => openLightbox(cs.images as { src: string; alt?: string }[], 0)}
+                    className="p-0 m-0 bg-transparent border-0 text-left w-full h-full"
+                  >
+                    <Image
+                      src={cs.images?.[0]?.src ?? ""}
+                      alt={cs.images?.[0]?.alt ?? `${cs.title} project screenshot - ${cs.client}`}
+                      width={600}
+                      height={338}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
                 </div>
                 <CardContent className="p-6">
                   <p className="text-sm text-accent-foreground mb-1">{cs.client}</p>
@@ -163,6 +209,13 @@ export default function Work({}: WorkProps) {
           )}
         </div>
       </section>
+      {lightboxOpen && (
+        <Lightbox
+          images={lightboxImages}
+          initialIndex={lightboxIndex}
+          onClose={() => setLightboxOpen(false)}
+        />
+      )}
     </>
   );
 }
