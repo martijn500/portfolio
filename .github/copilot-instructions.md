@@ -10,6 +10,13 @@ Guidelines for Copilot suggestions that match this Next.js portfolio project.
 - Prefer pure, single-purpose functions and extract shared logic into helpers or custom hooks.
 - Reuse existing UI building blocks from `@/components/ui/*` and `@/components/layout/*` before adding new primitives.
 - Respect accessibility: semantic HTML, ARIA where needed, focus visibility, and reduced-motion support.
+
+- Defaults: create accessible-by-default components. For any interactive UI (modals, lightboxes, dialogs, tooltips):
+  - provide clear ARIA attributes (aria-modal, aria-labelledby, aria-describedby) and visible focus styles
+  - manage focus: trap focus inside the component while open and restore focus on close
+  - support keyboard controls (Escape to close, Arrow keys for navigation where applicable)
+  - add touch support where relevant (e.g., swipe gestures for image carousels / lightboxes)
+  - prefer Next/Image for large media and ensure alt text and accessible descriptions are present
 - Follow the established formatting (Prettier defaults: 2 spaces, double quotes in TSX/TS).
 - Use `npm` for scripts and dependency updates (`npm run dev`, `npm run build`, `npm run lint`).
 
