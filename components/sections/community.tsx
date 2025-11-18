@@ -21,7 +21,7 @@ export default function Community({}: CommunityProps) {
           {t.community.map((x: string, i: number) => (
             <li key={i} className="flex items-start gap-3">
               <span
-                className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-primary"
+                className="self-start mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0"
                 aria-hidden="true"
               />
               {x}
@@ -49,7 +49,7 @@ export default function Community({}: CommunityProps) {
               href={w.link}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${w.title} (opens in new tab)`}
+              aria-label={`${w.title} (${t.openInNewTab})`}
               className="group block py-6 lg:rounded-full hover:bg-muted/60 transition-colors -mx-5 md:-mx-8 lg:-mx-12 px-5 md:px-8 lg:px-12"
             >
               <div className="flex flex-col gap-3">

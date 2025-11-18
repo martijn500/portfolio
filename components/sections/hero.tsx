@@ -189,26 +189,41 @@ export default function Hero({}: HeroProps) {
                           </div>
                         </div>
                         <div className="flex flex-wrap gap-3">
-                          {t.hero.workLinks.map((link: { title: string; url: string }) => (
-                            <Button
-                              key={link.title}
-                              asChild
-                              variant={link.url.startsWith("#") ? "default" : "outline"}
-                            >
-                              <a
-                                href={link.url}
-                                target={link.url.startsWith("#") ? "_self" : "_blank"}
-                                rel={link.url.startsWith("#") ? undefined : "noopener noreferrer"}
-                                aria-label={
-                                  link.url.startsWith("#")
-                                    ? link.title
-                                    : `${link.title} (opens in new tab)`
-                                }
+                          {t.hero.workLinks.map((link: { title: string; url: string }) => {
+                            const isExternal = !link.url.startsWith("#");
+                            const isLinkedIn = link.url.includes("linkedin.com");
+                            const isGitHub = link.url.includes("github.com");
+
+                            return (
+                              <Button
+                                key={link.title}
+                                asChild
+                                variant={isExternal ? "outline" : "default"}
                               >
-                                {link.title}
-                              </a>
-                            </Button>
-                          ))}
+                                <a
+                                  href={link.url}
+                                  target={isExternal ? "_blank" : "_self"}
+                                  rel={isExternal ? "noopener noreferrer" : undefined}
+                                  aria-label={
+                                    isExternal ? `${link.title} (${t.openInNewTab})` : link.title
+                                  }
+                                >
+                                  {link.title}
+                                </a>
+                              </Button>
+                            );
+                          })}
+                          {/* Extra icon-only GitHub button */}
+                          <Button asChild variant="outline">
+                            <a
+                              href="https://github.com/martijn500"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`GitHub (${t.openInNewTab})`}
+                            >
+                              GitHub
+                            </a>
+                          </Button>
                         </div>
                       </motion.div>
                     </div>
@@ -303,7 +318,7 @@ export default function Hero({}: HeroProps) {
                                 aria-label={
                                   link.url.startsWith("#")
                                     ? link.title
-                                    : `${link.title} (opens in new tab)`
+                                    : `${link.title} (${t.openInNewTab})`
                                 }
                               >
                                 {link.title}

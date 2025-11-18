@@ -13,7 +13,7 @@ export default function Footer() {
           className="hover:underline focus:outline-none focus:ring-2 focus:ring-ring rounded transition-colors"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`${t.hero.ctaPortfolio} (opens in new tab)`}
+          aria-label={`${t.hero.ctaPortfolio} (${t.openInNewTab})`}
         >
           {t.hero.ctaPortfolio}
         </a>
@@ -22,16 +22,25 @@ export default function Footer() {
           className="hover:underline focus:outline-none focus:ring-2 focus:ring-ring rounded transition-colors"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`${t.hero.ctaLinkedin} (opens in new tab)`}
+          aria-label={`${t.hero.ctaLinkedin} (${t.openInNewTab})`}
         >
           {t.hero.ctaLinkedin}
+        </a>
+        <a
+          href="https://github.com/martijn500"
+          className="hover:underline focus:outline-none focus:ring-2 focus:ring-ring rounded transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`GitHub (${t.openInNewTab})`}
+        >
+          GitHub
         </a>
         <a
           href="https://www.divotion.com/"
           className="hover:underline focus:outline-none focus:ring-2 focus:ring-ring rounded transition-colors"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`${t.hero.ctaDivotion} (opens in new tab)`}
+          aria-label={`${t.hero.ctaDivotion} (${t.openInNewTab})`}
         >
           {t.hero.ctaDivotion}
         </a>
