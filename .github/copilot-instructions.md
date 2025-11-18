@@ -52,7 +52,10 @@ Guidelines for Copilot suggestions that match this Next.js portfolio project.
 
 - Run `npm run lint` before submitting changes; ensure ESLint passes without disabling rules unless explicitly justified.
 - Prefer localized strings via `lib/i18n.ts`; avoid hard-coded copy in components.
+- When adding user-facing strings, add corresponding keys in `lib/i18n.ts` for all supported locales (at minimum `en` and `nl`) and keep translations in sync.
+- When strings are meant to be reused across components (for example short UI hints like `openInNewTab`), prefer adding them as top-level keys in `lib/i18n.ts` rather than nesting them under a specific feature namespace. This keeps shared UI copy consistent and easy to update.
 - Remove unused scaffolding or variables; keep comments focused on clarifying non-obvious logic.
+- When refactoring, avoid leaving unused variables or imports behind. Run the linter and TypeScript checks (for example `npm run lint -- --fix` and `npx tsc --noEmit`) and remove any leftover symbols before committing.
 
 ## Import & refactor checklist
 
