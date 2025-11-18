@@ -217,7 +217,10 @@ export default function Header({
             <div className="flex flex-col gap-6 overflow-y-auto px-4 pb-4">
               {/* Navigation section - mobile only */}
               <div className="md:hidden">
-                <h3 className="text-sm font-medium text-foreground/70 mb-3" id="navigation-section">
+                <h3
+                  className="text-sm font-medium text-foreground/70 mb-3 font-sans"
+                  id="navigation-section"
+                >
                   {headerCopy.navigation.label}
                 </h3>
                 <nav
@@ -252,7 +255,10 @@ export default function Header({
 
               {/* Language section - as navigation links */}
               <div>
-                <h3 className="text-sm font-medium text-foreground/70 mb-3" id="language-section">
+                <h3
+                  className="text-sm font-medium text-foreground/70 mb-3 font-sans"
+                  id="language-section"
+                >
                   {headerCopy.languageToggle.label}
                 </h3>
                 <nav
@@ -292,7 +298,10 @@ export default function Header({
 
               {/* Theme section - as radiogroup */}
               <div>
-                <h3 className="text-sm font-medium text-foreground/70 mb-3" id="theme-section">
+                <h3
+                  className="text-sm font-medium text-foreground/70 mb-3 font-sans"
+                  id="theme-section"
+                >
                   {themeGroupLabel}
                 </h3>
                 <div

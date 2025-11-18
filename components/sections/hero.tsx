@@ -146,7 +146,7 @@ export default function Hero({}: HeroProps) {
       <div ref={containerRef} className="lg:h-[200vh] w-full relative">
         <div
           ref={stickyRef}
-          className="lg:sticky lg:top-16 lg:h-[calc(100vh-7rem)] w-full bg-background lg:rounded-2xl lg:overflow-hidden scroll-mt-20 lg:shadow-[inset_0_0_40px_rgba(0,0,0,0.08)]"
+          className="lg:sticky lg:top-16 lg:h-[calc(100vh-7rem)] w-full bg-background lg:rounded-2xl lg:overflow-hidden scroll-mt-20"
         >
           <div className="w-full max-w-6xl mx-auto h-full">
             <motion.div

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Spotlight, BriefcaseBusiness, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -181,10 +181,10 @@ export default function Work({}: WorkProps) {
                   </CardTitle>
                 </CardHeader>
                 {/* Image Full Width */}
-                <div className="aspect-video bg-muted overflow-hidden">
+                <div className="relative aspect-video bg-white/70 border overflow-hidden">
                   <button
                     onClick={() => openLightbox(cs.images as { src: string; alt?: string }[], 0)}
-                    className="p-0 m-0 bg-transparent border-0 text-left w-full h-full"
+                    className="peer p-0 m-0 bg-transparent border-0 text-left w-full h-full focus:outline-none"
                   >
                     <Image
                       src={cs.images?.[0]?.src ?? ""}
@@ -194,6 +194,11 @@ export default function Work({}: WorkProps) {
                       className="w-full h-full object-cover"
                     />
                   </button>
+
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-150 peer-focus-visible:opacity-100 shadow-[inset_0_0_0_3px_var(--ring)]"
+                  />
                 </div>
                 <CardContent className="p-6">
                   <p className="text-sm text-accent-foreground mb-1">{cs.client}</p>
