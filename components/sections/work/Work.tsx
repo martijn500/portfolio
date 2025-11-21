@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, createRef, useMemo, useEffect } from "react";
+import React, { useState, useRef, createRef, useMemo, useLayoutEffect } from "react";
 import { useLanguage } from "@/lib/context/language-context";
 import SectionHeading from "@/components/ui/section-heading";
 import Lightbox, { ImageItem } from "@/components/ui/lightbox";
@@ -16,6 +16,7 @@ const Work: React.FC<WorkProps> = () => {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [lightboxImages, setLightboxImages] = useState<ImageItem[]>([]);
   const [lightboxRects, setLightboxRects] = useState<(DOMRect | null)[]>([]);
+  const [lightboxThumbIndex, setLightboxThumbIndex] = useState(0);
   const ref0 = useRef<HTMLDivElement | null>(null);
   const ref1 = useRef<HTMLDivElement | null>(null);
   const ref2 = useRef<HTMLDivElement | null>(null);
@@ -25,29 +26,32 @@ const Work: React.FC<WorkProps> = () => {
     [otherCases.length]
   );
 
-  const openLightbox = (images: ImageItem[], index = 0) => {
+  const openLightbox = (images: ImageItem[], index = 0, thumbIndex = 0) => {
     setLightboxImages(images);
     setLightboxIndex(index);
+    setLightboxThumbIndex(thumbIndex);
     setLightboxOpen(true);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (lightboxOpen) {
       if (lightboxImages.length === featuredImgRefs.length) {
         const rects = featuredImgRefs.map((r) =>
           r.current instanceof HTMLElement ? r.current.getBoundingClientRect() : null
         );
-        setLightboxRects(rects);
+        requestAnimationFrame(() => setLightboxRects(rects));
       } else if (otherImgRefs.length > 0) {
-        const rects = otherImgRefs.map((r) =>
-          r.current instanceof HTMLElement ? r.current.getBoundingClientRect() : null
-        );
-        setLightboxRects(rects);
+        const rect =
+          otherImgRefs[lightboxThumbIndex] &&
+          otherImgRefs[lightboxThumbIndex].current instanceof HTMLElement
+            ? otherImgRefs[lightboxThumbIndex].current.getBoundingClientRect()
+            : null;
+        requestAnimationFrame(() => setLightboxRects([rect]));
       } else {
-        setLightboxRects([]);
+        requestAnimationFrame(() => setLightboxRects([]));
       }
     }
-  }, [lightboxOpen, lightboxImages.length, featuredImgRefs, otherImgRefs]);
+  }, [lightboxOpen, lightboxImages.length, featuredImgRefs, otherImgRefs, lightboxThumbIndex]);
 
   return (
     <>

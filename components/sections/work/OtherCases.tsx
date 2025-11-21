@@ -9,7 +9,7 @@ import { useLanguage } from "@/lib/context/language-context";
 export type OtherCasesProps = {
   otherCases: any[];
   otherImgRefs: React.RefObject<HTMLDivElement | null>[];
-  openLightbox: (images: ImageItem[], index: number) => void;
+  openLightbox: (images: ImageItem[], index: number, thumbIndex?: number) => void;
 };
 
 const OtherCases: React.FC<OtherCasesProps> = ({ otherCases, otherImgRefs, openLightbox }) => {
@@ -40,7 +40,7 @@ const OtherCases: React.FC<OtherCasesProps> = ({ otherCases, otherImgRefs, openL
               </CardHeader>
               <div className="relative aspect-video bg-white/70 overflow-hidden">
                 <button
-                  onClick={() => openLightbox(cs.images, 0)}
+                  onClick={() => openLightbox(cs.images, 0, idx)}
                   className="peer p-0 m-0 bg-transparent border-0 text-left w-full h-full focus:outline-none"
                 >
                   <div ref={otherImgRef} className="relative w-full h-full">

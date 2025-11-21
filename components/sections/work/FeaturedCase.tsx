@@ -8,7 +8,7 @@ import { useLanguage } from "@/lib/context/language-context";
 export type FeaturedCaseProps = {
   featured: any;
   featuredImgRefs: React.RefObject<HTMLDivElement | null>[];
-  openLightbox: (images: ImageItem[], index: number) => void;
+  openLightbox: (images: ImageItem[], index: number, thumbIndex?: number) => void;
 };
 
 const FeaturedCase: React.FC<FeaturedCaseProps> = ({ featured, featuredImgRefs, openLightbox }) => {
@@ -63,7 +63,7 @@ const FeaturedCase: React.FC<FeaturedCaseProps> = ({ featured, featuredImgRefs, 
             {[0, 1, 2].map((idx) => (
               <div key={idx} className={idx === 2 ? "col-span-2" : undefined}>
                 <button
-                  onClick={() => openLightbox(featured?.images ?? [], idx)}
+                  onClick={() => openLightbox(featured?.images ?? [], idx, idx)}
                   className="p-0 m-0 bg-transparent border-0 text-left w-full"
                 >
                   <div
