@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-all will-change-transform disabled:pointer-events-none disabled:opacity-50 overflow-hidden backdrop-blur-sm backdrop-saturate-150 bg-gradient-to-b from-white/6 to-white/2 border border-white/8 shadow-sm hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0.5 motion-reduce:transform-none antialiased [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-all will-change-transform disabled:pointer-events-none disabled:opacity-50 overflow-hidden backdrop-blur-sm backdrop-saturate-150 bg-gradient-to-b from-white/6 to-white/2 border border-white/8 shadow-sm hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0.5 motion-reduce:transform-none antialiased [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {

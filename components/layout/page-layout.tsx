@@ -2,7 +2,7 @@
 import React from "react";
 import type { LangKey } from "@/lib/i18n";
 import Hero from "@/components/sections/hero";
-import Work from "@/components/sections/work/Work";
+import Work from "@/components/sections/work/work";
 import DesignPhilosophy from "@/components/sections/design-philosophy";
 import Community from "@/components/sections/community";
 import Principles from "@/components/sections/principles";

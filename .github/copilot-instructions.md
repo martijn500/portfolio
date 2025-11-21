@@ -68,3 +68,22 @@ Guidelines for Copilot suggestions that match this Next.js portfolio project.
 
 - Use conventional-commit style messages consistent with the repo (e.g., `fix(component): clarify aria labels`).
 - Update or add documentation inline or in feature-specific notes as needed; no dedicated `docs/` folder is required unless one already exists.
+
+### Commit message style (recommended)
+
+- **Header format:** `type(scope): short description`
+  - `type` examples: `feat`, `fix`, `chore`, `docs`, `refactor`, `style`, `test`, `perf`.
+  - `scope` is optional but recommended for clarity (e.g., `layout`, `work`, `i18n`).
+  - Keep the header <= 72 characters.
+
+- **Body (optional):** Use a blank line after the header and write a more detailed description. Wrap lines at ~72 characters.
+
+- **Footer (optional):** Reference issues, breaking changes, or migration notes.
+
+Examples:
+
+- `fix(header): prevent layout shift when user prefers reduced motion`
+- `docs(i18n): add nl translations for work section`
+- `chore: rename work case components to kebab-case and tidy imports`
+
+Using this style keeps the repo history clean and helps automation (release notes, changelogs).

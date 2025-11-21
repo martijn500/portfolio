@@ -3,8 +3,8 @@ import React, { useState, useRef, createRef, useMemo, useLayoutEffect } from "re
 import { useLanguage } from "@/lib/context/language-context";
 import SectionHeading from "@/components/ui/section-heading";
 import Lightbox, { ImageItem } from "@/components/ui/lightbox";
-import FeaturedCase from "@/components/sections/work/FeaturedCase";
-import OtherCases from "@/components/sections/work/OtherCases";
+import FeaturedCase from "@/components/sections/work/featured-case";
+import OtherCases from "@/components/sections/work/other-cases";
 
 type WorkProps = Record<string, never>;
 

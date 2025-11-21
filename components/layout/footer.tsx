@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="flex items-center gap-4">
         <a
           href="https://www.figma.com/deck/ltOQAl9YHQeNbxipQIt2jD/portfolio"
-          className="hover:underline focus:outline-none focus:ring-2 focus:ring-ring rounded transition-colors"
+          className="hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded transition-colors"
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${t.hero.ctaPortfolio} (${t.openInNewTab})`}
@@ -19,7 +19,7 @@ export default function Footer() {
         </a>
         <a
           href="https://www.linkedin.com/in/martijnvanderwijst/"
-          className="hover:underline focus:outline-none focus:ring-2 focus:ring-ring rounded transition-colors"
+          className="hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded transition-colors"
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${t.hero.ctaLinkedin} (${t.openInNewTab})`}
@@ -28,7 +28,7 @@ export default function Footer() {
         </a>
         <a
           href="https://github.com/martijn500"
-          className="hover:underline focus:outline-none focus:ring-2 focus:ring-ring rounded transition-colors"
+          className="hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded transition-colors"
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`GitHub (${t.openInNewTab})`}
@@ -37,7 +37,7 @@ export default function Footer() {
         </a>
         <a
           href="https://www.divotion.com/"
-          className="hover:underline focus:outline-none focus:ring-2 focus:ring-ring rounded transition-colors"
+          className="hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded transition-colors"
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${t.hero.ctaDivotion} (${t.openInNewTab})`}
