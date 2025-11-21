@@ -172,7 +172,7 @@ export default function Hero({}: HeroProps) {
                     <div className="grid gap-8 flex-1 py-8 md:py-12">
                       <motion.div {...fadeUp} className="flex flex-col justify-center h-full">
                         {/* Titel */}
-                        <motion.div {...fadeUp} className="mb-4">
+                        <motion.div {...fadeUp} className="mb-5">
                           <h2
                             id="work-heading"
                             className="text-2xl md:text-4xl font-semibold leading-none max-w-fit [font-family:var(--font-merriweather)]"
@@ -288,7 +288,7 @@ export default function Hero({}: HeroProps) {
                     <div className="grid gap-8 flex-1 py-8 md:py-12">
                       <motion.div {...fadeUp} className="flex flex-col justify-center h-full">
                         {/* Titel */}
-                        <motion.div {...fadeUp} className="mb-4">
+                        <motion.div {...fadeUp} className="mb-5">
                           <h2
                             id="life-heading"
                             className="text-2xl md:text-4xl font-semibold leading-none max-w-fit [font-family:var(--font-merriweather)]"

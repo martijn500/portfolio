@@ -1,14 +1,14 @@
 "use client";
 import React, { useState, useRef, createRef, useMemo, useEffect } from "react";
-import FeaturedCase from "@/components/sections/work/FeaturedCase";
-import OtherCases from "@/components/sections/work/OtherCases";
 import { useLanguage } from "@/lib/context/language-context";
 import SectionHeading from "@/components/ui/section-heading";
 import Lightbox, { ImageItem } from "@/components/ui/lightbox";
+import FeaturedCase from "@/components/sections/work/FeaturedCase";
+import OtherCases from "@/components/sections/work/OtherCases";
 
 type WorkProps = Record<string, never>;
 
-export default function Work({}: WorkProps) {
+const Work: React.FC<WorkProps> = () => {
   const { t } = useLanguage();
   const featured = (t as any).cases?.[0];
   const otherCases = (t as any).cases?.slice(1) ?? [];
@@ -68,4 +68,6 @@ export default function Work({}: WorkProps) {
       )}
     </>
   );
-}
+};
+
+export default Work;

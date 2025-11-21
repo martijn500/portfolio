@@ -1,8 +1,6 @@
 import { i18n } from "@/lib/i18n";
 import { contentType, createImageResponse, size } from "@/lib/opengraph-renderer";
 
-export const runtime = "edge";
-
 const t = i18n.en;
 
 export { contentType, size };

@@ -12,7 +12,7 @@ export default function DesignPhilosophy({}: DesignPhilosophyProps) {
       <SectionHeading id="philosophy-heading">{t.hero.philosophyTitle}</SectionHeading>
 
       <div className="mx-auto max-w-6xl px-5 md:px-8 lg:px-12 py-6 leading-relaxed">
-        <p className="text-2xl md:text-3xl font-semibold">{t.hero.philosophyText}</p>
+        <p className="text-2xl md:text-3xl">{t.hero.philosophyText}</p>
       </div>
     </>
   );

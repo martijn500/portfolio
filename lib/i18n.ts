@@ -121,7 +121,7 @@ zodat oplossingen goed werken voor zowel gebruikers als developmentteams.",
     clientLabel: "Klant",
     challengeLabel: "Challenge",
     roleLabel: "Rol",
-    contribLabel: "Mijn bijdrage",
+    contributionsLabel: "Mijn bijdrage",
     resultLabel: "Resultaat",
     cases: [
       {
@@ -132,32 +132,33 @@ zodat oplossingen goed werken voor zowel gebruikers als developmentteams.",
         images: [
           {
             src: "/bmwgroup-1.png",
-            alt: "BMW Group Design System - interface van de componentbibliotheek met design tokens en componenten",
+            alt: "BMW Group Design System - Storybook documentatie van de componentbibliotheek met design tokens en componenten",
           },
           {
             src: "/bmwgroup-2.png",
-            alt: "BMW Group Design System - documentatiepagina met component specificaties",
+            alt: "BMW Group Design System - Figma prototype gebruikmakend van Design System",
           },
           {
             src: "/bmwgroup-3.png",
-            alt: "BMW Group Design System - overzichtsdashboard met implementatierichtlijnen",
+            alt: "BMW Group Design System - Token architectuur overzicht met kleur, typografie en spacing tokens",
           },
         ],
-
+        imageCaption:
+          "BMW Group Design System screenshots die de componentbibliotheek en implementatie tonen.",
         client: "BMW Group",
         summary:
-          "Evolueer het design system met tokens om efficiency te verhogen, consistentie te borgen en meerdere brands te ondersteunen.",
+          "Evolueer het design system met tokens om efficiëntie te verhogen, consistentie te borgen en meerdere brands te ondersteunen.",
         role: "Tech Lead UX: UX-roadmap eigenaarschap, toegankelijkheidsstandaarden, schaalbaar design system, coaching en vertegenwoordiging in productvisie.",
         bullets: [
-          "Token-architectuur (kleur, typografie, spacing, states, theming)",
+          "Token-architectuur (kleur, typografie, afstanden, groottes, thema's)",
           "Figma ↔ Storybook synchronisatie + CI/CD publishing",
           "Governance en change control over 15+ apps",
-          "Reusable componenten met duidelijke variants & states",
+          "Herbruikbare componenten met duidelijke varianten & statussen",
         ],
         outcomes: [
-          "Snellere delivery door hergebruik van componenten en tokens",
-          "Langdurige alignment tussen UX, business en development",
-          "Minder inconsistenties over 15+ apps",
+          "Snellere levering door hergebruik van componenten en tokens",
+          "Langdurige samenwerking tussen UX, business en development",
+          "Minder inconsistenties bij 15+ applicaties",
         ],
       },
       {
@@ -177,7 +178,7 @@ zodat oplossingen goed werken voor zowel gebruikers als developmentteams.",
         outcomes: [
           "Adoptie ontwerpprincipes over 15+ applicaties",
           "Baseline WCAG 2.1 AA",
-          "Snellere feature delivery door herbruikbare patterns",
+          "Snellere uitrol van nieuwe functies door herbruikbare patronen",
         ],
       },
       {
@@ -294,7 +295,7 @@ zodat oplossingen goed werken voor zowel gebruikers als developmentteams.",
       name: "Martijn van der Wijst",
       role: "Hi, I'm Martijn van der Wijst. Tech Lead UX, Frontend Architect spending a lot of time with Design Systems.",
       summary:
-        "I’m a UX specialist with a background in frontend development. \
+        "I'm a UX specialist with a background in frontend development. \
 I bridge the gap between design and technology, creating digital products that are inclusive, intuitive, and scalable. \
 My work combines research-driven decisions with a clear sense for simplicity and consistency, \
 making sure solutions work for users and development teams alike.",
@@ -405,7 +406,7 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
     clientLabel: "Client",
     challengeLabel: "Challenge",
     roleLabel: "Role",
-    contribLabel: "Contributions",
+    contributionsLabel: "Contributions",
     resultLabel: "Results",
     cases: [
       {
@@ -416,31 +417,32 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
         images: [
           {
             src: "/bmwgroup-1.png",
-            alt: "BMW Group Design System - component library interface showing design tokens and components",
+            alt: "BMW Group Design System - Storybook documentation of the component library with design tokens and components",
           },
           {
             src: "/bmwgroup-2.png",
-            alt: "BMW Group Design System - documentation page with detailed component specifications",
+            alt: "BMW Group Design System - Figma prototype utilizing Design System components",
           },
           {
             src: "/bmwgroup-3.png",
-            alt: "BMW Group Design System - overview dashboard showing implementation guidelines",
+            alt: "BMW Group Design System - Token architecture overview with color, typography and spacing tokens",
           },
         ],
-
+        imageCaption:
+          "BMW Group Design System screenshots showcasing component library and implementation.",
         client: "BMW Group",
         summary:
           "Evolve the design system with tokens to boost efficiency, maintain consistency, and support multiple brands.",
         role: "Tech Lead UX: owned the UX roadmap, introduced accessibility standards, scaled the design system, coached teams, and represented design in product vision.",
         bullets: [
-          "Token architecture (color, type, spacing, states, theming)",
+          "Token architecture (color, type, spacing, sizes, theming)",
           "Figma ↔ Storybook sync + CI/CD publishing",
           "Governance & change control across 15+ apps",
           "Reusable components with clear variants & states",
         ],
         outcomes: [
           "Faster delivery via reusable components and tokens",
-          "Long-term alignment between UX, business, and engineering",
+          "Long-term alignment between UX, business, and development",
           "Reduced inconsistencies across 15+ apps",
         ],
       },
