@@ -7,12 +7,17 @@ import type { ImageItem } from "@/components/ui/lightbox";
 import { useLanguage } from "@/lib/context/language-context";
 
 export type OtherCasesProps = {
-  otherCases: any[];
-  otherImgRefs: React.RefObject<HTMLDivElement | null>[];
-  openLightbox: (images: ImageItem[], index: number, thumbIndex?: number) => void;
+  cases: any[];
+  imgRefs: React.RefObject<HTMLDivElement | null>[];
+  openLightbox: (
+    images: ImageItem[],
+    index: number,
+    thumbIndex: number,
+    imgRefs: React.RefObject<HTMLDivElement | null>[]
+  ) => void;
 };
 
-const OtherCases: React.FC<OtherCasesProps> = ({ otherCases, otherImgRefs, openLightbox }) => {
+const OtherCases: React.FC<OtherCasesProps> = ({ cases: otherCases, imgRefs, openLightbox }) => {
   const { t } = useLanguage();
 
   return (
@@ -23,7 +28,7 @@ const OtherCases: React.FC<OtherCasesProps> = ({ otherCases, otherImgRefs, openL
       </motion.div>
       <div className="grid md:grid-cols-2 gap-6 mx-auto max-w-6xl px-5 md:px-8 lg:px-12">
         {otherCases.map((cs, idx) => {
-          const otherImgRef = otherImgRefs[idx];
+          const imgRef = imgRefs[idx];
           return (
             <Card key={cs.id} className="overflow-hidden">
               <CardHeader className="border-b">
@@ -40,10 +45,12 @@ const OtherCases: React.FC<OtherCasesProps> = ({ otherCases, otherImgRefs, openL
               </CardHeader>
               <div className="relative aspect-video bg-white/70 overflow-hidden">
                 <button
-                  onClick={() => openLightbox(cs.images, 0, idx)}
+                  onClick={() =>
+                    openLightbox(cs.images, 0, idx, Array(cs.images?.length ?? 1).fill(imgRef))
+                  }
                   className="peer p-0 m-0 bg-transparent border-0 text-left w-full h-full focus:outline-none"
                 >
-                  <div ref={otherImgRef} className="relative w-full h-full">
+                  <div ref={imgRef} className="relative w-full h-full">
                     <Image
                       src={cs.images?.[0]?.src}
                       alt={cs.images?.[0]?.alt}

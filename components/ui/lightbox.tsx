@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -23,30 +23,27 @@ export default function Lightbox(props: LightboxProps) {
   const fadeExit = { opacity: 0, transition: { duration: 0.25, ease: easeInOut } };
   const [isClosing, setIsClosing] = useState(false);
 
-  // Helper om te sluiten met animatie
-  const handleClose = () => {
+  const { images, initialIndex = 0, onClose, thumbnailRects } = props;
+
+  // Helper om te sluiten met animatie (stable reference)
+  const handleClose = useCallback(() => {
     setIsClosing(true);
     setTimeout(() => {
       setIsClosing(false);
       onClose();
     }, 250); // match animatie duur
-  };
-  const { images, initialIndex = 0, onClose, thumbnailRects } = props;
+  }, [onClose]);
   const [index, setIndex] = useState(initialIndex);
   const touchStartX = useRef<number | null>(null);
-  const prevFocused = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!images || images.length === 0) return;
-    prevFocused.current = document.activeElement as HTMLElement | null;
     // prevent body scroll while open
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     return () => {
       document.body.style.overflow = prevOverflow;
-      // restore focus
-      prevFocused.current?.focus();
     };
   }, [images]);
 
@@ -57,6 +54,7 @@ export default function Lightbox(props: LightboxProps) {
     if (!images || images.length === 0) return;
 
     function onKey(e: KeyboardEvent) {
+      // navigate with arrow keys
       if (e.key === "ArrowLeft") {
         e.preventDefault();
         setIndex((i) => (i - 1 + images.length) % images.length);
@@ -135,7 +133,15 @@ export default function Lightbox(props: LightboxProps) {
   }
 
   return (
-    <Dialog.Root open>
+    <Dialog.Root
+      open
+      // Let Radix handle keyboard close (Escape). Radix will call onOpenChange(false)
+      // — we intercept and run our closing animation (handleClose) before calling
+      // the parent's onClose handler.
+      onOpenChange={(isOpen) => {
+        if (!isOpen) handleClose();
+      }}
+    >
       <Dialog.Portal>
         <Dialog.Overlay forceMount asChild>
           <motion.div

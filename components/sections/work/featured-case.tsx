@@ -6,12 +6,17 @@ import type { ImageItem } from "@/components/ui/lightbox";
 import { useLanguage } from "@/lib/context/language-context";
 
 export type FeaturedCaseProps = {
-  featured: any;
-  featuredImgRefs: React.RefObject<HTMLDivElement | null>[];
-  openLightbox: (images: ImageItem[], index: number, thumbIndex?: number) => void;
+  case: any;
+  imgRefs: React.RefObject<HTMLDivElement | null>[];
+  openLightbox: (
+    images: ImageItem[],
+    index: number,
+    thumbIndex: number,
+    imgRefs: React.RefObject<HTMLDivElement | null>[]
+  ) => void;
 };
 
-const FeaturedCase: React.FC<FeaturedCaseProps> = ({ featured, featuredImgRefs, openLightbox }) => {
+const FeaturedCase: React.FC<FeaturedCaseProps> = ({ case: featured, imgRefs, openLightbox }) => {
   const { t } = useLanguage();
 
   return (
@@ -63,11 +68,11 @@ const FeaturedCase: React.FC<FeaturedCaseProps> = ({ featured, featuredImgRefs, 
             {[0, 1, 2].map((idx) => (
               <div key={idx} className={idx === 2 ? "col-span-2" : undefined}>
                 <button
-                  onClick={() => openLightbox(featured?.images ?? [], idx, idx)}
+                  onClick={() => openLightbox(featured?.images ?? [], idx, idx, imgRefs)}
                   className="p-0 m-0 bg-transparent border-0 text-left w-full"
                 >
                   <div
-                    ref={featuredImgRefs[idx]}
+                    ref={imgRefs[idx]}
                     className={
                       idx === 2
                         ? "col-span-2 aspect-video rounded-xl bg-white/70 border overflow-hidden"

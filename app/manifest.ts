@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Martijn van der Wijst Portfolio",
     short_name: "Martijn",
     description:
-      "Portfolio van Martijn van der Wijst – Tech Lead UX met focus op design systems, accessibility en design tokens.",
+      "Portfolio van Martijn van der Wijst - Tech Lead UX met focus op design systems, accessibility en design tokens.",
     start_url: "/",
     display: "standalone",
     background_color: THEME_COLORS.lightBackground,

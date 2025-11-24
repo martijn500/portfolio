@@ -26,7 +26,18 @@ const Work: React.FC<WorkProps> = () => {
     [otherCases.length]
   );
 
-  const openLightbox = (images: ImageItem[], index = 0, thumbIndex = 0) => {
+  const openLightbox = (
+    images: ImageItem[],
+    index: number,
+    thumbIndex: number,
+    imgRefs: React.RefObject<HTMLDivElement | null>[]
+  ) => {
+    // Compute rects directly from the provided refs so the lightbox mounts with the correct start rect for each image.
+    const rects = imgRefs.map((r) =>
+      r.current instanceof HTMLElement ? r.current.getBoundingClientRect() : null
+    );
+    setLightboxRects(rects);
+
     setLightboxImages(images);
     setLightboxIndex(index);
     setLightboxThumbIndex(thumbIndex);
@@ -56,12 +67,8 @@ const Work: React.FC<WorkProps> = () => {
   return (
     <>
       <SectionHeading id="work-heading">{t.workTitle}</SectionHeading>
-      <FeaturedCase
-        featured={featured}
-        featuredImgRefs={featuredImgRefs}
-        openLightbox={openLightbox}
-      />
-      <OtherCases otherCases={otherCases} otherImgRefs={otherImgRefs} openLightbox={openLightbox} />
+      <FeaturedCase case={featured} imgRefs={featuredImgRefs} openLightbox={openLightbox} />
+      <OtherCases cases={otherCases} imgRefs={otherImgRefs} openLightbox={openLightbox} />
       {lightboxOpen && (
         <Lightbox
           images={lightboxImages}
