@@ -159,8 +159,7 @@ export default function Hero({}: HeroProps) {
               <motion.section
                 ref={workRef}
                 className="w-full lg:w-1/4 h-full shrink-0"
-                aria-labelledby="work-heading"
-                role="region"
+                aria-labelledby="work-life-heading"
                 style={{ opacity: isMobile ? 1 : workOpacity }}
               >
                 <div
@@ -174,7 +173,7 @@ export default function Hero({}: HeroProps) {
                         {/* Titel */}
                         <motion.div {...fadeUp} className="mb-5">
                           <h2
-                            id="work-heading"
+                            id="work-life-heading"
                             className="text-2xl md:text-4xl font-semibold leading-none max-w-fit [font-family:var(--font-merriweather)]"
                           >
                             {t.profile.role}
@@ -235,6 +234,8 @@ export default function Hero({}: HeroProps) {
                         src="/martijn-portrait-work.png"
                         alt={`${t.profile.name} professional portrait`}
                         fill
+                        priority
+                        loading="eager"
                         className="object-contain object-bottom"
                       />
                     </div>
@@ -250,6 +251,8 @@ export default function Hero({}: HeroProps) {
                         src="/martijn-portrait-life.png"
                         alt={`${t.profile.name} personal portrait`}
                         fill
+                        priority
+                        loading="eager"
                         className="object-contain object-bottom"
                       />
                     </div>
@@ -262,7 +265,6 @@ export default function Hero({}: HeroProps) {
                 ref={lifeRef}
                 className="w-full lg:w-1/4 h-full shrink-0 relative"
                 aria-labelledby="life-heading"
-                role="region"
                 style={{ opacity: isMobile ? 1 : lifeOpacity }}
               >
                 <div id="about-life" className="sr-only" aria-hidden="true"></div>

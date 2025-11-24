@@ -52,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               '(function(){try{var root=document.documentElement;var stored=localStorage.getItem("theme-preference");var prefersDark=window.matchMedia("(prefers-color-scheme: dark)").matches;var mode=stored==="light"||stored==="dark"?stored:"system";var isDark=mode==="dark"||(mode==="system"&&prefersDark);root.classList.toggle("dark",isDark);root.dataset.theme=mode;root.classList.add("theme-ready");}catch(error){}})();',
           }}
         />
+        <meta name="description" content={metadata.description ?? ""} />
       </head>
       <body className="min-h-screen bg-background text-foreground">{children}</body>
     </html>

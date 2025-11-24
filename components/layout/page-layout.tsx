@@ -213,17 +213,16 @@ function SiteContent() {
         )}
       </header>
 
-      <main id="main-content" role="main">
+      <main id="main-content">
         <section
           id="hero"
           className="border-b-8 border-foreground dark:border-foreground/30 bg-card lg:px-12 lg:pb-12"
-          role="region"
           aria-labelledby="hero-heading"
         >
           <Hero />
         </section>
 
-        <section id="philosophy" role="region" aria-labelledby="philosophy-heading">
+        <section id="philosophy" aria-labelledby="philosophy-heading">
           <DecorativeStripes />
           <div className="py-10 sm:py-14 lg:py-20">
             <DesignPhilosophy />
@@ -234,13 +233,12 @@ function SiteContent() {
         <section
           id="featured"
           className="pt-10 md:pt-14 lg:pt-20 border-t-8 border-b-8 border-foreground dark:border-foreground/30 bg-background"
-          role="region"
           aria-labelledby="work-heading"
         >
           <Work />
         </section>
 
-        <section id="principles" role="region" aria-labelledby="principles-heading">
+        <section id="principles" aria-labelledby="principles-heading">
           <DecorativeStripes />
           <div className="py-10 sm:py-14 lg:py-20">
             <Principles />
@@ -251,7 +249,6 @@ function SiteContent() {
         <section
           id="community"
           className="py-10 md:py-14 lg:py-20 border-t-8 border-foreground dark:border-foreground/30 bg-background"
-          role="region"
           aria-labelledby="community-heading"
         >
           <Community />
