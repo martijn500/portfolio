@@ -191,8 +191,6 @@ export default function Hero({}: HeroProps) {
                         <div className="flex flex-wrap gap-3">
                           {t.hero.workLinks.map((link: { title: string; url: string }) => {
                             const isExternal = !link.url.startsWith("#");
-                            const isLinkedIn = link.url.includes("linkedin.com");
-                            const isGitHub = link.url.includes("github.com");
 
                             return (
                               <Button
@@ -213,17 +211,6 @@ export default function Hero({}: HeroProps) {
                               </Button>
                             );
                           })}
-                          {/* Extra icon-only GitHub button */}
-                          <Button asChild variant="outline">
-                            <a
-                              href="https://github.com/martijn500"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              aria-label={`GitHub (${t.openInNewTab})`}
-                            >
-                              GitHub
-                            </a>
-                          </Button>
                         </div>
                       </motion.div>
                     </div>

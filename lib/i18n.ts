@@ -100,6 +100,10 @@ zodat oplossingen goed werken voor zowel gebruikers als developmentteams.",
           title: "LinkedIn",
           url: "https://www.linkedin.com/in/martijnvanderwijst/",
         },
+        {
+          title: "GitHub",
+          url: "https://github.com/martijn500",
+        },
       ],
       lifeLinks: [
         {
@@ -384,6 +388,10 @@ Lasting hobbies include cooking, snowboarding, festivals and movie nights, and I
         {
           title: "LinkedIn",
           url: "https://www.linkedin.com/in/martijnvanderwijst/",
+        },
+        {
+          title: "GitHub",
+          url: "https://github.com/martijn500",
         },
       ],
       lifeLinks: [
