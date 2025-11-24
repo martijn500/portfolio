@@ -24,8 +24,8 @@ import { SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Martijn van der Wijst – Tech Lead UX & Design Systems",
-  description: "UX specialist / Tech Lead UX – design systems, tokens, accessibility.",
+  title: "Martijn van der Wijst - Tech Lead UX & Design Systems",
+  description: "UX specialist / Tech Lead UX - design systems, tokens, accessibility.",
   manifest: "/manifest.webmanifest",
 };
 

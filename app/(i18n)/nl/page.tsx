@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageLayout from "@/components/layout/page-layout";
 import { i18n } from "@/lib/i18n";
 import { SITE_URL, OG_IMAGE_VERSION } from "@/lib/constants";
+import buildJsonLdFor from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = i18n.nl;
@@ -43,5 +44,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Page() {
-  return <PageLayout lang="nl" />;
+  const t = i18n.nl;
+  const jsonLd = JSON.stringify(buildJsonLdFor(t));
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <PageLayout lang="nl" />
+    </>
+  );
 }
