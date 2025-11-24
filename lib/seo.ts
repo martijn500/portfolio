@@ -3,18 +3,20 @@ import { SITE_URL } from "./constants";
 export function personJsonLd(t: any) {
   const sameAs: string[] = [];
   // attempt to collect social links from the i18n translation object
-  if (t.hero?.workLinks) {
-    t.hero.workLinks.forEach((l: any) => {
-      if (
-        typeof l.url === "string" &&
-        (l.url.includes("linkedin.com") ||
-          l.url.includes("github.com") ||
-          l.url.includes("instagram.com"))
-      ) {
-        sameAs.push(l.url);
-      }
-    });
-  }
+  const linkCandidates = [...(t.hero?.workLinks ?? []), ...(t.hero?.lifeLinks ?? [])];
+
+  // Collect only common social domains we care about.
+  linkCandidates.forEach((l: any) => {
+    const url = l?.url;
+    if (!url) return;
+    if (
+      url.includes("linkedin.com") ||
+      url.includes("github.com") ||
+      url.includes("instagram.com")
+    ) {
+      sameAs.push(url);
+    }
+  });
 
   return {
     "@context": "https://schema.org",
