@@ -236,6 +236,7 @@ export default function Hero({}: HeroProps) {
                         fill
                         priority
                         loading="eager"
+                        sizes="(min-width: 1024px) 388px, 100vw"
                         className="object-contain object-bottom"
                       />
                     </div>
@@ -253,6 +254,7 @@ export default function Hero({}: HeroProps) {
                         fill
                         priority
                         loading="eager"
+                        sizes="(min-width: 1024px) 388px, 100vw"
                         className="object-contain object-bottom"
                       />
                     </div>
