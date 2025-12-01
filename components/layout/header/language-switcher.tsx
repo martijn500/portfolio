@@ -29,17 +29,10 @@ export function LanguageSwitcher() {
 
   return (
     <div>
-      <h3
-        className="text-sm font-medium text-foreground/70 mb-3 font-sans"
-        id="language-section"
-      >
+      <h3 className="text-sm font-medium text-foreground/70 mb-3 font-sans" id="language-section">
         {headerCopy.languageToggle.label}
       </h3>
-      <nav
-        className="flex flex-col gap-2"
-        role="navigation"
-        aria-labelledby="language-section"
-      >
+      <nav className="flex flex-col gap-2" role="navigation" aria-labelledby="language-section">
         {languages.map((language) => (
           <a
             key={language.code}
@@ -62,9 +55,7 @@ export function LanguageSwitcher() {
           >
             <Languages className="h-4 w-4" aria-hidden="true" />
             <span>{language.nativeLabel}</span>
-            {lang === language.code && (
-              <span className="sr-only">{headerCopy.currentPage}</span>
-            )}
+            {lang === language.code && <span className="sr-only">{headerCopy.currentPage}</span>}
           </a>
         ))}
       </nav>

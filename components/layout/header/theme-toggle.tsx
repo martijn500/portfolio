@@ -14,7 +14,7 @@ export function ThemeToggle({ themeMode, onThemeModeChange }: ThemeToggleProps) 
   const { t } = useLanguage();
   const headerCopy = t.header;
   const themeGroupLabel = headerCopy.themeToggle.label;
-  
+
   const themeOptions = [
     {
       value: "light" as const,
@@ -38,10 +38,7 @@ export function ThemeToggle({ themeMode, onThemeModeChange }: ThemeToggleProps) 
 
   return (
     <div>
-      <h3
-        className="text-sm font-medium text-foreground/70 mb-3 font-sans"
-        id="theme-section"
-      >
+      <h3 className="text-sm font-medium text-foreground/70 mb-3 font-sans" id="theme-section">
         {themeGroupLabel}
       </h3>
       <div
@@ -81,9 +78,7 @@ export function ThemeToggle({ themeMode, onThemeModeChange }: ThemeToggleProps) 
           >
             <option.Icon className="h-4 w-4" aria-hidden="true" />
             <span>{option.label}</span>
-            {themeMode === option.value && (
-              <span className="sr-only">{headerCopy.selected}</span>
-            )}
+            {themeMode === option.value && <span className="sr-only">{headerCopy.selected}</span>}
           </button>
         ))}
       </div>

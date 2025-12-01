@@ -1,14 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Banana,
-  Briefcase,
-  Palmtree,
-  Lightbulb,
-  Star,
-  Target,
-  Users,
-} from "lucide-react";
+import { Banana, Briefcase, Palmtree, Lightbulb, Star, Target, Users } from "lucide-react";
 import type { ThemeMode } from "@/lib/theme";
 import { useLanguage } from "@/lib/context/language-context";
 import { useActiveSection } from "@/lib/hooks/use-active-section";

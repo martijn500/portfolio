@@ -245,9 +245,9 @@ zodat oplossingen goed werken voor zowel gebruikers als developmentteams.",
       title: "Toegankelijk by default",
       description:
         "WCAG als baseline; toetsenbord, contrast, semantiek en leesbaarheid zijn non-negotiable.",
-        icon: "Accessibility",
-      },
-    ],
+      icon: "Accessibility",
+    },
+  ],
   communityTitle: "Community & Leadership",
   communitySummary:
     "Naast mijn dagelijkse werk ben ik actief betrokken bij de frontend en UX community. Ik geloof in kennisdeling, mentorship en het helpen groeien van anderen in het vakgebied. Hieronder staan enkele voorbeelden ter demonstratie van mijn betrokkenheid.",

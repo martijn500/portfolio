@@ -7,7 +7,7 @@ const defaultLocale = "en";
 function getLocale(request: NextRequest) {
   const acceptLanguage = request.headers.get("accept-language");
   if (!acceptLanguage) return defaultLocale;
-  
+
   // Simple check for nl preference
   if (/(^|,|;)\s*(nl|nl-)/i.test(acceptLanguage)) {
     return "nl";
@@ -34,6 +34,6 @@ export function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     // Skip all internal paths (_next) and static files
-    '/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|manifest.webmanifest|icon|.*\\.png|.*\\.jpg|.*\\.svg).*)',
+    "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|manifest.webmanifest|icon|.*\\.png|.*\\.jpg|.*\\.svg).*)",
   ],
 };

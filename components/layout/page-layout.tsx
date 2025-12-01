@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
+import dynamic from "next/dynamic";
 import Hero from "@/components/sections/hero";
-import Work from "@/components/sections/work/work";
-import DesignPhilosophy from "@/components/sections/design-philosophy";
-import Community from "@/components/sections/community";
-import Principles from "@/components/sections/principles";
+
+const Work = dynamic(() => import("@/components/sections/work/work"));
+const DesignPhilosophy = dynamic(() => import("@/components/sections/design-philosophy"));
+const Community = dynamic(() => import("@/components/sections/community"));
+const Principles = dynamic(() => import("@/components/sections/principles"));
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import DecorativeStripes from "@/components/common/decorative-stripes";

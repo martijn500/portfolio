@@ -221,9 +221,7 @@ export default function Hero({ workImage, lifeImage }: HeroProps) {
               </motion.section>
 
               {/* Shared Aside - switches image based on scroll */}
-              <motion.aside
-                className="w-full lg:w-1/4 min-h-[400px] lg:h-full flex items-end justify-center overflow-hidden"
-              >
+              <motion.aside className="w-full lg:w-1/4 min-h-[400px] lg:h-full flex items-end justify-center overflow-hidden">
                 <div className="relative w-full h-full lg:max-h-[calc(100vh-8rem)]">
                   <motion.div
                     initial={{ opacity: 1 }}

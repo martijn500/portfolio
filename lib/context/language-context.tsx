@@ -18,7 +18,9 @@ export function LanguageProvider({
   dictionary: I18nDictionary;
   children: React.ReactNode;
 }) {
-  return <LanguageContext.Provider value={{ lang, t: dictionary }}>{children}</LanguageContext.Provider>;
+  return (
+    <LanguageContext.Provider value={{ lang, t: dictionary }}>{children}</LanguageContext.Provider>
+  );
 }
 
 export function useLanguage() {

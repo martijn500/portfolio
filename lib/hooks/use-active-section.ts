@@ -5,7 +5,7 @@ export function useActiveSection() {
 
   useEffect(() => {
     let ticking = false;
-    
+
     // Cache elements
     const heroContainer = document.querySelector(".lg\\:h-\\[200vh\\]");
     const sections = [
@@ -60,7 +60,7 @@ export function useActiveSection() {
     updateActiveSection();
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll, { passive: true });
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
