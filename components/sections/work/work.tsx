@@ -1,10 +1,15 @@
 "use client";
 import React, { useState, useRef, createRef, useMemo, useLayoutEffect } from "react";
+import dynamic from "next/dynamic";
 import { useLanguage } from "@/lib/context/language-context";
 import SectionHeading from "@/components/ui/section-heading";
-import Lightbox, { ImageItem } from "@/components/ui/lightbox";
+import type { ImageItem } from "@/components/ui/lightbox";
 import FeaturedCase from "@/components/sections/work/featured-case";
 import OtherCases from "@/components/sections/work/other-cases";
+
+const Lightbox = dynamic(() => import("@/components/ui/lightbox"), {
+  ssr: false,
+});
 
 type WorkProps = Record<string, never>;
 
