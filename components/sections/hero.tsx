@@ -9,9 +9,12 @@ import { useReducedMotion } from "@/lib/hooks/use-reduced-motion";
 import { useFadeUp } from "@/lib/animations";
 import type { HeroScrollDetail } from "@/lib/scroll-hero";
 
-type HeroProps = Record<string, never>;
+type HeroProps = {
+  workImage: React.ReactNode;
+  lifeImage: React.ReactNode;
+};
 
-export default function Hero({}: HeroProps) {
+export default function Hero({ workImage, lifeImage }: HeroProps) {
   const { t } = useLanguage();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const workRef = React.useRef<HTMLDivElement>(null);
@@ -169,16 +172,16 @@ export default function Hero({}: HeroProps) {
                   <div className="h-full flex flex-col min-h-0">
                     {/* Content grid */}
                     <div className="grid gap-8 flex-1 py-8 md:py-12">
-                      <motion.div {...fadeUp} className="flex flex-col justify-center h-full">
+                      <div className="flex flex-col justify-center h-full">
                         {/* Titel */}
-                        <motion.div {...fadeUp} className="mb-5">
+                        <div className="mb-5">
                           <h2
                             id="work-life-heading"
                             className="text-2xl md:text-4xl font-semibold leading-none max-w-fit [font-family:var(--font-merriweather)]"
                           >
                             {t.profile.role}
                           </h2>
-                        </motion.div>
+                        </div>
                         <p className="text-lg prose-measure mb-6">{t.profile.summary}</p>
                         <div className="mb-6">
                           <div className="flex flex-wrap gap-2">
@@ -211,7 +214,7 @@ export default function Hero({}: HeroProps) {
                             );
                           })}
                         </div>
-                      </motion.div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -219,7 +222,6 @@ export default function Hero({}: HeroProps) {
 
               {/* Shared Aside - switches image based on scroll */}
               <motion.aside
-                {...fadeUp}
                 className="w-full lg:w-1/4 min-h-[400px] lg:h-full flex items-end justify-center overflow-hidden"
               >
                 <div className="relative w-full h-full lg:max-h-[calc(100vh-8rem)]">
@@ -230,15 +232,7 @@ export default function Hero({}: HeroProps) {
                     className="absolute inset-0 flex items-end"
                   >
                     <div className="relative w-full aspect-3/4 lg:h-full lg:aspect-auto">
-                      <Image
-                        src="/martijn-portrait-work.png"
-                        alt={`${t.profile.name} professional portrait`}
-                        fill
-                        priority
-                        loading="eager"
-                        sizes="(min-width: 1024px) 388px, 100vw"
-                        className="object-contain object-bottom"
-                      />
+                      {workImage}
                     </div>
                   </motion.div>
                   <motion.div
@@ -248,15 +242,7 @@ export default function Hero({}: HeroProps) {
                     className="flex items-end h-full"
                   >
                     <div className="relative w-full aspect-3/4 lg:h-full lg:aspect-auto">
-                      <Image
-                        src="/martijn-portrait-life.png"
-                        alt={`${t.profile.name} personal portrait`}
-                        fill
-                        priority
-                        loading="eager"
-                        sizes="(min-width: 1024px) 388px, 100vw"
-                        className="object-contain object-bottom"
-                      />
+                      {lifeImage}
                     </div>
                   </motion.div>
                 </div>

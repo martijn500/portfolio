@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import PageLayout from "@/components/layout/page-layout";
 import { i18n, type LangKey } from "@/lib/i18n";
 import { SITE_URL, OG_IMAGE_VERSION } from "@/lib/constants";
@@ -65,7 +66,30 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
-      <PageLayout />
+      <PageLayout
+        heroWorkImage={
+          <Image
+            src="/martijn-portrait-work.png"
+            alt={`${t.profile.name} professional portrait`}
+            fill
+            priority
+            loading="eager"
+            sizes="(min-width: 1024px) 388px, 100vw"
+            className="object-contain object-bottom"
+          />
+        }
+        heroLifeImage={
+          <Image
+            src="/martijn-portrait-life.png"
+            alt={`${t.profile.name} personal portrait`}
+            fill
+            priority
+            loading="eager"
+            sizes="(min-width: 1024px) 388px, 100vw"
+            className="object-contain object-bottom"
+          />
+        }
+      />
     </>
   );
 }

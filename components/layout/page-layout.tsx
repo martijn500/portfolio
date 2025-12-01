@@ -15,7 +15,12 @@ import { THEME_STORAGE_KEY } from "@/lib/theme";
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
-export default function PageLayout() {
+type PageLayoutProps = {
+  heroWorkImage: React.ReactNode;
+  heroLifeImage: React.ReactNode;
+};
+
+export default function PageLayout({ heroWorkImage, heroLifeImage }: PageLayoutProps) {
   const [themeMode, setThemeMode] = React.useState<ThemeMode>("system");
   const [isDark, setIsDark] = React.useState(false);
   const [isThemeResolved, setIsThemeResolved] = React.useState(false);
@@ -213,7 +218,7 @@ export default function PageLayout() {
           className="border-b-8 border-foreground dark:border-foreground/30 bg-card lg:px-12 lg:pb-12"
           aria-labelledby="hero-heading"
         >
-          <Hero />
+          <Hero workImage={heroWorkImage} lifeImage={heroLifeImage} />
         </section>
 
         <section id="philosophy" aria-labelledby="philosophy-heading">
