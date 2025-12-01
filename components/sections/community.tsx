@@ -10,7 +10,6 @@ type CommunityProps = Record<string, never>;
 
 export default function Community({}: CommunityProps) {
   const { t } = useLanguage();
-  // const fadeUp = useFadeUp(); // Commented out as we will use useFadeUp directly in JSX
 
   return (
     <>

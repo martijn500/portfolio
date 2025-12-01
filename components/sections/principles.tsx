@@ -3,8 +3,6 @@ import { Eye, Layers, Accessibility } from "lucide-react";
 import { useLanguage } from "@/lib/context/language-context";
 import SectionHeading from "@/components/ui/section-heading";
 
-// reuse shared fadeUp from lib/animations
-
 export default function Principles() {
   const { t } = useLanguage();
 
