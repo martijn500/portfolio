@@ -1,19 +1,24 @@
 "use client";
 import React, { createContext, useContext } from "react";
-import type { LangKey } from "@/lib/i18n";
-import { i18n } from "@/lib/i18n";
+import type { LangKey, I18nDictionary } from "@/lib/i18n";
 
 interface LanguageContextType {
   lang: LangKey;
-  t: (typeof i18n)[LangKey];
+  t: I18nDictionary;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ lang, children }: { lang: LangKey; children: React.ReactNode }) {
-  const t = i18n[lang];
-
-  return <LanguageContext.Provider value={{ lang, t }}>{children}</LanguageContext.Provider>;
+export function LanguageProvider({
+  lang,
+  dictionary,
+  children,
+}: {
+  lang: LangKey;
+  dictionary: I18nDictionary;
+  children: React.ReactNode;
+}) {
+  return <LanguageContext.Provider value={{ lang, t: dictionary }}>{children}</LanguageContext.Provider>;
 }
 
 export function useLanguage() {

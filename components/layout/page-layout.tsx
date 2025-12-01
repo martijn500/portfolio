@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import type { LangKey } from "@/lib/i18n";
 import Hero from "@/components/sections/hero";
 import Work from "@/components/sections/work/work";
 import DesignPhilosophy from "@/components/sections/design-philosophy";
@@ -9,14 +8,14 @@ import Principles from "@/components/sections/principles";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import DecorativeStripes from "@/components/common/decorative-stripes";
-import { LanguageProvider, useLanguage } from "@/lib/context/language-context";
+import { useLanguage } from "@/lib/context/language-context";
+import type { ThemeMode } from "@/lib/theme";
+import { THEME_STORAGE_KEY } from "@/lib/theme";
 
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
-type ThemeMode = "light" | "dark" | "system";
-const THEME_STORAGE_KEY = "theme-preference";
 
-function SiteContent() {
+export default function PageLayout() {
   const [themeMode, setThemeMode] = React.useState<ThemeMode>("system");
   const [isDark, setIsDark] = React.useState(false);
   const [isThemeResolved, setIsThemeResolved] = React.useState(false);
@@ -25,7 +24,7 @@ function SiteContent() {
     left: number;
     width: number;
   } | null>(null);
-  const { lang, t } = useLanguage();
+  const { t } = useLanguage();
 
   useIsomorphicLayoutEffect(() => {
     if (typeof window === "undefined") {
@@ -102,11 +101,6 @@ function SiteContent() {
       // localStorage might be unavailable (e.g., private mode); ignore.
     }
   }, [themeMode]);
-
-  React.useEffect(() => {
-    document.documentElement.setAttribute("lang", lang);
-    document.title = t.seo.title;
-  }, [lang, t.seo.title]);
 
   React.useEffect(() => {
     if (typeof window === "undefined") {
@@ -263,13 +257,5 @@ function SiteContent() {
         <Footer />
       </footer>
     </div>
-  );
-}
-
-export default function PageLayout({ lang }: { lang: LangKey }) {
-  return (
-    <LanguageProvider lang={lang}>
-      <SiteContent />
-    </LanguageProvider>
   );
 }

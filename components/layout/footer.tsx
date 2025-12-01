@@ -6,7 +6,9 @@ export default function Footer() {
 
   return (
     <div className="py-10 text-sm text-accent-foreground mx-auto max-w-6xl px-5 md:px-8 lg:px-12 flex flex-wrap items-center justify-between gap-3">
-      <p>{t.footerAllRights(t.profile.name)}</p>
+      <p>
+        © {new Date().getFullYear()} {t.profile.name}. {t.footerAllRights}
+      </p>
       <div className="flex items-center gap-4">
         <a
           href="https://www.figma.com/deck/ltOQAl9YHQeNbxipQIt2jD/portfolio"

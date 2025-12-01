@@ -1,4 +1,4 @@
-import "./globals.css";
+import "../globals.css";
 import { Merriweather } from "next/font/google";
 import { Geist } from "next/font/google";
 
@@ -19,6 +19,8 @@ const geist = Geist({
 });
 
 import type { Metadata, Viewport } from "next";
+import { i18n, type LangKey } from "@/lib/i18n";
+import { LanguageProvider } from "@/lib/context/language-context";
 import { THEME_COLORS } from "@/lib/utils";
 import { SITE_URL } from "@/lib/constants";
 
@@ -39,13 +41,33 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export async function generateStaticParams() {
+  return [{ lang: "en" }, { lang: "nl" }];
+}
+
+export default async function RootLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  const validLang = (["en", "nl"] as const).includes(lang as any) ? (lang as LangKey) : "en";
+  const dictionary = i18n[validLang];
+  const noscriptMsg = dictionary.noscript.message;
+
   return (
     // Keep theme and script logic on <html>, but attach the *variable* classes
     // for the fonts (they expose CSS variables). The globals.css already
     // uses those variables to apply different fonts to body/headings.
-    <html suppressHydrationWarning className={`${geist.variable} ${merriweather.variable}`}>
+    <html
+      lang={validLang}
+      suppressHydrationWarning
+      className={`${geist.variable} ${merriweather.variable}`}
+    >
       <head>
+        {/* Theme bootstrap (safe — wrapped in try/catch) */}
         <script
           dangerouslySetInnerHTML={{
             __html:
@@ -54,7 +76,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <meta name="description" content={metadata.description ?? ""} />
       </head>
-      <body className="min-h-screen bg-background text-foreground">{children}</body>
+      <body className="min-h-screen bg-background text-foreground">
+        <LanguageProvider lang={validLang} dictionary={dictionary}>
+          <noscript>
+            <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 p-3 text-center">
+              {noscriptMsg}
+            </div>
+          </noscript>
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   );
 }

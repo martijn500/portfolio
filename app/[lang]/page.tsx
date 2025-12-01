@@ -1,18 +1,24 @@
 import type { Metadata } from "next";
 import PageLayout from "@/components/layout/page-layout";
-import { i18n } from "@/lib/i18n";
+import { i18n, type LangKey } from "@/lib/i18n";
 import { SITE_URL, OG_IMAGE_VERSION } from "@/lib/constants";
 import buildJsonLdFor from "@/lib/seo";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = i18n.en;
+type Props = {
+  params: Promise<{ lang: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  const validLang = (["en", "nl"] as const).includes(lang as any) ? (lang as LangKey) : "en";
+  const t = i18n[validLang];
   const imageVersion = OG_IMAGE_VERSION;
 
   return {
     title: t.seo.title,
     description: t.seo.description,
     alternates: {
-      canonical: `${SITE_URL}/en`,
+      canonical: `${SITE_URL}/${validLang}`,
       languages: {
         nl: `${SITE_URL}/nl`,
         en: `${SITE_URL}/en`,
@@ -21,13 +27,13 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: t.seo.title,
       description: t.seo.description,
-      url: `${SITE_URL}/en`,
+      url: `${SITE_URL}/${validLang}`,
       siteName: t.profile.name,
       locale: t.seo.locale,
       type: "website",
       images: [
         {
-          url: `${SITE_URL}/en/opengraph-image.png?v=${imageVersion}`,
+          url: `${SITE_URL}/${validLang}/opengraph-image.png?v=${imageVersion}`,
           width: 1200,
           height: 630,
           alt: t.seo.title,
@@ -38,19 +44,28 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: t.seo.title,
       description: t.seo.description,
-      images: [`${SITE_URL}/en/opengraph-image.png?v=${imageVersion}`],
+      images: [
+        {
+          url: `${SITE_URL}/${validLang}/opengraph-image.png?v=${imageVersion}`,
+          width: 1200,
+          height: 630,
+          alt: t.seo.title,
+        },
+      ],
     },
   };
 }
 
-export default function Page() {
-  const t = i18n.en;
+export default async function Page({ params }: Props) {
+  const { lang } = await params;
+  const validLang = (["en", "nl"] as const).includes(lang as any) ? (lang as LangKey) : "en";
+  const t = i18n[validLang];
   const jsonLd = JSON.stringify(buildJsonLdFor(t));
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
-      <PageLayout lang="en" />
+      <PageLayout />
     </>
   );
 }
